@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Your Booking</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="booking-container">
+      <header class="booking-header">
+        <h1>Complete Your Booking</h1>
+        <p>Secure your stay by providing the details below.</p>
+      </header>
+      <a href="index.html" class="back-home-button">← Back to Home</a>
+      <div class="booking-content">
+        <main class="booking-form-area">
+          <form id="booking-form" action="#" method="post">
+            <!-- Property Snippet (Optional) -->
+            <section class="property-snippet">
+              <img
+                src="images/222.png"
+                alt="Property Thumbnail"
+                class="property-thumb"
+              />
+              <div>
+                <h2>Vill For Rent</h2>
+                <p>Your selected property</p>
+                <!-- Maybe add rating or location here -->
+              </div>
+            </section>
+
+            <!-- Dates Section -->
+            <section class="form-section">
+              <h3>Select Your Dates</h3>
+              <div class="date-selection">
+                <div class="form-group">
+                  <label for="checkin-date">Check-in Date</label>
+                  <input
+                    type="date"
+                    id="checkin-date"
+                    name="checkin"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="checkout-date">Check-out Date</label>
+                  <input
+                    type="date"
+                    id="checkout-date"
+                    name="checkout"
+                    required
+                  />
+                </div>
+              </div>
+              <p class="price-note">
+                Price per night: <span id="price-per-night">15,000.00</span>
+              </p>
+            </section>
+
+            <!-- Guests Section -->
+            <section class="form-section guest-info">
+              <h3>Guest Information</h3>
+              <div class="guest-list">
+                <div class="guest-item">
+                  <div class="guest-type">
+                    <span class="icon">AD</span>
+                    <div>
+                      <span class="guest-label">Adults</span>
+                      <span class="guest-sublabel">Age 13+</span>
+                    </div>
+                  </div>
+                  <div class="guest-counter">
+                    <button
+                      type="button"
+                      class="counter-btn"
+                      data-action="decrement"
+                      data-target="adults-count"
+                      aria-label="Decrease adults"
+                    >
+                      -
+                    </button>
+                    <span id="adults-count" class="guest-count">1</span>
+                    <input
+                      type="hidden"
+                      name="adults"
+                      id="adults-input"
+                      value="1"
+                    />
+                    <button
+                      type="button"
+                      class="counter-btn"
+                      data-action="increment"
+                      data-target="adults-count"
+                      aria-label="Increase adults"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div class="guest-item">
+                  <div class="guest-type">
+                    <span class="icon">CH</span>
+                    <div>
+                      <span class="guest-label">Children</span>
+                      <span class="guest-sublabel">Ages 2–12</span>
+                    </div>
+                  </div>
+                  <div class="guest-counter">
+                    <button
+                      type="button"
+                      class="counter-btn"
+                      data-action="decrement"
+                      data-target="children-count"
+                      aria-label="Decrease children"
+                    >
+                      -
+                    </button>
+                    <span id="children-count" class="guest-count">0</span>
+                    <input
+                      type="hidden"
+                      name="children"
+                      id="children-input"
+                      value="0"
+                    />
+                    <button
+                      type="button"
+                      class="counter-btn"
+                      data-action="increment"
+                      data-target="children-count"
+                      aria-label="Increase children"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div class="guest-item">
+                  <div class="guest-type">
+                    <span class="icon">PT</span>
+                    <div>
+                      <span class="guest-label">Pets</span>
+                      <span class="guest-sublabel">Bringing a pet?</span>
+                    </div>
+                  </div>
+                  <div class="guest-counter">
+                    <button
+                      type="button"
+                      class="counter-btn"
+                      data-action="decrement"
+                      data-target="pets-count"
+                      aria-label="Decrease pets"
+                    >
+                      -
+                    </button>
+                    <span id="pets-count" class="guest-count">0</span>
+                    <input
+                      type="hidden"
+                      name="pets"
+                      id="pets-input"
+                      value="0"
+                    />
+                    <button
+                      type="button"
+                      class="counter-btn"
+                      data-action="increment"
+                      data-target="pets-count"
+                      aria-label="Increase pets"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Your Details Section -->
+            <section class="form-section">
+              <h3>Your Information</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="full-name">Full Name</label>
+                  <input
+                    type="text"
+                    id="full-name"
+                    name="full_name"
+                    placeholder="e.g., Prata"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="e.g., prata@123.com"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="Optional"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="requests">Special Requests (Optional)</label>
+                <textarea
+                  id="requests"
+                  name="requests"
+                  rows="3"
+                  placeholder="e.g., late check-in, allergies"
+                ></textarea>
+              </div>
+            </section>
+
+            <!-- Payment Section -->
+            <section class="form-section payment-info">
+              <h3>Payment Details</h3>
+              <p>All transactions are secure and encrypted.</p>
+              <div class="form-row">
+                <div class="form-group form-group-full">
+                  <label for="card-number">Card Number</label>
+                  <input
+                    type="text"
+                    id="card-number"
+                    name="card_number"
+                    placeholder="Enter card number"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="expiry-date">Expiry Date</label>
+                  <input
+                    type="text"
+                    id="expiry-date"
+                    name="expiry_date"
+                    placeholder="MM / YY"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="cvv">CVV</label>
+                  <input
+                    type="text"
+                    id="cvv"
+                    name="cvv"
+                    placeholder="CVV"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="card-name">Name on Card</label>
+                <input
+                  type="text"
+                  id="card-name"
+                  name="card_name"
+                  placeholder="Name as it appears on card"
+                  required
+                />
+              </div>
+            </section>
+
+            <!-- Submission -->
+            <div class="form-submit-area">
+              <p class="terms">
+                By clicking "Confirm Booking", you agree to the
+                <a href="#">Terms of Service</a> and
+                <a href="#">Cancellation Policy</a>.
+              </p>
+              <button type="submit" class="confirm-button">
+                Confirm Booking
+              </button>
+            </div>
+          </form>
+        </main>
+
+        <aside class="booking-summary">
+          <h3>Booking Summary</h3>
+          <div class="summary-details">
+            <div class="summary-item">
+              <span>Check-in:</span>
+              <strong id="summary-checkin">-- / -- / ----</strong>
+            </div>
+            <div class="summary-item">
+              <span>Check-out:</span>
+              <strong id="summary-checkout">-- / -- / ----</strong>
+            </div>
+            <div class="summary-item">
+              <span>Total Nights:</span>
+              <strong id="summary-nights">0</strong>
+            </div>
+            <div class="summary-item">
+              <span>Guests:</span>
+              <strong id="summary-guests">1 Adult</strong>
+            </div>
+          </div>
+
+          <div class="price-breakdown">
+            <h4>Price Details</h4>
+            <dl>
+              <div class="price-line">
+                <dt id="price-calc-text">15,000 x 0 nights</dt>
+                <dd id="summary-base-price">$0.00</dd>
+              </div>
+              <div class="price-line">
+                <dt>Taxes & Fees (approx)</dt>
+                <dd id="summary-taxes">$0.00</dd>
+              </div>
+            </dl>
+            <div class="price-total">
+              <span>Total Price:</span>
+              <strong id="summary-total-price">$0.00</strong>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <!-- /.booking-content -->
+    </div>
+    <!-- /.booking-container -->
+
+    <script src="script.js"></script>
+  </body>
+</html>

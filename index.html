@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Perfect Rental - PRATA</title>
+    <link rel="stylesheet" href="globals.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,500;1,700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Example: Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/image-2.png" alt="PRATA Logo">
+            </a>
+            <nav class="header-nav">
+                <a href="#" class="wishlist-icon" aria-label="Wishlist">
+                    <img src="images/iconamoon-heart-bold.svg" alt="Wishlist">
+                </a>
+                <div class="profile-icon" aria-label="Profile Menu">
+                    <div class="ellipse"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Hero with Integrated Search -->
+        <section class="hero-section improved-hero">
+            <div class="hero-background-overlay"></div>
+            <img class="hero-background" src="images/photo-1518002054494-3a6f94352e9d.jpg" alt="Comfortable living room">
+            <div class="hero-content container">
+                <h1 class="hero-title">Find Your Perfect Rental</h1>
+                <p class="hero-subtitle">Your Perfect Space Awaits! Explore thousands of listings.</p>
+
+
+                <div class="hero-search-container">
+                    <form id="search-form-hero" class="search-form-inline">
+                        <div class="search-field location-field">
+                            <label for="location-hero" class="sr-only">Location</label>
+                            <i class="fas fa-map-marker-alt input-icon"></i>
+                            <input type="text" id="location-hero" name="location" placeholder="Enter location (e.g., Thamel)">
+                        </div>
+                        <div class="search-field category-field">
+                             <label for="category-hero" class="sr-only">Category</label>
+                             <i class="fas fa-building input-icon"></i>
+                             <select id="category-hero" name="category">
+                                <option value="">Any Type</option>
+                                <option value="Apartment">Apartment</option>
+                                <option value="House">House</option>
+                                <option value="Room">Room</option>
+                                <option value="Villa">Villa</option>
+                             </select>
+                        </div>
+                        <div class="search-field price-field">
+                            <label for="price-range-hero" class="sr-only">Max Price</label>
+                            <i class="fas fa-dollar-sign input-icon"></i>
+                            <input type="number" id="price-range-hero" name="price_range" min="10000" max="80000000" placeholder="Max Price (NPR)">
+                        </div>
+                        <button type="submit" class="search-button-inline">
+                            <i class="fas fa-search"></i> <span class="search-button-text">Search</span>
+                        </button>
+                    </form>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Value Proposition / How It Works -->
+        <section class="value-prop-section container">
+            <h2 class="section-title alt-title">Why Choose PRATA?</h2>
+            <div class="value-prop-grid">
+                <div class="value-prop-item">
+                    <i class="fas fa-search-location prop-icon"></i>
+                    <h3>Easy Search</h3>
+                    <p>Find rentals quickly with our intuitive search and filters.</p>
+                </div>
+
+                <div class="value-prop-item">
+                    <i class="fas fa-check-circle prop-icon"></i>
+                    <h3>Verified Listings</h3>
+                    <p>Browse listings you can trust, with clear details and photos.</p>
+                </div>
+                <div class="value-prop-item">
+                    <i class="fas fa-comments prop-icon"></i>
+                    <h3>Direct Contact</h3>
+                    <p>Connect directly with landlords to ask questions and book viewings.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Section 3: Featured Rentals -->
+        <section class="featured-rentals container">
+            <h2 class="section-title">Featured Rentals</h2>
+            <div class="rental-cards-grid">
+                <a href="property.html?id=1" class="property-card-link" data-property-id="1">
+                <article class="property-card" data-property-id="1">
+                    <div class="card-image-container">
+                        <img src="images/card1.png.jpeg" alt="Villa Exterior" class="card-image">
+                        <span class="card-tag">Popular</span>
+                        <div class="card-price">NPR 35,000/mo</div>
+                    </div>
+                    <div class="card-text-content">
+                        <h3 class="card-title">Villa for Rent at Affordable Price</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> Budanilkantha</p>
+                        <div class="card-features">
+                             <span><i class="fas fa-bed"></i> 3 Beds</span>
+                             <span><i class="fas fa-bath"></i> 2 Baths</span>
+                        </div>
+                    </div>
+                </article>  
+            </a>
+
+            <a href="property.html?id=2" class="property-card-link" data-property-id="2">
+                <article class="property-card" data-property-id="2">
+                     <div class="card-image-container">
+                        <img src="images/card2.png.jpeg" alt="Cozy Home Interior" class="card-image">
+                        <span class="card-tag">Popular</span>
+                         <div class="card-price">NPR 28,000/mo</div>
+                    </div>
+                    <div class="card-text-content">
+                        <h3 class="card-title">Cozy Home Available for Rent</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> Lalitpur</p>
+                         <div class="card-features">
+                             <span><i class="fas fa-bed"></i> 2 Beds</span>
+                             <span><i class="fas fa-bath"></i> 1 Bath</span>
+                        </div>
+                    </div>
+                </article>
+                </a>
+                <a href="property.html?id=3" class="property-card-link" data-property-id="3">
+                <article class="property-card" data-property-id="3">
+                     <div class="card-image-container">
+                        <img src="images/card3.png.jpeg" alt="Luxury Villa Poolside" class="card-image">
+                         <span class="card-tag">Luxury</span>
+                          <div class="card-price">NPR 120,000/mo</div>
+                     </div>
+                     <div class="card-text-content">
+                         <h3 class="card-title">Luxury Villa Now Renting</h3>
+                         <p class="card-location"><i class="fas fa-map-marker-alt"></i> Patan</p>
+                          <div class="card-features">
+                             <span><i class="fas fa-bed"></i> 5 Beds</span>
+                             <span><i class="fas fa-bath"></i> 4 Baths</span>
+                             <span><i class="fas fa-swimmer"></i> Pool</span>
+                        </div>
+                     </div>
+                 </article>
+                 </a>
+
+                 <a href="property.html?id=4" class="property-card-link" data-property-id="4">
+                  <article class="property-card" data-property-id="4">
+                      <div class="card-image-container">
+                         <img src="images/card4.png.jpeg" alt="Rental Property Exterior" class="card-image">
+                         <span class="card-tag">Featured</span>
+                         <div class="card-price">NPR 40,000/mo</div>
+                     </div>
+                     <div class="card-text-content">
+                         <h3 class="card-title">Elegant Rental Property Available</h3>
+                         <p class="card-location"><i class="fas fa-map-marker-alt"></i> Thamel</p>
+                         <div class="card-features">
+                             <span><i class="fas fa-bed"></i> 3 Beds</span>
+                             <span><i class="fas fa-bath"></i> 2 Baths</span>
+                        </div>
+                     </div>
+                  </article>
+                 </a>
+
+             
+
+            </div>
+            <a href="allproperties.html" class="view-more-button">View All Rentals </a>
+        </section>
+
+        <!-- Section 4: Popular Locations -->
+        <section class="popular-locations-section">
+            <div class="container">
+                <h2 class="section-title alt-title">Explore Popular Locations</h2>
+                <div class="locations-grid">
+                    <a href="#" class="location-card">
+                        <img src="images/location-pokhara.jpg" alt="Pokhara Lakeside">
+                        <div class="location-name">Pokhara</div>
+                    </a>
+                     <a href="#" class="location-card">
+                        <img src="images/location-thamel.jpg" alt="Thamel Street View">
+                        <div class="location-name">Thamel</div>
+                    </a>
+                     <a href="#" class="location-card">
+                        <img src="images/location-lalitpur.jpg" alt="Lalitpur Patan Durbar Square">
+                        <div class="location-name">Lalitpur</div>
+                    </a>
+                    <a href="#" class="location-card">
+                        <img src="images/location-jhamsikhel.jpg" alt="Jhamsikhel Cafe Scene">
+                        <div class="location-name">Jhamsikhel</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Call to Action - List Your Property -->
+        <section class="list-property-cta">
+            <div class="container cta-content">
+                 <h2>List Your Property with PRATA</h2>
+                 <p>Reach thousands of potential tenants easily. Sign up and list your property today!</p>
+                 <a href="#" class="btn btn-primary btn-cta">Become a Host</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                 <a href="#">About Us</a>
+                 <a href="#">Terms of Service</a>
+                 <a href="contact.html">Contact Us</a>
+                 <a href="#">Help Center</a>
+                 <a href="#">For Landlords</a>
+            </div>
+            <div class="footer-social">
+
+                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                 <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+        </div>
+     </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

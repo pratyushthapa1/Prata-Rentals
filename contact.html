@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Landlord - PRATA</title>
+    <link rel="stylesheet" href="css/globals.css">
+    <link rel="stylesheet" href="style.css">
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,500&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,500;1,700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="contact-page"> <!-- Added class for specific background -->
+
+    <!-- Minimal Header for Contact Page -->
+    <header class="main-header">
+         <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/image-2.png" alt="PRATA Logo">
+            </a>
+             <!-- Simplified nav for contact if needed, or remove -->
+            <nav class="header-nav">
+                 <a href="index.html" style="color: #e4d7c5;">Back to Home</a>
+             </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <img class="contact-header-image" src="https://images.unsplash.com/photo-1511215579272-6192432f83bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Scenic contact background">
+
+        <div class="contact-form-container">
+            <h1>Contact The Landlord</h1>
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <label for="contact-name">Name</label>
+                    <input type="text" id="contact-name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email</label>
+                    <input type="email" id="contact-email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group form-group-textarea">
+                    <label for="contact-purpose">Purpose of visit / Message</label> <!-- Combined label -->
+                    <textarea id="contact-purpose" name="purpose" placeholder="Enter purpose of visit or your message" required></textarea>
+                </div>
+                <button type="submit" class="contact-submit-button">Submit</button>
+            </form>
+        </div>
+    </main>
+
+     <!-- Minimal Footer -->
+     <footer class="main-footer" style="background: transparent; border: none; margin-top: 20px;">
+        <div class="container">
+            <div class="footer-content">
+                 <a href="#">Terms of Service</a>
+            </div>
+        </div>
+     </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+[
+    {
+      "id": 1,
+      "title": "Villa for Rent at Affordable Price",
+      "location": "Budanilkantha",
+      "price": "35,000",
+      "priceSuffix": "/mo",
+      "image": "images/card1.png.jpeg",
+      "tag": "Popular",
+      "features": [
+        { "icon": "fa-bed", "text": "3 Beds" },
+        { "icon": "fa-bath", "text": "2 Baths" }
+      ],
+      "description": "A beautiful villa located in the serene area of Budanilkantha. Perfect for families looking for comfort and affordability.",
+      "gallery": ["images/card1.png.jpeg", "images/villa-inside1.jpg", "images/villa-garden.jpg"]
+    },
+    {
+      "id": 2,
+      "title": "Cozy Home Available for Rent",
+      "location": "Lalitpur",
+      "price": "28,000",
+      "priceSuffix": "/mo",
+      "image": "images/card2.png.jpeg",
+      "tag": "Popular",
+      "features": [
+        { "icon": "fa-bed", "text": "2 Beds" },
+        { "icon": "fa-bath", "text": "1 Bath" }
+      ],
+      "description": "Charming and cozy home in a convenient Lalitpur neighborhood. Ideal for couples or small families.",
+       "gallery": ["images/card2.png.jpeg", "images/cozy-living.jpg"]
+    },
+    {
+      "id": 3,
+      "title": "Luxury Villa Now Renting",
+      "location": "Patan",
+      "price": "120,000",
+      "priceSuffix": "/mo",
+      "image": "images/card3.png.jpeg",
+      "tag": "Luxury",
+      "features": [
+          { "icon": "fa-bed", "text": "5 Beds" },
+          { "icon": "fa-bath", "text": "4 Baths" },
+          { "icon": "fa-swimmer", "text": "Pool" }
+      ],
+      "description": "Experience luxury living in this stunning villa in Patan, featuring modern amenities and a private swimming pool.",
+      "gallery": ["images/card3.png.jpeg", "images/luxury-pool.jpg", "images/luxury-interior.jpg"]
+    },
+    {
+      "id": 4,
+      "title": "Elegant Rental Property Available",
+      "location": "Thamel",
+      "price": "40,000",
+      "priceSuffix": "/mo",
+      "image": "images/card4.png.jpeg",
+      "tag": "Featured",
+      "features": [
+          { "icon": "fa-bed", "text": "3 Beds" },
+          { "icon": "fa-bath", "text": "2 Baths" }
+      ],
+      "description": "Well-maintained and elegant property available for rent in the vibrant Thamel area. Close to shops and restaurants.",
+       "gallery": ["images/card4.png.jpeg"]
+    }
+
+  ]
