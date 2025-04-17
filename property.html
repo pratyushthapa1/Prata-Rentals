@@ -3,265 +3,224 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Property Details - PRATA</title>
-
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,500&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,500;1,700&family=Roboto:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+    <title>Property Details - PRATA</title> <!-- Title will be updated by JS -->
+    <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/property.css"> <!-- Specific: property.css -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
   <body>
     <header class="main-header">
-      <!-- Same header as index.html -->
+      <!-- Reusing Header from index.html -->
       <div class="container">
         <a href="index.html" class="header-logo">
-          <img src="images/image-2.png" alt="PRATA Logo" />
+          <!-- Ensure image path is correct, using PRATA logo -->
+          <img src="images/PRATA logo.png" alt="PRATA Logo" />
         </a>
         <nav class="header-nav">
-          <a href="#" class="wishlist-icon" aria-label="Wishlist">
+           <!-- Updated hrefs -->
+          <a href="wishlist.html" class="wishlist-icon" aria-label="Wishlist">
             <img src="images/iconamoon-heart-bold.svg" alt="Wishlist" />
           </a>
-          <div class="profile-icon" aria-label="Profile Menu">
-            <div class="ellipse"></div>
-          </div>
+          <a href="profile.html" class="profile-icon" aria-label="Profile Menu">
+            <div class="ellipse"></div> <!-- Consider using icon -->
+          </a>
         </nav>
       </div>
     </header>
-   
 
     <main class="container">
-      <section class="property-details-section">
-        <div class="property-main-layout">
-          <div class="property-info-column">
-            <h1>Villa for Rent at Affordable Price</h1>
-            <p class="property-description">
-              📍 Prime Location:<br />
-              🏙️ Situated in a well-connected area with easy access to markets,
-              schools, hospitals, and public transport.<br />
-              💰 Affordable Rent & Flexible Terms!<br />
-              🔹 Budget-friendly pricing<br />
-              🔹 Long-term and short-term rental options available<br />
-              📞 Contact us today to book a visit! Don’t miss out on this
-              amazing rental opportunity.
-            </p>
-            <div class="property-rent">Rent: NPR 35,000 / month</div>
-            <!-- Example Rent -->
-            <div class="property-actions">
-              <a href="booking.html" class="btn btn-secondary">Book Now</a>
-              <a href="contact.html" class="btn btn-primary">Contact Owner</a>
-            </div>
-          </div>
-          <div class="property-image-column">
-            <img src="images/card1.png.jpeg" alt="Villa Main View" />
-          </div>
-        </div>
-      </section>
+       <!-- NOTE: This page REQUIRES js/property-details.js to function -->
+       <!-- It fetches data based on the 'id' parameter in the URL -->
+       <!-- and populates the #property-content section. -->
 
-      <section class="property-features-section">
-        <h2 class="section-title">Features & Amenities</h2>
-        <div class="features-grid">
-          <article class="feature-item">
-            <div class="feature-icon">
-              <!-- Placeholder for icon, replace with actual <img> or SVG -->
-              <img src="images/basemap-image.png" alt="Location Icon" />
-              <!-- Example using provided image -->
-              <!-- <img src="images/location-icon.svg" alt="Location Icon"> -->
-            </div>
-            <div class="feature-text">
-              <h3>Location</h3>
-              <p>Lakeside View, Pokhara</p>
-              <div class="feature-tags">
-                <span>Secluded</span>
-                <span>Lakefront</span>
+      <!-- Loading/Error Messages -->
+      <div id="loading-message" style="text-align: center; padding: 40px; font-size: 1.2em;">Loading property details...</div>
+      <div id="error-message" style="text-align: center; padding: 40px; color: red; display: none;">Could not load property details. Please check the URL or try again later.</div>
+
+      <!-- Property details content - Populated by JS -->
+      <div id="property-content" style="display: none;">
+        <section class="property-details-section">
+          <div class="property-main-layout">
+            <div class="property-info-column">
+              <h1 id="property-title">Property Title</h1> <!-- Populated by JS -->
+              <p class="property-location" id="property-location" style="margin-bottom: 15px; font-style: italic;"><i class="fas fa-map-marker-alt"></i> Location</p> <!-- Added location field -->
+              <p class="property-description" id="property-description" style="white-space: pre-line;">Property description...</p> <!-- Populated by JS -->
+              <div class="property-rent" id="property-rent" style="font-size: 1.5em; font-weight: bold; margin: 15px 0;">NPR 0 /mo</div> <!-- Populated by JS -->
+              <div class="property-actions">
+                 <!-- Links dynamically set by JS - Added IDs -->
+                <a href="booking.html" id="book-now-link" class="btn btn-secondary">Book Now</a>
+                <a href="contact.html" id="contact-owner-link" class="btn btn-primary">Contact Owner</a>
               </div>
             </div>
-          </article>
-          <article class="feature-item">
-            <div class="feature-icon">
-              <!-- Placeholder, replace with actual icon -->
-              <div class="feature-icon-placeholder"></div>
-              <!-- <img src="images/availability-icon.svg" alt="Availability Icon"> -->
+            <div class="property-image-column">
+              <!-- Image src and alt dynamically set by JS -->
+              <img src="images/placeholder.png" alt="Property Main View" id="property-main-image" />
             </div>
-            <div class="feature-text">
-              <h3>Availability</h3>
-              <p>Available for bookings year-round</p>
-              <div class="feature-tags">
-                <span>Year-round</span>
+          </div>
+        </section>
+
+        <section class="property-features-section">
+          <h2 class="section-title">Features & Amenities</h2>
+          <!-- Features grid dynamically populated by JS -->
+          <div class="features-grid" id="features-grid">
+             <!-- Example structure (JS will create these):
+             <div class="feature-item"><i class="fas fa-bed"></i> <span>3 Beds</span></div>
+             <div class="feature-item"><i class="fas fa-bath"></i> <span>2 Baths</span></div>
+             -->
+          </div>
+        </section>
+
+        <section class="property-gallery-section">
+          <h2 class="section-title">Photo Gallery</h2>
+          <!-- Gallery grid dynamically populated by JS -->
+          <div class="property-gallery-grid" id="property-gallery-grid">
+             <!-- Example structure (JS will create these):
+             <div class="gallery-image"> <img src="gallery-image-1.jpg" alt="Gallery image 1"> </div>
+             <div class="gallery-image"> <img src="gallery-image-2.jpg" alt="Gallery image 2"> </div>
+             -->
+          </div>
+          <!-- Optional: View More button logic handled by JS if needed -->
+          <!-- <button id="view-more-images-btn" class="view-more-button">VIEW MORE IMAGES</button> -->
+        </section>
+
+        <section class="property-map-section">
+            <h2 class="section-title">Location on Map</h2>
+            <div class="map-container" id="map-container">
+              <!-- Map link/image dynamically updated by JS -->
+              <a href="#" target="_blank" rel="noopener noreferrer" id="map-link">
+                <img src="images/basemap-image-2.png" alt="Location Map (placeholder)" id="map-image" />
+                <!-- JS should update the href based on properties.json mapLink -->
+                <!-- Consider embedding an interactive map if coordinates are available -->
+              </a>
+              <div id="map-interactive" style="height: 400px; width: 100%; background-color: #e0e0e0; display: none;">
+                  <!-- Placeholder for interactive map library (e.g., Leaflet, Google Maps) -->
               </div>
             </div>
-          </article>
-          <article class="feature-item">
-            <div class="feature-icon">
-              <!-- Placeholder, replace with actual icon -->
-              <img src="images/1.png.webp" alt="Amenities Icon" />
-              <!-- Example using provided image -->
-              <!-- <img src="images/amenities-icon.svg" alt="Amenities Icon"> -->
-            </div>
-            <div class="feature-text">
-              <h3>Amenities</h3>
-              <p>Private pool, outdoor terrace, Gym access</p>
-              <div class="feature-tags">
-                <span>Private Pool</span>
-                <span>Gym</span>
-                <span>Terrace</span>
+        </section>
+
+        <!-- Reviews section remains static or could be loaded dynamically -->
+        <section class="property-reviews-section">
+            <div class="property-reviews-layout">
+              <div class="review-image-container">
+                <img src="images/inquiry.png" alt="Happy tenants illustration" />
               </div>
-            </div>
-          </article>
-          <!-- Add more features as needed -->
-        </div>
-      </section>
-
-      <section class="property-gallery-section">
-        <h2 class="section-title">Photo Gallery</h2>
-        <div class="property-gallery-grid">
-          <div class="gallery-image">
-            <img src="images/4.png.webp" alt="Property Gallery Image 1" />
-          </div>
-          <div class="gallery-image">
-            <img src="images/3.png" alt="Property Gallery Image 2" />
-          </div>
-          <div class="gallery-image">
-            <img src="images/2.png" alt="Property Gallery Image 3" />
-          </div>
-          <div class="gallery-image">
-            <img src="images/card1.png.jpeg" alt="Property Gallery Image 4" />
-          </div>
-          <!-- Reuse main -->
-          <!-- Add more images -->
-        </div>
-        <button id="view-more-images-btn" class="view-more-button">
-          VIEW MORE IMAGES
-        </button>
-      </section>
-
-      <section class="property-map-section">
-        <h2 class="section-title">Find Us On The Map</h2>
-        <div class="map-container">
-          <!-- Replace with actual map embed or clickable image -->
-          <a
-            href="https://maps.app.goo.gl/E8NbafYmUczTs5fE9"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src="images/basemap-image-2.png" alt="Location Map" />
-          </a>
-        </div>
-      </section>
-
-      <section class="property-reviews-section">
-        <div class="property-reviews-layout">
-          <div class="review-image-container">
-            <img src="images/inquiry.png" alt="Happy tenants illustration" />
-          </div>
-          <div class="reviews-content">
-            <h2>Guest Reviews</h2>
-            <p class="section-subtitle">
-              See what our guests have to say about their stay.
-            </p>
-            <div class="review-cards-container">
-              <article class="review-card">
-                <div class="review-user">
-                  <div class="review-avatar"></div>
-                  <div class="review-user-info"><h4>Ashreen</h4></div>
-                  <div class="review-rating">
-                    <img src="images/image.svg" alt="5 Stars" />
-                  </div>
-                  <!-- Assuming image.svg is stars -->
-                </div>
-                <p class="review-text">
-                  Absolutely breathtaking views! A perfect getaway.
+              <div class="reviews-content">
+                <h2>Guest Reviews</h2>
+                <p class="section-subtitle">
+                  See what guests have to say.
                 </p>
-              </article>
-              <article class="review-card">
-                <div class="review-user">
-                  <div class="review-avatar"></div>
-                  <div class="review-user-info"><h4>Trijan</h4></div>
-                  <div class="review-rating">
-                    <img src="images/image.svg" alt="5 Stars" />
-                  </div>
-                  <!-- Assuming image.svg is stars -->
+                 <!-- Static reviews, consider making dynamic -->
+                <div class="review-cards-container">
+                  <article class="review-card">
+                     <div class="review-user">
+                       <div class="review-avatar"></div> <!-- Placeholder avatar -->
+                       <div class="review-user-info"><h4>Ashreen K.</h4></div> <!-- Added initial for privacy -->
+                       <div class="review-rating">
+                         <img src="images/image.svg" alt="5 Stars" /> <!-- Alt text more descriptive -->
+                       </div>
+                     </div>
+                    <p class="review-text">"Absolutely breathtaking views! A perfect getaway."</p> <!-- Added quotes -->
+                  </article>
+                   <article class="review-card">
+                     <div class="review-user">
+                       <div class="review-avatar"></div>
+                       <div class="review-user-info"><h4>Trijan P.</h4></div>
+                       <div class="review-rating">
+                         <img src="images/image.svg" alt="5 Stars Rating" />
+                       </div>
+                     </div>
+                    <p class="review-text">"The villa exceeded all our expectations. Highly recommended."</p>
+                  </article>
                 </div>
-                <p class="review-text">
-                  The villa exceeded all our expectations. Highly recommended.
-                </p>
-              </article>
-              <!-- Add more reviews -->
+                 <!-- Optional: Add link to view more reviews -->
+                 <!-- <a href="#reviews-more" class="view-more-button">More Reviews</a> -->
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <section class="property-inquiry-section">
-        <div class="property-inquiry-layout">
-          <div class="inquiry-info">
-            <h2>Inquiry Form</h2>
-            <p class="section-subtitle">
-              Have a question? Send us a message below.
-            </p>
-            <!-- Optional: Add contact info here too -->
-            <p>
-              <strong>Or contact us directly:</strong><br />
-              Email: info@prata.com<br />
-              Phone: +977 98XXXXXXXX
-            </p>
-          </div>
-          <form class="inquiry-form" id="inquiry-form">
-            <div class="form-group">
-              <label for="inquiry-name">Name</label>
-              <input
-                type="text"
-                id="inquiry-name"
-                name="name"
-                placeholder="Enter your name"
-                required
-              />
-              <span class="form-info">Required</span>
+          <!-- Inquiry section remains static -->
+          <section class="property-inquiry-section">
+            <div class="property-inquiry-layout">
+              <div class="inquiry-info">
+                <h2>Have Questions?</h2> <!-- Simplified Heading -->
+                <p class="section-subtitle">
+                  Send us a message using the form.
+                </p>
+                <p>
+                  <strong>Or contact PRATA directly:</strong><br /> <!-- Clarified contact -->
+                  Email: info@prata.com<br />
+                  Phone: +977 98XXXXXXXX
+                </p>
+              </div>
+              <!-- NOTE: JavaScript needed for form submission logic (e.g., AJAX) -->
+              <form class="inquiry-form" id="inquiry-form" action="#" method="POST"> <!-- action="#" requires JS -->
+                 <!-- Hidden input for property context (JS should set this) -->
+                 <input type="hidden" name="property_id" id="inquiry-property-id" value="">
+                 <input type="hidden" name="property_title" id="inquiry-property-title" value="">
+
+                <div class="form-group">
+                  <label for="inquiry-name">Name</label>
+                  <input type="text" id="inquiry-name" name="name" placeholder="Enter your name" required />
+                  <!-- Removed redundant 'Required' span, use CSS/JS for indicators -->
+                </div>
+                <div class="form-group">
+                  <label for="inquiry-email">Email</label>
+                  <input type="email" id="inquiry-email" name="email" placeholder="Enter your email" required />
+                </div>
+                <div class="form-group">
+                  <label for="inquiry-message">Message</label>
+                  <textarea id="inquiry-message" name="message" placeholder="Type your message here" rows="4" required></textarea> <!-- Removed maxlength, use JS if needed -->
+                  <!-- Removed character count span, use JS if needed -->
+                </div>
+                 <!-- NOTE: JS needed for Reset button functionality -->
+                <div class="inquiry-form-actions">
+                  <button type="reset" class="btn btn-reset">Reset Form</button> <!-- Changed type to reset -->
+                  <button type="submit" class="btn btn-primary">Send Inquiry</button>
+                </div>
+              </form>
             </div>
-            <div class="form-group">
-              <label for="inquiry-email">Email</label>
-              <input
-                type="email"
-                id="inquiry-email"
-                name="email"
-                placeholder="Enter your email"
-                required
-              />
-              <span class="form-info">Required</span>
-            </div>
-            <div class="form-group">
-              <label for="inquiry-message">Message</label>
-              <textarea
-                id="inquiry-message"
-                name="message"
-                placeholder="Type your message here"
-                maxlength="300"
-                required
-              ></textarea>
-              <span class="form-info">Maximum 300 characters</span>
-            </div>
-            <div class="inquiry-form-actions">
-              <button type="button" class="btn btn-reset">Reset Form</button>
-              <button type="submit" class="btn btn-primary">
-                Send Inquiry
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
+          </section>
+      </div> <!-- End of #property-content -->
+
     </main>
 
     <footer class="main-footer">
-      <!-- Same footer as index.html -->
+      <!-- Reusing Footer from index.html -->
       <div class="container">
         <div class="footer-content">
-          <a href="#">About Us</a>
-          <a href="#">Terms of Service</a>
+           <!-- Update hrefs -->
+          <a href="about.html">About Us</a>
+          <a href="terms.html">Terms of Service</a>
           <a href="contact.html">Contact Us</a>
+          <a href="help.html">Help Center</a>
+          <a href="become-host.html">For Landlords</a>
         </div>
+         <div class="footer-social">
+             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+             <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+         <div class="footer-copyright">
+             © 2024 PRATA Rentals. All rights reserved.
+         </div>
       </div>
     </footer>
 
-    <script src="js/script.js"></script>
+    <!-- NOTE: Link the specific JavaScript file for this page -->
+    <!-- You will need to create js/property-details.js separately -->
+    <!-- <script src="js/property-details.js"></script> -->
+    <!-- General script for common functions if needed -->
+
+    <!-- NOTE: Link the specific JavaScript file for this page -->
+    <script src="js/script.js"></script> <!-- General script first -->
+    <script src="js/property-details.js"></script> <!-- Specific script for this page -->
+  </body>
+</html>
   </body>
 </html>

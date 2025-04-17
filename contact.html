@@ -1,34 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Landlord - PRATA</title>
-    <link rel="stylesheet" href="css/globals.css">
-    <link rel="stylesheet" href="style.css">
-     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,500&family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,500;1,700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Us - PRATA</title>
+        <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/contact.css"> <!-- Specific: contact.css -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
 <body class="contact-page"> <!-- Added class for specific background -->
 
     <!-- Minimal Header for Contact Page -->
-    <header class="main-header">
+    <header class="main-header" style="position: static; background-color: transparent; box-shadow: none;"> <!-- Transparent header -->
          <div class="container">
             <a href="index.html" class="header-logo">
-                <img src="images/image-2.png" alt="PRATA Logo">
+                <!-- Ensure image path is correct -->
+                <img src="images/PRATA logo.png" alt="PRATA Logo" style="filter: brightness(0.2);"> <!-- Darken logo on light bg -->
             </a>
-             <!-- Simplified nav for contact if needed, or remove -->
             <nav class="header-nav">
-                 <a href="index.html" style="color: #e4d7c5;">Back to Home</a>
+                 <a href="index.html" class="nav-link" style="color: var(--primary-color);">Back to Home</a> <!-- Added class for potential styling -->
              </nav>
         </div>
     </header>
 
     <main class="container">
-        <img class="contact-header-image" src="https://images.unsplash.com/photo-1511215579272-6192432f83bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Scenic contact background">
+        <!-- Consider making the image optional or relevant to contact -->
+        <!-- Removed header image for cleaner look -->
+        <!-- <img class="contact-header-image" src="..." alt="Scenic contact background"> -->
 
         <div class="contact-form-container">
-            <h1>Contact The Landlord</h1>
-            <form class="contact-form" id="contact-form">
+             <!-- Heading adjusted for general contact. If for specific landlord, needs update and property context -->
+            <h1>Get In Touch</h1>
+            <p id="contact-subject-line" style="text-align: center; margin-bottom: 20px; font-style: italic; color: #555;"></p> <!-- For subject -->
+            <!-- NOTE: JavaScript (script.js) required to handle form submission and redirect to message.html -->
+            <form class="contact-form" id="contact-form" action="#" method="POST"> <!-- action="#" requires JS handler -->
+                 <!-- Hidden input for context (like property ID or subject) -->
+                 <input type="hidden" name="contact_subject" id="contact-subject" value="General Inquiry">
+
                 <div class="form-group">
                     <label for="contact-name">Name</label>
                     <input type="text" id="contact-name" name="name" placeholder="Enter your name" required>
@@ -38,10 +52,11 @@
                     <input type="email" id="contact-email" name="email" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group form-group-textarea">
-                    <label for="contact-purpose">Purpose of visit / Message</label> <!-- Combined label -->
-                    <textarea id="contact-purpose" name="purpose" placeholder="Enter purpose of visit or your message" required></textarea>
+                     <!-- Label adjusted for general message -->
+                    <label for="contact-message">Your Message</label>
+                    <textarea id="contact-message" name="message" placeholder="Enter your message or inquiry" required></textarea>
                 </div>
-                <button type="submit" class="contact-submit-button">Submit</button>
+                <button type="submit" class="contact-submit-button">Send Message</button>
             </form>
         </div>
     </main>
@@ -50,11 +65,39 @@
      <footer class="main-footer" style="background: transparent; border: none; margin-top: 20px;">
         <div class="container">
             <div class="footer-content">
-                 <a href="#">Terms of Service</a>
+                 <!-- Link to actual terms page -->
+                 <a href="terms.html">Terms of Service</a>
+                 <a href="help.html">Help Center</a> <!-- Added Help -->
+            </div>
+             <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
             </div>
         </div>
      </footer>
 
-    <script src="js/script.js"></script>
+    <!-- NOTE: Link the JavaScript file that handles form submission -->
+    <script src="js/script.js"></script> <!-- General script includes contact logic -->
+    <script>
+        // Check for subject in URL query parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const subject = params.get('subject');
+            const propertyId = params.get('propertyId'); // Example for property inquiry
+            const subjectLine = document.getElementById('contact-subject-line');
+            const subjectInput = document.getElementById('contact-subject');
+
+            if (subject) {
+                if (subjectLine) subjectLine.textContent = `Regarding: ${subject}`;
+                if (subjectInput) subjectInput.value = subject;
+            }
+             if (propertyId) {
+                // Add property context to message placeholder or hidden field
+                const messageTextarea = document.getElementById('contact-message');
+                 if (subjectLine) subjectLine.textContent = `Inquiry about Property ID: ${propertyId}`; // Update subject line
+                 if (subjectInput) subjectInput.value = `Inquiry Property ID: ${propertyId}`; // Update hidden subject
+                if(messageTextarea) messageTextarea.placeholder = `Please enter your message regarding property ID ${propertyId}...`;
+            }
+        });
+    </script>
 </body>
 </html>

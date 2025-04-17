@@ -1,0 +1,84 @@
+/* ============================================ */
+/* == Auth Page Styles (login.html, signup.html) == */
+/* ============================================ */
+
+/* Inherits .container, header, footer, buttons from common.css */
+/* Inherits .form-group base styles from common.css */
+
+body.auth-page { /* Add class to body if needed */
+    background-color: #e9ecef; /* Different background */
+}
+
+.auth-container {
+   max-width: 450px;
+   margin: 60px auto;
+   padding: 35px 40px;
+   background-color: #fff;
+   border-radius: var(--border-radius);
+   box-shadow: var(--shadow);
+   text-align: center;
+}
+.auth-container h1 {
+   font-family: var(--font-secondary);
+   color: var(--primary-color);
+   font-size: 1.6rem;
+   font-weight: 600;
+   margin-bottom: 30px;
+}
+
+.auth-form .form-group {
+   margin-bottom: 20px;
+   text-align: left;
+}
+.auth-form label {
+   font-size: 0.9rem;
+   margin-bottom: 6px;
+}
+.auth-form input {
+   padding: 12px;
+}
+
+.auth-submit-button {
+   background-color: var(--primary-color);
+   color: white;
+   border: none;
+   padding: 12px 30px;
+   border-radius: 6px;
+   font-size: 1rem;
+   font-weight: 500;
+   cursor: pointer;
+   transition: background-color 0.2s;
+   width: 100%;
+   margin-top: 10px;
+   font-family: var(--font-secondary);
+}
+.auth-submit-button:hover {
+   background-color: var(--secondary-color);
+}
+
+.auth-link {
+   margin-top: 25px;
+   font-size: 0.9em;
+   color: var(--light-text-color);
+}
+.auth-link a {
+   color: var(--primary-color);
+   text-decoration: none;
+   font-weight: 500;
+}
+.auth-link a:hover {
+   text-decoration: underline;
+}
+
+.error-message { /* For password mismatch, etc. */
+   color: var(--error-color);
+   font-size: 0.85em;
+   margin-top: 5px;
+   text-align: left;
+}
+
+/* Simple header for auth pages */
+.auth-page .main-header {
+   position: static; /* Non-sticky */
+   box-shadow: none;
+}

@@ -3,36 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Complete Your Booking</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Complete Your Booking - PRATA</title>
+    
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/booking-style.css"> <!-- Specific: booking.css -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
   <body>
+    <!-- Standard Header -->
+    <header class="main-header" style="position: static;"> <!-- Non-sticky might be better here -->
+      <div class="container">
+          <a href="index.html" class="header-logo">
+              <img src="images/PRATA logo.png" alt="PRATA Logo">
+          </a>
+           <nav class="header-nav">
+               <a href="wishlist.html" class="wishlist-icon" aria-label="Wishlist"><img src="images/iconamoon-heart-bold.svg" alt="Wishlist"></a>
+               <a href="profile.html" class="profile-icon" aria-label="Profile Menu"><div class="ellipse"></div></a>
+           </nav>
+      </div>
+    </header>
+
     <div class="booking-container">
       <header class="booking-header">
         <h1>Complete Your Booking</h1>
         <p>Secure your stay by providing the details below.</p>
       </header>
-      <a href="index.html" class="back-home-button">← Back to Home</a>
+      <!-- Removed Back to Home button as header now exists -->
+      <!-- <a href="index.html" class="back-home-button">← Back to Home</a> -->
       <div class="booking-content">
         <main class="booking-form-area">
-          <form id="booking-form" action="#" method="post">
-            <!-- Property Snippet (Optional) -->
+          <!-- NOTE: JavaScript (script.js) is required to handle form submission, date calculations, guest counters, and summary updates. -->
+          <form id="booking-form" action="#" method="post"> <!-- Needs JS handler, action="#" prevents default temporarily -->
+
+            <!-- Property Snippet (Needs Dynamic Update via JS) -->
             <section class="property-snippet">
+              <!-- NOTE: Image src and text below should be dynamically populated by JS based on selected property -->
               <img
-                src="images/222.png"
+                src="images/222.png"  
                 alt="Property Thumbnail"
                 class="property-thumb"
+                id="booking-property-image"
               />
               <div>
-                <h2>Vill For Rent</h2>
+                <h2 id="booking-property-title">Villa For Rent</h2> <!-- Placeholder Title -->
                 <p>Your selected property</p>
-                <!-- Maybe add rating or location here -->
+                <!-- Add property ID as hidden input if needed for submission -->
+                <input type="hidden" name="property_id" id="booking-property-id" value=""> <!-- JS should set value -->
               </div>
             </section>
 
             <!-- Dates Section -->
             <section class="form-section">
               <h3>Select Your Dates</h3>
+              <!-- NOTE: JS needed for date validation (check-out >= check-in) and summary update -->
               <div class="date-selection">
                 <div class="form-group">
                   <label for="checkin-date">Check-in Date</label>
@@ -54,52 +82,35 @@
                 </div>
               </div>
               <p class="price-note">
-                Price per night: <span id="price-per-night">15,000.00</span>
+                 <!-- NOTE: Price should be dynamically loaded by JS -->
+                Price per night: NPR <span id="price-per-night">15,000.00</span>
               </p>
             </section>
 
             <!-- Guests Section -->
             <section class="form-section guest-info">
               <h3>Guest Information</h3>
+              <!-- NOTE: JS needed for counter buttons and updating summary -->
               <div class="guest-list">
+                <!-- Adults -->
                 <div class="guest-item">
                   <div class="guest-type">
-                    <span class="icon">AD</span>
+                    <span class="icon">AD</span> <!-- Consider using Font Awesome icons -->
                     <div>
                       <span class="guest-label">Adults</span>
                       <span class="guest-sublabel">Age 13+</span>
                     </div>
                   </div>
                   <div class="guest-counter">
-                    <button
-                      type="button"
-                      class="counter-btn"
-                      data-action="decrement"
-                      data-target="adults-count"
-                      aria-label="Decrease adults"
-                    >
-                      -
-                    </button>
+                    <button type="button" class="counter-btn" data-action="decrement" data-target="adults-count" aria-label="Decrease adults" disabled>-</button> <!-- Start disabled at 1 -->
                     <span id="adults-count" class="guest-count">1</span>
-                    <input
-                      type="hidden"
-                      name="adults"
-                      id="adults-input"
-                      value="1"
-                    />
-                    <button
-                      type="button"
-                      class="counter-btn"
-                      data-action="increment"
-                      data-target="adults-count"
-                      aria-label="Increase adults"
-                    >
-                      +
-                    </button>
+                    <input type="hidden" name="adults" id="adults-input" value="1" />
+                    <button type="button" class="counter-btn" data-action="increment" data-target="adults-count" aria-label="Increase adults">+</button>
                   </div>
                 </div>
+                <!-- Children -->
                 <div class="guest-item">
-                  <div class="guest-type">
+                   <div class="guest-type">
                     <span class="icon">CH</span>
                     <div>
                       <span class="guest-label">Children</span>
@@ -107,67 +118,26 @@
                     </div>
                   </div>
                   <div class="guest-counter">
-                    <button
-                      type="button"
-                      class="counter-btn"
-                      data-action="decrement"
-                      data-target="children-count"
-                      aria-label="Decrease children"
-                    >
-                      -
-                    </button>
+                    <button type="button" class="counter-btn" data-action="decrement" data-target="children-count" aria-label="Decrease children" disabled>-</button> <!-- Start disabled at 0 -->
                     <span id="children-count" class="guest-count">0</span>
-                    <input
-                      type="hidden"
-                      name="children"
-                      id="children-input"
-                      value="0"
-                    />
-                    <button
-                      type="button"
-                      class="counter-btn"
-                      data-action="increment"
-                      data-target="children-count"
-                      aria-label="Increase children"
-                    >
-                      +
-                    </button>
+                    <input type="hidden" name="children" id="children-input" value="0" />
+                    <button type="button" class="counter-btn" data-action="increment" data-target="children-count" aria-label="Increase children">+</button>
                   </div>
                 </div>
-                <div class="guest-item">
-                  <div class="guest-type">
-                    <span class="icon">PT</span>
+                <!-- Pets -->
+                 <div class="guest-item">
+                   <div class="guest-type">
+                    <span class="icon">PT</span> <!-- Consider Font Awesome 'fa-paw' -->
                     <div>
                       <span class="guest-label">Pets</span>
                       <span class="guest-sublabel">Bringing a pet?</span>
                     </div>
                   </div>
-                  <div class="guest-counter">
-                    <button
-                      type="button"
-                      class="counter-btn"
-                      data-action="decrement"
-                      data-target="pets-count"
-                      aria-label="Decrease pets"
-                    >
-                      -
-                    </button>
+                   <div class="guest-counter">
+                    <button type="button" class="counter-btn" data-action="decrement" data-target="pets-count" aria-label="Decrease pets" disabled>-</button> <!-- Start disabled at 0 -->
                     <span id="pets-count" class="guest-count">0</span>
-                    <input
-                      type="hidden"
-                      name="pets"
-                      id="pets-input"
-                      value="0"
-                    />
-                    <button
-                      type="button"
-                      class="counter-btn"
-                      data-action="increment"
-                      data-target="pets-count"
-                      aria-label="Increase pets"
-                    >
-                      +
-                    </button>
+                    <input type="hidden" name="pets" id="pets-input" value="0" />
+                    <button type="button" class="counter-btn" data-action="increment" data-target="pets-count" aria-label="Increase pets">+</button>
                   </div>
                 </div>
               </div>
@@ -179,44 +149,22 @@
               <div class="form-row">
                 <div class="form-group">
                   <label for="full-name">Full Name</label>
-                  <input
-                    type="text"
-                    id="full-name"
-                    name="full_name"
-                    placeholder="e.g., Prata"
-                    required
-                  />
+                  <input type="text" id="full-name" name="full_name" placeholder="e.g., Prata Sharma" required />
                 </div>
                 <div class="form-group">
                   <label for="email">Email Address</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="e.g., prata@123.com"
-                    required
-                  />
+                  <input type="email" id="email" name="email" placeholder="e.g., prata@example.com" required />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="phone">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="Optional"
-                  />
+                  <input type="tel" id="phone" name="phone" placeholder="Optional, e.g., 98XXXXXXXX" />
                 </div>
               </div>
               <div class="form-group">
                 <label for="requests">Special Requests (Optional)</label>
-                <textarea
-                  id="requests"
-                  name="requests"
-                  rows="3"
-                  placeholder="e.g., late check-in, allergies"
-                ></textarea>
+                <textarea id="requests" name="requests" rows="3" placeholder="e.g., late check-in, allergies"></textarea>
               </div>
             </section>
 
@@ -224,58 +172,36 @@
             <section class="form-section payment-info">
               <h3>Payment Details</h3>
               <p>All transactions are secure and encrypted.</p>
+              <!-- NOTE: Implement client-side validation (JS) and server-side processing for security -->
               <div class="form-row">
                 <div class="form-group form-group-full">
                   <label for="card-number">Card Number</label>
-                  <input
-                    type="text"
-                    id="card-number"
-                    name="card_number"
-                    placeholder="Enter card number"
-                    required
-                  />
+                  <input type="text" id="card-number" name="card_number" placeholder="Enter card number" inputmode="numeric" pattern="[\d ]{12,19}" autocomplete="cc-number" required />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="expiry-date">Expiry Date</label>
-                  <input
-                    type="text"
-                    id="expiry-date"
-                    name="expiry_date"
-                    placeholder="MM / YY"
-                    required
-                  />
+                  <input type="text" id="expiry-date" name="expiry_date" placeholder="MM / YY" inputmode="numeric" pattern="\d{2} / \d{2}" autocomplete="cc-exp" required />
                 </div>
                 <div class="form-group">
                   <label for="cvv">CVV</label>
-                  <input
-                    type="text"
-                    id="cvv"
-                    name="cvv"
-                    placeholder="CVV"
-                    required
-                  />
+                  <input type="text" id="cvv" name="cvv" placeholder="CVV" inputmode="numeric" pattern="\d{3,4}" autocomplete="cc-csc" required />
                 </div>
               </div>
               <div class="form-group">
                 <label for="card-name">Name on Card</label>
-                <input
-                  type="text"
-                  id="card-name"
-                  name="card_name"
-                  placeholder="Name as it appears on card"
-                  required
-                />
+                <input type="text" id="card-name" name="card_name" placeholder="Name as it appears on card" autocomplete="cc-name" required />
               </div>
             </section>
 
             <!-- Submission -->
             <div class="form-submit-area">
               <p class="terms">
+                <!-- Updated links -->
                 By clicking "Confirm Booking", you agree to the
-                <a href="#">Terms of Service</a> and
-                <a href="#">Cancellation Policy</a>.
+                <a href="terms.html" target="_blank">Terms of Service</a> and
+                <a href="cancellation.html" target="_blank">Cancellation Policy</a>.
               </p>
               <button type="submit" class="confirm-button">
                 Confirm Booking
@@ -286,6 +212,7 @@
 
         <aside class="booking-summary">
           <h3>Booking Summary</h3>
+           <!-- NOTE: All content below needs to be updated by JS based on user input -->
           <div class="summary-details">
             <div class="summary-item">
               <span>Check-in:</span>
@@ -301,7 +228,7 @@
             </div>
             <div class="summary-item">
               <span>Guests:</span>
-              <strong id="summary-guests">1 Adult</strong>
+              <strong id="summary-guests">1 Adult</strong> <!-- ID added for JS -->
             </div>
           </div>
 
@@ -309,26 +236,48 @@
             <h4>Price Details</h4>
             <dl>
               <div class="price-line">
-                <dt id="price-calc-text">15,000 x 0 nights</dt>
-                <dd id="summary-base-price">$0.00</dd>
+                <dt id="price-calc-text">NPR 15,000 x 0 nights</dt>
+                <dd id="summary-base-price">NPR 0.00</dd>
               </div>
               <div class="price-line">
+                <!-- Tax calculation logic needed in JS -->
                 <dt>Taxes & Fees (approx)</dt>
-                <dd id="summary-taxes">$0.00</dd>
+                <dd id="summary-taxes">NPR 0.00</dd>
               </div>
             </dl>
             <div class="price-total">
               <span>Total Price:</span>
-              <strong id="summary-total-price">$0.00</strong>
+              <strong id="summary-total-price">NPR 0.00</strong> <!-- ID added for JS -->
             </div>
           </div>
         </aside>
       </div>
-
       <!-- /.booking-content -->
     </div>
     <!-- /.booking-container -->
 
-    <script src="script.js"></script>
+     <!-- Standard Footer -->
+     <footer class="main-footer">
+      <div class="container">
+          <div class="footer-content">
+               <a href="about.html">About Us</a>
+               <a href="terms.html">Terms of Service</a>
+               <a href="contact.html">Contact Us</a>
+               <a href="help.html">Help Center</a>
+               <a href="become-host.html">For Landlords</a>
+          </div>
+           <div class="footer-social">
+               <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+               <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+               <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="footer-copyright">
+              © 2024 PRATA Rentals. All rights reserved.
+          </div>
+      </div>
+   </footer>
+
+    <!-- NOTE: Link the JavaScript file that handles booking logic -->
+    <script src="js/script.js"></script> <!-- General script includes booking logic -->
   </body>
 </html>

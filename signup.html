@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login / Sign Up - PRATA</title> <!-- Adjust Title per page -->
+        <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/auth.css"> <!-- Specific: auth.css -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <!-- Font Awesome (Optional for auth pages) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+<body>
+    <!-- Simple Header for Auth Pages -->
+    <header class="main-header" style="position: static;"> <!-- Non-sticky header -->
+         <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/PRATA logo.png" alt="PRATA Logo">
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <h1>Create Your Account</h1>
+            <form id="signup-form" class="auth-form">
+                 <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" required minlength="6">
+                </div>
+                 <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" name="confirm_password" required>
+                     <p id="password-error" class="error-message" style="display: none;">Passwords do not match.</p>
+                </div>
+                <button type="submit" class="auth-submit-button">Sign Up</button>
+            </form>
+            <p class="auth-link">
+                Already have an account? <a href="login.html">Log In</a>
+            </p>
+        </div>
+    </main>
+
+    <footer class="main-footer" style="margin-top: 30px;">
+         <div class="container">
+             <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+         </div>
+     </footer>
+
+     <script>
+        const signupForm = document.getElementById('signup-form');
+        const passwordInput = document.getElementById('signup-password');
+        const confirmPasswordInput = document.getElementById('signup-confirm-password');
+        const passwordError = document.getElementById('password-error');
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            passwordError.style.display = 'none'; // Hide error initially
+
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            // Basic Validation
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                passwordError.style.display = 'block';
+                confirmPasswordInput.focus();
+                return;
+            }
+
+            if (password.length < 6) {
+                 alert('Password must be at least 6 characters long.');
+                 passwordInput.focus();
+                 return;
+            }
+
+             // --- Signup Simulation ---
+             // In a real app, send data to the backend to create the user.
+             // Check if email already exists, hash password, etc.
+            alert(`Sign up successful for ${name}! Redirecting to login...`);
+             // Store name for profile page simulation (optional)
+             // Note: We don't log the user in automatically here, redirect to login.
+            window.location.href = 'login.html';
+             // --- End Simulation ---
+        });
+     </script>
+</body>
+</html>
