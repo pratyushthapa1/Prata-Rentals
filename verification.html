@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRATA - Enter Verification Code</title>
+    <!-- Links using your project structure -->
+    <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/forgot-password.css"> <!-- Link the new CSS -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome (Needed for icons like back arrow potentially) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="auth-page">
+
+    <!-- Simplified Header -->
+    <header class="main-header" style="position: static; box-shadow: none;">
+         <div class="container" style="justify-content: flex-start;">
+            <!-- Back link integrated into header -->
+            <a href="forgot-options.html" class="back-button-link" style="margin-right: 20px;">← Back</a>
+            <a href="index.html" class="header-logo" style="margin-left: auto; margin-right: auto;">
+                <img src="images/PRATA logo.png" alt="PRATA Logo">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="auth-container verification-container">
+            <h1>Enter Code</h1>
+            <p class="sub-description" id="verification-message">Please enter the 5-digit verification code sent.</p>
+
+            <!-- Form submits to backend for validation or directly to reset page -->
+            <form action="reset-password.html" method="post" class="auth-form" id="verify-form">
+                <div class="code-input-group">
+                    <input type="text" name="code1" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
+                    <input type="text" name="code2" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
+                    <input type="text" name="code3" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
+                    <input type="text" name="code4" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
+                    <input type="text" name="code5" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
+                </div>
+                 <div class="resend-link">
+                     Didn't receive code? <a href="#" id="resend-code-link">Resend</a>
+                 </div>
+
+                <button type="submit" class="auth-submit-button">Verify Code</button>
+            </form>
+        </div>
+    </main>
+
+     <!-- Minimal Footer -->
+    <footer class="main-footer" style="margin-top: 30px; background: transparent; border-top: none; padding-top: 0;">
+         <div class="container">
+             <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+         </div>
+     </footer>
+
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update message based on how user got here
+            const params = new URLSearchParams(window.location.search);
+            const method = params.get('method');
+            const contactInfo = params.get('contactInfo'); // Email or Phone (masked or real)
+            const messageEl = document.getElementById('verification-message');
+
+            if (method && messageEl) {
+                messageEl.textContent = `Please enter the 5-digit verification code sent via ${method}${contactInfo ? ' to ' + contactInfo : ''}.`;
+            }
+
+            // Auto-focus next input
+            const codeInputs = document.querySelectorAll('.code-input');
+            codeInputs.forEach((input, index) => {
+                input.addEventListener('input', (e) => {
+                    // If input has value and it's not the last input, focus next
+                    if (input.value && index < codeInputs.length - 1) {
+                        codeInputs[index + 1].focus();
+                    }
+                });
+                // Optional: Handle backspace to focus previous
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !input.value && index > 0) {
+                         codeInputs[index - 1].focus();
+                    }
+                });
+            });
+
+            // Simulate Resend
+             const resendLink = document.getElementById('resend-code-link');
+             if(resendLink){
+                 resendLink.addEventListener('click', (e) => {
+                     e.preventDefault();
+                     alert('Verification code resend request simulated.');
+                     // Add logic here to potentially disable the link for a while
+                 });
+             }
+
+             // Simulate Verification (Form action takes to reset page)
+             const verifyForm = document.getElementById('verify-form');
+             verifyForm?.addEventListener('submit', (e) => {
+                 // In real app, prevent default, collect code, send to backend for validation
+                 // e.preventDefault();
+                 // const code = Array.from(codeInputs).map(input => input.value).join('');
+                 // fetch('/api/verify-code', { method: 'POST', body: JSON.stringify({ code }) }) ...
+                 console.log('Simulating code verification...');
+             });
+        });
+     </script>
+
+</body>
+</html>

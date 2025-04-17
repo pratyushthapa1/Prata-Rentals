@@ -4,10 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Search Results - PRATA</title>
-        <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+        <!-- Ensure correct order: Globals -> Common -> Specific Page -->
+        <link rel="stylesheet" href="globals.css"> If you have this
         <link rel="stylesheet" href="css/common.css">
-        <!-- Uses common.css for property cards, could add search-results.css for filters -->
-        <!-- <link rel="stylesheet" href="css/search-results.css"> -->
+        <link rel="stylesheet" href="css/search-results.css">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,15 +36,26 @@
     </header>
 
     <main class="container">
-        <h1 class="section-title alt-title">Search Results</h1>
-        <p id="search-criteria" style="text-align: center; margin-bottom: 30px; font-style: italic;">Showing properties matching your criteria...</p>
+        <!-- Wrap Title and Criteria in the header div -->
+        <div class="search-results-header">
+            <h1 class="section-title alt-title">Search Results</h1>
+            <!-- Removed inline style -->
+            <p id="search-criteria">Showing properties matching your criteria...</p>
+        </div>
 
-        <!-- Optional: Add search filters again here -->
+        <!-- Optional: Add search filters again here using the .search-results-filters class -->
+        <!-- Example:
+        <div class="search-results-filters">
+            <h2>Filter Results</h2>
+            <form> ... your filter form elements ... </form>
+        </div>
+        -->
 
         <div class="properties-grid" id="results-grid">
             <!-- JS would dynamically populate this based on actual search -->
             <!-- Placeholder Content -->
-            <p id="no-results-message" style="display: none; grid-column: 1 / -1; text-align: center; padding: 40px;">No properties found matching your criteria. Try adjusting your search.</p>
+            <!-- Removed inline style - CSS will handle display:none initially -->
+            <p id="no-results-message">No properties found matching your criteria. Try adjusting your search.</p>
 
              <!-- Example Card (Repeat or remove based on JS) -->
              <a href="property.html?id=5" class="property-link">
@@ -120,21 +132,29 @@
             let criteriaText = 'Showing all properties.';
             if (location || category || maxPrice) {
                 criteriaText = 'Showing results for: ';
-                if (location) criteriaText += ` Location "${location}"`;
-                if (category) criteriaText += ` Type "${category}"`;
-                if (maxPrice) criteriaText += ` up to NPR ${maxPrice}`;
+                let conditions = []; // Use an array to join conditions cleanly
+                if (location) conditions.push(` Location "${location}"`);
+                if (category) conditions.push(` Type "${category}"`);
+                if (maxPrice) conditions.push(` up to NPR ${maxPrice}`);
+                criteriaText += conditions.join(','); // Join with comma or ' and '
                 criteriaText += '.';
             }
-            criteriaP.textContent = criteriaText;
+            // Ensure criteriaP exists before setting textContent
+            if(criteriaP) {
+                criteriaP.textContent = criteriaText;
+            }
 
-            // --- Backend Simulation ---
-            // In a real app, you'd fetch results based on params.
-            // Here, we just check if *any* results are hardcoded.
-            const hasResults = resultsGrid.querySelector('.property-link'); // Check if placeholders exist
-            if (!hasResults) {
-                 if(noResultsMsg) noResultsMsg.style.display = 'block';
-            } else {
-                 if(noResultsMsg) noResultsMsg.style.display = 'none';
+            // --- Result Display Logic ---
+            // In a real app, you'd fetch results based on params and populate resultsGrid.
+            // This simulates checking if results were populated (or if placeholders exist).
+            const hasResults = resultsGrid && resultsGrid.querySelector('.property-link'); // Check if any result links exist within the grid
+
+            if (noResultsMsg) { // Check if the no-results element exists
+                if (!hasResults) {
+                    noResultsMsg.style.display = 'block'; // Show message if no results
+                } else {
+                    noResultsMsg.style.display = 'none'; // Hide message if there are results
+                }
             }
             // --- End Simulation ---
         });

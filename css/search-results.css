@@ -1,0 +1,227 @@
+/* ============================================ */
+/* == Search Results Page Styles             == */
+/* ============================================ */
+
+/* --- Inherited Styles Note --- */
+/* ... (keep the inherited styles note) ... */
+
+/* --- Main Layout (Sidebar + Content) --- */
+.search-results-layout {
+    display: grid;
+    /* Adjust sidebar width (e.g., 280px) and gap as needed */
+    grid-template-columns: 280px 1fr; /* Sidebar | Main Content */
+    gap: 30px; /* Space between sidebar and content */
+    padding: 30px 0; /* Vertical padding for the entire layout */
+    align-items: start; /* Align items to the top */
+}
+
+/* --- Filters Sidebar --- */
+.search-sidebar {
+    background-color: #f8f9fa; /* Light background for sidebar */
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    border: 1px solid #dee2e6; /* Subtle border */
+    /* Make it sticky if content scrolls long? */
+    /* position: sticky; */
+    /* top: 20px; */ /* Adjust based on header height */
+}
+
+.search-sidebar h2 {
+    font-size: 1.3rem;
+    font-family: var(--font-secondary);
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0; /* Separator line */
+}
+
+/* Basic Filter Form Styles (Adapt from common.css or create new) */
+.search-sidebar .form-group {
+    margin-bottom: 18px;
+}
+
+.search-sidebar label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-color-dark); /* Assuming a darker text variable */
+}
+
+.search-sidebar input[type="text"],
+.search-sidebar input[type="number"],
+.search-sidebar select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: var(--input-border-radius, 4px); /* Use variable or default */
+    font-size: 0.95rem;
+    box-sizing: border-box; /* Include padding/border in width */
+}
+.search-sidebar input:focus,
+.search-sidebar select:focus {
+      border-color: var(--primary-color-light); /* Use a focus color */
+      box-shadow: 0 0 0 2px rgba(var(--primary-rgb), 0.2); /* Example focus shadow */
+      outline: none;
+}
+
+.search-sidebar button.btn { /* Style the apply button */
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    /* Assuming .btn and .btn-primary are defined in common.css */
+}
+
+/* --- Main Results Content Area --- */
+.search-results-content {
+    /* This is the right grid column, mostly needs no specific style */
+    /* It just contains the header, utility bar, and results grid */
+}
+
+/* --- Page Header (Title & Criteria) --- */
+.search-results-header {
+    text-align: left; /* Align left now it's in the main column */
+    margin-bottom: 25px; /* Space below header, before utility bar */
+}
+
+.search-results-header h1.section-title.alt-title {
+     font-size: 1.8rem;
+     margin-bottom: 8px; /* Less space between title and criteria */
+}
+
+#search-criteria {
+    font-size: 0.95rem;
+    color: var(--light-text-color);
+    font-style: italic;
+    margin-bottom: 0; /* Margin handled by parent */
+}
+
+/* --- Utility Bar (Sorting, Count) --- */
+.results-utility-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 15px; /* Space between items if they wrap */
+    padding: 12px 15px;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px; /* Space below bar, before grid */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+.results-count-text {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.sort-options label {
+    margin-right: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.sort-options select {
+    padding: 6px 10px;
+    border: 1px solid #ced4da;
+    border-radius: var(--input-border-radius, 4px);
+    font-size: 0.9rem;
+    background-color: #fff;
+}
+
+/* --- Results Grid Layout --- */
+.properties-grid {
+    display: grid;
+    /* Adjust minmax slightly if needed, now that container is narrower */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+}
+
+/* --- No Results Message --- */
+#no-results-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 1.1rem;
+    color: var(--light-text-color);
+    display: none; /* Initially hidden */
+    background-color: #fff; /* Give it a background within the grid */
+    border-radius: var(--border-radius);
+    border: 1px dashed var(--border-color, #ddd);
+}
+
+/* ============================================ */
+/* == Responsive Styles for Search Results   == */
+/* ============================================ */
+
+/* Tablet and Smaller - Stack Sidebar on Top */
+@media (max-width: 991.98px) { /* Adjust breakpoint as needed */
+    .search-results-layout {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 30px; /* Vertical gap when stacked */
+    }
+
+    .search-sidebar {
+        /* position: static; */ /* Remove sticky if it was added */
+        width: 100%; /* Take full width */
+        margin-bottom: 0; /* Gap handled by grid */
+    }
+
+     .search-results-header {
+        text-align: center; /* Center header again when stacked */
+     }
+}
+
+/* Further adjustments for smaller screens */
+@media (max-width: 767.98px) {
+    .properties-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Slightly smaller min */
+        gap: 20px;
+    }
+
+    .search-results-header h1.section-title.alt-title {
+        font-size: 1.6rem;
+    }
+
+    #search-criteria {
+        font-size: 0.9rem;
+    }
+
+    .results-utility-bar {
+        padding: 10px;
+        justify-content: center; /* Center items when they wrap */
+    }
+}
+
+@media (max-width: 575.98px) {
+    .properties-grid {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 20px;
+    }
+
+    .search-results-header {
+        margin-bottom: 20px;
+    }
+     #search-criteria {
+        font-size: 0.85rem;
+     }
+
+    .results-utility-bar {
+        flex-direction: column; /* Stack count and sort options vertically */
+        align-items: center;
+        gap: 10px;
+    }
+    .sort-options {
+        width: 100%;
+        text-align: center;
+    }
+    .sort-options select {
+         width: 80%; /* Don't make select full width */
+         max-width: 250px;
+    }
+}
