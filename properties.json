@@ -1,8 +1,8 @@
-
 [
   {
     "id": 1,
     "title": "Villa for Rent at Affordable Price",
+    "type": "Villa",
     "location": "Budanilkantha, Kathmandu",
     "price": "35000",
     "priceSuffix": "/mo",
@@ -12,7 +12,10 @@
     "features": [
       { "icon": "fa-bed", "text": "3 Beds" },
       { "icon": "fa-bath", "text": "2 Baths" },
-      { "icon": "fa-house-user", "text": "Family Friendly"}
+      { "icon": "fa-ruler-combined", "text": "Approx. 1800 sq ft" },
+      { "icon": "fa-house-user", "text": "Family Friendly" },
+      { "icon": "fa-car", "text": "Ample Parking" },
+      { "icon": "fa-tree", "text": "Small Garden" }
     ],
     "description": "A beautiful villa located in the serene area of Budanilkantha. Perfect for families looking for comfort and affordability.\n\n🏙️ Situated in a well-connected area with easy access to markets, schools, hospitals, and public transport.\n\n💰 Affordable Rent & Flexible Terms!\n🔹 Budget-friendly pricing\n🔹 Long-term and short-term rental options available",
     "gallery": ["images/card1.png.jpeg", "images/villa-inside1.jpg", "images/villa-garden.jpg", "images/4.png.webp", "images/3.png", "images/2.png" ],
@@ -21,7 +24,8 @@
   },
   {
     "id": 2,
-    "title": "Cozy Home Available for Rent",
+    "title": "Cozy Ground Floor Home for Rent",
+    "type": "House",
     "location": "Sanepa, Lalitpur",
     "price": "28000",
     "priceSuffix": "/mo",
@@ -31,9 +35,13 @@
     "features": [
       { "icon": "fa-bed", "text": "2 Beds" },
       { "icon": "fa-bath", "text": "1 Bath" },
-      { "icon": "fa-kitchen-set", "text": "Basic Kitchenette"}
+      { "icon": "fa-ruler-combined", "text": "750 sq ft" },
+      { "icon": "fa-building", "text": "Ground Floor" },
+      { "icon": "fa-kitchen-set", "text": "Basic Kitchenette" },
+      { "icon": "fa-couch", "text": "Semi-Furnished" },
+      { "icon": "fa-motorcycle", "text": "Bike Parking" }
     ],
-    "description": "Charming and cozy home in a convenient Lalitpur neighborhood (Sanepa area). Ideal for couples or small families seeking a comfortable living space.",
+    "description": "Charming and cozy ground floor home in a convenient Lalitpur neighborhood (Sanepa area). Ideal for couples or small families seeking a comfortable living space.",
     "gallery": ["images/card2.png.jpeg", "images/cozy-living.jpg"],
     "mapLink": null,
     "coordinates": null
@@ -41,6 +49,7 @@
   {
     "id": 3,
     "title": "Luxury Villa Now Renting",
+    "type": "Villa",
     "location": "Patan Durbar Square Area, Lalitpur",
     "price": "120000",
     "priceSuffix": "/mo",
@@ -50,8 +59,10 @@
     "features": [
         { "icon": "fa-bed", "text": "5 Beds" },
         { "icon": "fa-bath", "text": "4 Baths" },
+        { "icon": "fa-ruler-combined", "text": "3500+ sq ft" },
         { "icon": "fa-person-swimming", "text": "Private Pool" },
-        { "icon": "fa-car", "text": "Garage Parking" }
+        { "icon": "fa-car", "text": "Garage Parking" },
+        { "icon": "fa-plug", "text": "Backup Power" }
     ],
     "description": "Experience luxury living in this stunning villa near Patan Durbar Square. Features modern amenities, elegant interiors, and a private swimming pool.",
     "gallery": ["images/card3.png.jpeg", "images/luxury-pool.jpg", "images/luxury-interior.jpg"],
@@ -60,7 +71,8 @@
   },
   {
     "id": 4,
-    "title": "Elegant Rental Property Available",
+    "title": "Elegant Apartment in Thamel",
+    "type": "Apartment",
     "location": "Thamel, Kathmandu",
     "price": "40000",
     "priceSuffix": "/mo",
@@ -70,9 +82,13 @@
     "features": [
         { "icon": "fa-bed", "text": "3 Beds" },
         { "icon": "fa-bath", "text": "2 Baths" },
-        { "icon": "fa-balcony", "text": "Balcony Access" }
+        { "icon": "fa-ruler-combined", "text": "1100 sq ft" },
+        { "icon": "fa-building", "text": "Floor: 2nd" },
+        { "icon": "fa-wind", "text": "Balcony Access" },
+        { "icon": "fa-couch", "text": "Unfurnished" },
+        { "icon": "fa-car", "text": "Street Parking" }
     ],
-    "description": "Well-maintained and elegant property available for rent in the vibrant Thamel area. Close proximity to shops, restaurants, and nightlife.",
+    "description": "Well-maintained and elegant apartment available for rent in the vibrant Thamel area. Close proximity to shops, restaurants, and nightlife.",
     "gallery": ["images/card4.png.jpeg"],
     "mapLink": "https://maps.app.goo.gl/maps/Thamel",
     "coordinates": { "lat": 27.7150, "lng": 85.3115 }
@@ -80,6 +96,7 @@
   {
     "id": 5,
     "title": "Modern Apartment in Baneshwor",
+    "type": "Apartment",
     "location": "New Baneshwor, Kathmandu",
     "price": "45000",
     "priceSuffix": "/mo",
@@ -89,8 +106,14 @@
     "features": [
         { "icon": "fa-bed", "text": "2 Beds" },
         { "icon": "fa-bath", "text": "2 Baths" },
+        { "icon": "fa-ruler-combined", "text": "950 sq ft" },
+        { "icon": "fa-building", "text": "Floor: 5th" },
+        { "icon": "fa-elevator", "text": "Elevator Access" },
         { "icon": "fa-car", "text": "Reserved Parking" },
-        { "icon": "fa-elevator", "text": "Elevator Access" }
+        { "icon": "fa-couch", "text": "Semi-Furnished" },
+        { "icon": "fa-kitchen-set", "text": "Modular Kitchen" },
+        { "icon": "fa-snowflake", "text": "AC Available" },
+        { "icon": "fa-shower", "text": "Hot Water (Geyser)"}
     ],
     "description": "Newly built modern apartment in a prime Baneshwor location, offering convenience and style. Includes reserved parking space and elevator access.",
     "gallery": ["images/card5.png.jpeg", "images/apartment-living5.jpg", "images/apartment-kitchen5.jpg"],
@@ -100,6 +123,7 @@
   {
     "id": 6,
     "title": "Spacious Family Home with Garden",
+    "type": "House",
     "location": "Maharajgunj, Kathmandu",
     "price": "85000",
     "priceSuffix": "/mo",
@@ -109,9 +133,10 @@
     "features": [
         { "icon": "fa-bed", "text": "4 Beds" },
         { "icon": "fa-bath", "text": "3 Baths" },
+        { "icon": "fa-ruler-combined", "text": "2500 sq ft Living" },
         { "icon": "fa-tree", "text": "Large Garden" },
-        { "icon": "fa-sun", "text": "Ample Sunlight" }
-
+        { "icon": "fa-sun", "text": "Ample Sunlight" },
+        { "icon": "fa-car", "text": "Driveway Parking"}
     ],
     "description": "Large family home in Maharajgunj with a beautiful, spacious garden. Plenty of room for everyone, located in a peaceful and desirable neighborhood.",
     "gallery": ["images/card6.png.jpeg", "images/family-garden6.jpg", "images/family-room6.jpg"],
@@ -121,6 +146,7 @@
   {
     "id": 7,
     "title": "Affordable Studio Flat",
+    "type": "Flat",
     "location": "Kirtipur, Kathmandu",
     "price": "18000",
     "priceSuffix": "/mo",
@@ -128,9 +154,13 @@
     "image": "images/card7.png.jpeg",
     "tag": "Budget",
     "features": [
-      { "icon": "fa-bed", "text": "1 Bed (Studio)" },
+      { "icon": "fa-bed", "text": "Studio Layout" },
       { "icon": "fa-bath", "text": "1 Bath" },
-      { "icon": "fa-location-arrow", "text": "Near TU Campus"}
+      { "icon": "fa-ruler-combined", "text": "350 sq ft" },
+      { "icon": "fa-building", "text": "Floor: 1st" },
+      { "icon": "fa-location-arrow", "text": "Near TU Campus"},
+      { "icon": "fa-couch", "text": "Unfurnished" },
+      { "icon": "fa-motorcycle", "text": "Bike Parking" }
     ],
     "description": "Compact and affordable studio flat in Kirtipur. Suitable for students or single professionals looking for a budget-friendly option close to Tribhuvan University.",
     "gallery": ["images/card7.png.jpeg", "images/studio-inside7.jpg"],
@@ -140,6 +170,7 @@
   {
     "id": 8,
     "title": "Charming Traditional House",
+    "type": "House",
     "location": "Bhaktapur Durbar Square Area",
     "price": "32000",
     "priceSuffix": "/mo",
@@ -149,7 +180,10 @@
     "features": [
       { "icon": "fa-bed", "text": "3 Beds" },
       { "icon": "fa-bath", "text": "1 Bath" },
-      { "icon": "fa-landmark", "text": "Historic Area"}
+       { "icon": "fa-ruler-combined", "text": "1200 sq ft" },
+      { "icon": "fa-landmark", "text": "Historic Area"},
+      { "icon": "fa-tint", "text": "Community Water Access" },
+      { "icon": "fa-car", "text": "Nearby Parking Area"}
     ],
     "description": "Experience traditional Newari living in this charming house located near the historic Bhaktapur Durbar Square. Features intricate woodwork and cultural ambiance.",
     "gallery": ["images/card8.png.jpeg", "images/traditional-courtyard8.jpg", "images/traditional-interior8.jpg"],

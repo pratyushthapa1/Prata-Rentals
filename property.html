@@ -67,12 +67,23 @@
 
         <section class="property-features-section">
           <h2 class="section-title">Features & Amenities</h2>
-          <!-- Features grid dynamically populated by JS -->
+          <!-- Features grid - Initially shows static examples. -->
+          <!-- NOTE: js/property-details.js will CLEAR and REPOPULATE this section -->
+          <!-- with data fetched from properties.json based on the URL id. -->
           <div class="features-grid" id="features-grid">
-             <!-- Example structure (JS will create these):
-             <div class="feature-item"><i class="fas fa-bed"></i> <span>3 Beds</span></div>
-             <div class="feature-item"><i class="fas fa-bath"></i> <span>2 Baths</span></div>
-             -->
+             <!-- Static examples for a typical rental flat -->
+             <!-- These will be replaced by dynamic data from JS -->
+             <div class="feature-item"><i class="fas fa-bed"></i> <span>2 Beds</span></div>
+             <div class="feature-item"><i class="fas fa-bath"></i> <span>1 Bath</span></div>
+             <div class="feature-item"><i class="fas fa-ruler-combined"></i> <span>850 sq ft</span></div> <!-- Area -->
+             <div class="feature-item"><i class="fas fa-building"></i> <span>Floor: 3</span></div> <!-- Floor Level -->
+             <div class="feature-item"><i class="fas fa-couch"></i> <span>Furnished</span></div> <!-- Furnishing Status -->
+             <div class="feature-item"><i class="fas fa-car"></i> <span>Parking: Garage</span></div> <!-- Parking -->
+             <div class="feature-item"><i class="fas fa-paw"></i> <span>Pets: Allowed</span></div> <!-- Pet Policy -->
+             <div class="feature-item"><i class="fas fa-elevator"></i> <span>Elevator: Yes</span></div> <!-- Elevator -->
+             <div class="feature-item"><i class="fas fa-washer"></i> <span>Laundry: In-Unit</span></div> <!-- Laundry -->
+             <div class="feature-item"><i class="fas fa-wind"></i> <span>Balcony: Yes</span></div> <!-- Balcony/Patio -->
+             <div class="feature-item"><i class="fas fa-snowflake"></i> <span>AC: Yes</span></div> <!-- Air Conditioning -->
           </div>
         </section>
 
