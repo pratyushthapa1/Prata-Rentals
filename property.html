@@ -70,20 +70,20 @@
           <!-- Features grid - Initially shows static examples. -->
           <!-- NOTE: js/property-details.js will CLEAR and REPOPULATE this section -->
           <!-- with data fetched from properties.json based on the URL id. -->
+          <!-- JavaScript should check property.type and add the correct floor info -->
           <div class="features-grid" id="features-grid">
-             <!-- Static examples for a typical rental flat -->
-             <!-- These will be replaced by dynamic data from JS -->
-             <div class="feature-item"><i class="fas fa-bed"></i> <span>2 Beds</span></div>
-             <div class="feature-item"><i class="fas fa-bath"></i> <span>1 Bath</span></div>
-             <div class="feature-item"><i class="fas fa-ruler-combined"></i> <span>850 sq ft</span></div> <!-- Area -->
-             <div class="feature-item"><i class="fas fa-building"></i> <span>Floor: 3</span></div> <!-- Floor Level -->
-             <div class="feature-item"><i class="fas fa-couch"></i> <span>Furnished</span></div> <!-- Furnishing Status -->
-             <div class="feature-item"><i class="fas fa-car"></i> <span>Parking: Garage</span></div> <!-- Parking -->
-             <div class="feature-item"><i class="fas fa-paw"></i> <span>Pets: Allowed</span></div> <!-- Pet Policy -->
-             <div class="feature-item"><i class="fas fa-elevator"></i> <span>Elevator: Yes</span></div> <!-- Elevator -->
-             <div class="feature-item"><i class="fas fa-washer"></i> <span>Laundry: In-Unit</span></div> <!-- Laundry -->
-             <div class="feature-item"><i class="fas fa-wind"></i> <span>Balcony: Yes</span></div> <!-- Balcony/Patio -->
-             <div class="feature-item"><i class="fas fa-snowflake"></i> <span>AC: Yes</span></div> <!-- Air Conditioning -->
+             <!-- Static examples, useful as a template for the JS. -->
+             <!-- These specific items will be replaced by dynamic data. -->
+             <div class="feature-item"><i class="fas fa-bed"></i> <span>Example: 2 Beds</span></div>
+             <div class="feature-item"><i class="fas fa-bath"></i> <span>Example: 1 Bath</span></div>
+             <div class="feature-item"><i class="fas fa-ruler-combined"></i> <span>Example: 850 sq ft</span></div>
+             <!-- Example: JS will add 'Floor: X' for Apartments/Flats if data exists -->
+             <div class="feature-item"><i class="fas fa-building"></i> <span>Example Floor: 3</span></div>
+             <!-- Example: JS will add 'Floors: Y' for Houses/Villas if data exists -->
+             <div class="feature-item"><i class="fas fa-layer-group"></i> <span>Example Floors: 2</span></div>
+             <div class="feature-item"><i class="fas fa-couch"></i> <span>Example: Furnished</span></div>
+             <div class="feature-item"><i class="fas fa-car"></i> <span>Example Parking</span></div>
+             <!-- ... other potential static examples ... -->
           </div>
         </section>
 
@@ -93,11 +93,8 @@
           <div class="property-gallery-grid" id="property-gallery-grid">
              <!-- Example structure (JS will create these):
              <div class="gallery-image"> <img src="gallery-image-1.jpg" alt="Gallery image 1"> </div>
-             <div class="gallery-image"> <img src="gallery-image-2.jpg" alt="Gallery image 2"> </div>
              -->
           </div>
-          <!-- Optional: View More button logic handled by JS if needed -->
-          <!-- <button id="view-more-images-btn" class="view-more-button">VIEW MORE IMAGES</button> -->
         </section>
 
         <section class="property-map-section">
@@ -106,11 +103,9 @@
               <!-- Map link/image dynamically updated by JS -->
               <a href="#" target="_blank" rel="noopener noreferrer" id="map-link">
                 <img src="images/basemap-image-2.png" alt="Location Map (placeholder)" id="map-image" />
-                <!-- JS should update the href based on properties.json mapLink -->
-                <!-- Consider embedding an interactive map if coordinates are available -->
               </a>
               <div id="map-interactive" style="height: 400px; width: 100%; background-color: #e0e0e0; display: none;">
-                  <!-- Placeholder for interactive map library (e.g., Leaflet, Google Maps) -->
+                  <!-- Placeholder for interactive map library -->
               </div>
             </div>
         </section>
@@ -122,21 +117,21 @@
                 <img src="images/inquiry.png" alt="Happy tenants illustration" />
               </div>
               <div class="reviews-content">
-                <h2>Vistors Reviews</h2>
+                <h2>Visitors Reviews</h2> <!-- Changed from Vistorss -->
                 <p class="section-subtitle">
-                  See what Vistorss have to say.
+                  See what visitors have to say. <!-- Changed from Vistorss -->
                 </p>
                  <!-- Static reviews, consider making dynamic -->
                 <div class="review-cards-container">
                   <article class="review-card">
                      <div class="review-user">
                        <div class="review-avatar"></div> <!-- Placeholder avatar -->
-                       <div class="review-user-info"><h4>Ashreen K.</h4></div> <!-- Added initial for privacy -->
+                       <div class="review-user-info"><h4>Ashreen K.</h4></div>
                        <div class="review-rating">
-                         <img src="images/image.svg" alt="5 Stars" /> <!-- Alt text more descriptive -->
+                         <img src="images/image.svg" alt="5 Stars" />
                        </div>
                      </div>
-                    <p class="review-text">"Absolutely breathtaking views! A perfect getaway."</p> <!-- Added quotes -->
+                    <p class="review-text">"Absolutely breathtaking views! A perfect getaway."</p>
                   </article>
                    <article class="review-card">
                      <div class="review-user">
@@ -149,8 +144,6 @@
                     <p class="review-text">"The villa exceeded all our expectations. Highly recommended."</p>
                   </article>
                 </div>
-                 <!-- Optional: Add link to view more reviews -->
-                 <!-- <a href="#reviews-more" class="view-more-button">More Reviews</a> -->
               </div>
             </div>
           </section>
@@ -159,26 +152,23 @@
           <section class="property-inquiry-section">
             <div class="property-inquiry-layout">
               <div class="inquiry-info">
-                <h2>Have Questions?</h2> <!-- Simplified Heading -->
+                <h2>Have Questions?</h2>
                 <p class="section-subtitle">
                   Send us a message using the form.
                 </p>
                 <p>
-                  <strong>Or contact PRATA directly:</strong><br /> <!-- Clarified contact -->
+                  <strong>Or contact PRATA directly:</strong><br />
                   Email: info@prata.com<br />
                   Phone: +977 98XXXXXXXX
                 </p>
               </div>
-              <!-- NOTE: JavaScript needed for form submission logic (e.g., AJAX) -->
-              <form class="inquiry-form" id="inquiry-form" action="#" method="POST"> <!-- action="#" requires JS -->
-                 <!-- Hidden input for property context (JS should set this) -->
+              <form class="inquiry-form" id="inquiry-form" action="#" method="POST">
                  <input type="hidden" name="property_id" id="inquiry-property-id" value="">
                  <input type="hidden" name="property_title" id="inquiry-property-title" value="">
 
                 <div class="form-group">
                   <label for="inquiry-name">Name</label>
                   <input type="text" id="inquiry-name" name="name" placeholder="Enter your name" required />
-                  <!-- Removed redundant 'Required' span, use CSS/JS for indicators -->
                 </div>
                 <div class="form-group">
                   <label for="inquiry-email">Email</label>
@@ -186,12 +176,10 @@
                 </div>
                 <div class="form-group">
                   <label for="inquiry-message">Message</label>
-                  <textarea id="inquiry-message" name="message" placeholder="Type your message here" rows="4" required></textarea> <!-- Removed maxlength, use JS if needed -->
-                  <!-- Removed character count span, use JS if needed -->
+                  <textarea id="inquiry-message" name="message" placeholder="Type your message here" rows="4" required></textarea>
                 </div>
-                 <!-- NOTE: JS needed for Reset button functionality -->
                 <div class="inquiry-form-actions">
-                  <button type="reset" class="btn btn-reset">Reset Form</button> <!-- Changed type to reset -->
+                  <!-- <button type="reset" class="btn btn-reset">Reset Form</button> -->
                   <button type="submit" class="btn btn-primary">Send Inquiry</button>
                 </div>
               </form>
@@ -223,15 +211,9 @@
       </div>
     </footer>
 
-    <!-- NOTE: Link the specific JavaScript file for this page -->
-    <!-- You will need to create js/property-details.js separately -->
-    <!-- <script src="js/property-details.js"></script> -->
-    <!-- General script for common functions if needed -->
-
-    <!-- NOTE: Link the specific JavaScript file for this page -->
+    <!-- Link JavaScript files -->
     <script src="js/script.js"></script> <!-- General script first -->
     <script src="js/property-details.js"></script> <!-- Specific script for this page -->
-  </body>
-</html>
+    <!-- Removed duplicate </body></html> -->
   </body>
 </html>

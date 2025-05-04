@@ -9,6 +9,8 @@
     "currency": "NPR",
     "image": "images/card1.png.jpeg",
     "tag": "Popular",
+    "numberOfFloors": 2,
+    "hasWifi": true, 
     "features": [
       { "icon": "fa-bed", "text": "3 Bedrooms" },
       { "icon": "fa-bath", "text": "2 Bathrooms" },
@@ -17,7 +19,7 @@
       { "icon": "fa-car", "text": "Ample Parking Space" },
       { "icon": "fa-tree", "text": "Private Small Garden" }
     ],
-    "description": "Secure this beautiful 3-bedroom, 2-bathroom villa rental located in the serene and sought-after area of Budanilkantha. Offering approximately 1800 sq ft of living space, it's perfect for families seeking comfort, privacy, and value in their next rental home. Enjoy the convenience of ample parking and a small private garden space.\n\n🏙️ **Rental Advantage:** Situated in a well-connected area with easy access to markets, schools, hospitals, and public transport – ideal for settling into the community.\n\n💰 **Affordable Rent & Flexible Terms!**\n🔹 Budget-friendly monthly rent (NPR 35,000/mo).\n🔹 Options available for both long-term and potentially shorter-term rental agreements (inquire for details). Make this charming villa your rented home without breaking the bank.",
+    "description": "Secure this beautiful 3-bedroom, 2-bathroom villa rental located in the serene and sought-after area of Budanilkantha. Offering approximately 1800 sq ft of living space across 2 floors, it's perfect for families seeking comfort, privacy, and value in their next rental home. Enjoy the convenience of ample parking and a small private garden space.\n\n🏙️ **Rental Advantage:** Situated in a well-connected area with easy access to markets, schools, hospitals, and public transport – ideal for settling into the community.\n\n💰 **Affordable Rent & Flexible Terms!**\n🔹 Budget-friendly monthly rent (NPR 35,000/mo).\n🔹 Options available for both long-term and potentially shorter-term rental agreements (inquire for details). Make this charming villa your rented home without breaking the bank.",
     "gallery": ["images/card1.png.jpeg", "images/villa-inside1.jpg", "images/villa-garden.jpg", "images/4.png.webp", "images/3.png", "images/2.png" ],
     "mapLink": "https://maps.app.goo.gl/E8NbafYmUczTs5fE9",
     "coordinates": { "lat": 27.7715, "lng": 85.3620 }
@@ -32,6 +34,9 @@
     "currency": "NPR",
     "image": "images/card2.png.jpeg",
     "tag": "Popular",
+    "numberOfFloors": 1,
+    "floorNumber": 1,
+    "hasWifi": true, 
     "features": [
       { "icon": "fa-bed", "text": "2 Bedrooms" },
       { "icon": "fa-bath", "text": "1 Bathroom" },
@@ -41,7 +46,7 @@
       { "icon": "fa-couch", "text": "Semi-Furnished Option" },
       { "icon": "fa-motorcycle", "text": "Dedicated Bike Parking" }
     ],
-    "description": "Available for rent: A charming and cozy ground floor home (approx. 750 sq ft) in the highly convenient Sanepa neighborhood of Lalitpur. This rental features 2 bedrooms and 1 bathroom, making it ideal for couples, small families, or professionals seeking a comfortable and accessible living space. Comes semi-furnished, potentially saving you initial setup costs. Includes practical bike parking.\n\n🔑 **Rental Highlight:** Enjoy the ease of ground floor living in a sought-after location, perfect for those prioritizing convenience in their rental choice.",
+    "description": "Available for rent: A charming and cozy ground floor home (approx. 750 sq ft) in the highly convenient Sanepa neighborhood of Lalitpur. This single-floor rental features 2 bedrooms and 1 bathroom, making it ideal for couples, small families, or professionals seeking a comfortable and accessible living space. Comes semi-furnished, potentially saving you initial setup costs. Includes practical bike parking.\n\n🔑 **Rental Highlight:** Enjoy the ease of ground floor living in a sought-after location, perfect for those prioritizing convenience in their rental choice.",
     "gallery": ["images/card2.png.jpeg", "images/cozy-living.jpg"],
     "mapLink": null,
     "coordinates": null
@@ -56,6 +61,8 @@
     "currency": "NPR",
     "image": "images/card3.png.jpeg",
     "tag": "Luxury",
+    "numberOfFloors": 3,
+    "hasWifi": true, 
     "features": [
         { "icon": "fa-bed", "text": "5 Spacious Bedrooms" },
         { "icon": "fa-bath", "text": "4 Modern Bathrooms" },
@@ -64,7 +71,7 @@
         { "icon": "fa-car", "text": "Secure Garage Parking" },
         { "icon": "fa-plug", "text": "Reliable Backup Power" }
     ],
-    "description": "Indulge in an unparalleled rental experience with this stunning luxury villa, now available for rent near the historic Patan Durbar Square. Boasting over 3500 sq ft, this property features 5 spacious bedrooms, 4 modern bathrooms, elegant interiors, and the ultimate luxury: a private swimming pool. Essential amenities like secure garage parking and backup power ensure comfort and convenience for discerning renters.\n\n💎 **Exclusive Rental:** Ideal for expatriate families, corporate rentals, or anyone seeking a high-end lifestyle rental in a prestigious Lalitpur location.",
+    "description": "Indulge in an unparalleled rental experience with this stunning 3-floor luxury villa, now available for rent near the historic Patan Durbar Square. Boasting over 3500 sq ft, this property features 5 spacious bedrooms, 4 modern bathrooms, elegant interiors, and the ultimate luxury: a private swimming pool. Essential amenities like secure garage parking and backup power ensure comfort and convenience for discerning renters.\n\n💎 **Exclusive Rental:** Ideal for expatriate families, corporate rentals, or anyone seeking a high-end lifestyle rental in a prestigious Lalitpur location.",
     "gallery": ["images/card3.png.jpeg", "images/luxury-pool.jpg", "images/luxury-interior.jpg"],
     "mapLink": "https://maps.app.goo.gl/maps/Lalitpur",
     "coordinates": { "lat": 27.6732, "lng": 85.3251 }
@@ -79,6 +86,8 @@
     "currency": "NPR",
     "image": "images/card4.png.jpeg",
     "tag": "Featured",
+    "floorNumber": 2,
+    "hasWifi": true, 
     "features": [
         { "icon": "fa-bed", "text": "3 Bedrooms" },
         { "icon": "fa-bath", "text": "2 Bathrooms" },
@@ -103,6 +112,8 @@
     "currency": "NPR",
     "image": "images/card5.png.jpeg",
     "tag": "New",
+    "floorNumber": 5,
+    "hasWifi": true, 
     "features": [
         { "icon": "fa-bed", "text": "2 Comfortable Bedrooms" },
         { "icon": "fa-bath", "text": "2 Modern Bathrooms" },
@@ -130,6 +141,8 @@
     "currency": "NPR",
     "image": "images/card6.png.jpeg",
     "tag": "Featured",
+    "numberOfFloors": 2,
+    "hasWifi": true, 
     "features": [
         { "icon": "fa-bed", "text": "4 Bedrooms" },
         { "icon": "fa-bath", "text": "3 Bathrooms" },
@@ -138,7 +151,7 @@
         { "icon": "fa-sun", "text": "Bright with Ample Sunlight" },
         { "icon": "fa-car", "text": "Convenient Driveway Parking"}
     ],
-    "description": "Make this large family home your next rental! Available now in the desirable Maharajgunj area, this spacious house offers approximately 2500 sq ft of living space with 4 bedrooms and 3 bathrooms. A key highlight for renters is the beautiful, expansive private garden – perfect for children, relaxation, or entertaining. The home is filled with ample sunlight and includes convenient driveway parking.\n\n🌳 **Ideal Family Rental:** Located in a peaceful and well-regarded neighborhood, offering plenty of room to grow and enjoy outdoor space, a rare find in city rentals.",
+    "description": "Make this large family home your next rental! Available now in the desirable Maharajgunj area, this spacious 2-floor house offers approximately 2500 sq ft of living space with 4 bedrooms and 3 bathrooms. A key highlight for renters is the beautiful, expansive private garden – perfect for children, relaxation, or entertaining. The home is filled with ample sunlight and includes convenient driveway parking.\n\n🌳 **Ideal Family Rental:** Located in a peaceful and well-regarded neighborhood, offering plenty of room to grow and enjoy outdoor space, a rare find in city rentals.",
     "gallery": ["images/card6.png.jpeg", "images/family-garden6.jpg", "images/family-room6.jpg"],
     "mapLink": "https://maps.app.goo.gl/maps/Maharajgunj",
     "coordinates": { "lat": 27.7365, "lng": 85.3344 }
@@ -153,6 +166,8 @@
     "currency": "NPR",
     "image": "images/card7.png.jpeg",
     "tag": "Budget",
+    "floorNumber": 1,
+    "hasWifi": false, 
     "features": [
       { "icon": "fa-bed", "text": "Open Studio Layout" },
       { "icon": "fa-bath", "text": "1 Private Bathroom" },
@@ -177,6 +192,8 @@
     "currency": "NPR",
     "image": "images/card8.png.jpeg",
     "tag": "Heritage",
+    "numberOfFloors": 3,
+    "hasWifi": false, 
     "features": [
       { "icon": "fa-bed", "text": "3 Bedrooms" },
       { "icon": "fa-bath", "text": "1 Bathroom" },
@@ -185,7 +202,7 @@
       { "icon": "fa-tint", "text": "Reliable Community Water Access" },
       { "icon": "fa-car", "text": "Parking Available Nearby"}
     ],
-    "description": "Experience authentic Newari culture by renting this charming traditional house (approx. 1200 sq ft) located near the historic Bhaktapur Durbar Square. This unique rental opportunity offers 3 bedrooms, 1 bathroom, and features intricate traditional woodwork, providing a unique cultural ambiance. Benefit from reliable community water access. While direct parking isn't on-site, parking areas are conveniently located nearby for tenants.\n\n🏺 **Cultural Rental Experience:** Ideal for those seeking to immerse themselves in Bhaktapur's rich heritage and vibrant community life during their rental period.",
+    "description": "Experience authentic Newari culture by renting this charming traditional house (approx. 1200 sq ft across 3 floors) located near the historic Bhaktapur Durbar Square. This unique rental opportunity offers 3 bedrooms, 1 bathroom, and features intricate traditional woodwork, providing a unique cultural ambiance. Benefit from reliable community water access. While direct parking isn't on-site, parking areas are conveniently located nearby for tenants.\n\n🏺 **Cultural Rental Experience:** Ideal for those seeking to immerse themselves in Bhaktapur's rich heritage and vibrant community life during their rental period.",
     "gallery": ["images/card8.png.jpeg", "images/traditional-courtyard8.jpg", "images/traditional-interior8.jpg"],
     "mapLink": "https://maps.app.goo.gl/maps/Bhaktapur",
     "coordinates": { "lat": 27.6720, "lng": 85.4280 }

@@ -541,3 +541,14 @@ body {
     .container { padding: 0 15px; }
     .btn { padding: 8px 16px; font-size: 0.9rem; }
 }
+/* Style for the filled heart when wishlisted */
+.wishlist-button.active i {
+    font-weight: 900; /* Use Font Awesome's solid style weight */
+    font-family: "Font Awesome 6 Free"; /* Ensure correct font family */
+    color: #ff4d4d; /* Or your preferred 'active' color */
+}
+
+/* Optional: Add a subtle transition */
+.wishlist-button i {
+    transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}

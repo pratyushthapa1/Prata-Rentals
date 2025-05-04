@@ -3,8 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Complete Your Booking - PRATA</title>
-    
+    <!-- Changed Title -->
+    <title>Confirm Your Rental Details - PRATA</title>
+
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/booking-style.css"> <!-- Specific: booking.css -->
     <!-- Fonts -->
@@ -16,93 +17,105 @@
   </head>
   <body>
     <!-- Standard Header -->
-    <header class="main-header" style="position: static;"> <!-- Non-sticky might be better here -->
+    <header class="main-header" style="position: static;">
       <div class="container">
           <a href="index.html" class="header-logo">
               <img src="images/PRATA logo.png" alt="PRATA Logo">
           </a>
            <nav class="header-nav">
-               <a href="wishlist.html" class="wishlist-icon" aria-label="Wishlist"><img src="images/iconamoon-heart-bold.svg" alt="Wishlist"></a>
-               <a href="profile.html" class="profile-icon" aria-label="Profile Menu"><div class="ellipse"></div></a>
+               <!-- Using consistent nav icons -->
+               <a href="wishlist.html" class="nav-link wishlist-link" aria-label="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="nav-text">Wishlist</span>
+                    <span class="wishlist-count-badge" style="display: none;">0</span>
+                </a>
+                 <a href="profile.html" class="nav-link profile-link" aria-label="Profile Menu">
+                    <i class="fa-regular fa-user-circle"></i>
+                    <span class="nav-text">Profile</span>
+                </a>
            </nav>
       </div>
     </header>
 
     <div class="booking-container">
       <header class="booking-header">
-        <h1>Complete Your Booking</h1>
-        <p>Secure your stay by providing the details below.</p>
+         <!-- Updated Heading -->
+        <h1>Confirm Your Rental Details</h1>
+        <p>Please review and confirm the details for your rental request.</p>
       </header>
-      <!-- Removed Back to Home button as header now exists -->
-      <!-- <a href="index.html" class="back-home-button">← Back to Home</a> -->
+
       <div class="booking-content">
         <main class="booking-form-area">
-          <!-- NOTE: JavaScript (script.js) is required to handle form submission, date calculations, guest counters, and summary updates. -->
-          <form id="booking-form" action="#" method="post"> <!-- Needs JS handler, action="#" prevents default temporarily -->
+          <!-- NOTE: JavaScript (script.js) is required -->
+          <form id="booking-form" action="#" method="post">
 
             <!-- Property Snippet (Needs Dynamic Update via JS) -->
             <section class="property-snippet">
-              <!-- NOTE: Image src and text below should be dynamically populated by JS based on selected property -->
               <img
-                src="images/222.png"  
+                src="images/placeholder.png"
                 alt="Property Thumbnail"
                 class="property-thumb"
                 id="booking-property-image"
               />
               <div>
-                <h2 id="booking-property-title">Villa For Rent</h2> <!-- Placeholder Title -->
-                <p>Your selected property</p>
-                <!-- Add property ID as hidden input if needed for submission -->
-                <input type="hidden" name="property_id" id="booking-property-id" value=""> <!-- JS should set value -->
+                <h2 id="booking-property-title">Selected Rental Property</h2> <!-- Placeholder Title -->
+                <p>Details will load based on selection.</p>
+                <input type="hidden" name="property_id" id="booking-property-id" value="">
               </div>
             </section>
 
             <!-- Dates Section -->
             <section class="form-section">
-              <h3>Select Your Dates</h3>
-              <!-- NOTE: JS needed for date validation (check-out >= check-in) and summary update -->
+               <!-- Updated Heading -->
+              <h3>Select Rental Period</h3>
               <div class="date-selection">
                 <div class="form-group">
-                  <label for="checkin-date">Check-in Date</label>
+                   <!-- Updated Label and IDs/Names -->
+                  <label for="start-date">Rental Start Date</label>
                   <input
                     type="date"
-                    id="checkin-date"
-                    name="checkin"
+                    id="start-date"
+                    name="start_date"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label for="checkout-date">Check-out Date</label>
+                   <!-- Updated Label and IDs/Names -->
+                  <label for="end-date">Rental End Date</label>
                   <input
                     type="date"
-                    id="checkout-date"
-                    name="checkout"
+                    id="end-date"
+                    name="end_date"
                     required
                   />
                 </div>
               </div>
               <p class="price-note">
-                 <!-- NOTE: Price should be dynamically loaded by JS -->
-                Price per night: NPR <span id="price-per-night">15,000.00</span>
+                 <!-- Updated Text - JS needs to populate this span -->
+                 <!-- The underlying price value might still be per night/month from JSON -->
+                Base rental rate: <span id="base-rate-display">Loading...</span>
+                <!-- Hidden input to store base rate value for JS calculations if needed -->
+                <input type="hidden" id="base-rate-value" value="0">
               </p>
             </section>
 
-            <!-- Guests Section -->
+            <!-- Occupants Section -->
             <section class="form-section guest-info">
-              <h3>Guest Information</h3>
-              <!-- NOTE: JS needed for counter buttons and updating summary -->
+               <!-- Updated Heading -->
+              <h3>Occupant Information</h3>
               <div class="guest-list">
                 <!-- Adults -->
                 <div class="guest-item">
                   <div class="guest-type">
-                    <span class="icon">AD</span> <!-- Consider using Font Awesome icons -->
+                     <!-- Consider using Font Awesome icons: <i class="fas fa-user"></i> -->
+                     <i class="fas fa-user guest-icon"></i>
                     <div>
                       <span class="guest-label">Adults</span>
                       <span class="guest-sublabel">Age 13+</span>
                     </div>
                   </div>
                   <div class="guest-counter">
-                    <button type="button" class="counter-btn" data-action="decrement" data-target="adults-count" aria-label="Decrease adults" disabled>-</button> <!-- Start disabled at 1 -->
+                    <button type="button" class="counter-btn" data-action="decrement" data-target="adults-count" aria-label="Decrease adults" disabled>-</button>
                     <span id="adults-count" class="guest-count">1</span>
                     <input type="hidden" name="adults" id="adults-input" value="1" />
                     <button type="button" class="counter-btn" data-action="increment" data-target="adults-count" aria-label="Increase adults">+</button>
@@ -111,14 +124,15 @@
                 <!-- Children -->
                 <div class="guest-item">
                    <div class="guest-type">
-                    <span class="icon">CH</span>
+                     <!-- <i class="fas fa-child"></i> -->
+                     <i class="fas fa-child guest-icon"></i>
                     <div>
                       <span class="guest-label">Children</span>
                       <span class="guest-sublabel">Ages 2–12</span>
                     </div>
                   </div>
                   <div class="guest-counter">
-                    <button type="button" class="counter-btn" data-action="decrement" data-target="children-count" aria-label="Decrease children" disabled>-</button> <!-- Start disabled at 0 -->
+                    <button type="button" class="counter-btn" data-action="decrement" data-target="children-count" aria-label="Decrease children" disabled>-</button>
                     <span id="children-count" class="guest-count">0</span>
                     <input type="hidden" name="children" id="children-input" value="0" />
                     <button type="button" class="counter-btn" data-action="increment" data-target="children-count" aria-label="Increase children">+</button>
@@ -127,14 +141,15 @@
                 <!-- Pets -->
                  <div class="guest-item">
                    <div class="guest-type">
-                    <span class="icon">PT</span> <!-- Consider Font Awesome 'fa-paw' -->
+                     <!-- <i class="fas fa-paw"></i> -->
+                     <i class="fas fa-paw guest-icon"></i>
                     <div>
                       <span class="guest-label">Pets</span>
-                      <span class="guest-sublabel">Bringing a pet?</span>
+                      <span class="guest-sublabel">Check property rules</span> <!-- Updated sublabel -->
                     </div>
                   </div>
                    <div class="guest-counter">
-                    <button type="button" class="counter-btn" data-action="decrement" data-target="pets-count" aria-label="Decrease pets" disabled>-</button> <!-- Start disabled at 0 -->
+                    <button type="button" class="counter-btn" data-action="decrement" data-target="pets-count" aria-label="Decrease pets" disabled>-</button>
                     <span id="pets-count" class="guest-count">0</span>
                     <input type="hidden" name="pets" id="pets-input" value="0" />
                     <button type="button" class="counter-btn" data-action="increment" data-target="pets-count" aria-label="Increase pets">+</button>
@@ -143,36 +158,36 @@
               </div>
             </section>
 
-            <!-- Your Details Section -->
+            <!-- Renter Information Section -->
             <section class="form-section">
-              <h3>Your Information</h3>
+              <h3>Your Information</h3> <!-- Updated Heading -->
               <div class="form-row">
                 <div class="form-group">
                   <label for="full-name">Full Name</label>
-                  <input type="text" id="full-name" name="full_name" placeholder="e.g., Prata Sharma" required />
+                  <input type="text" id="full-name" name="full_name" placeholder="Your Full Name" required />
                 </div>
                 <div class="form-group">
                   <label for="email">Email Address</label>
-                  <input type="email" id="email" name="email" placeholder="e.g., prata@example.com" required />
+                  <input type="email" id="email" name="email" placeholder="your.email@example.com" required />
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group">
                   <label for="phone">Phone Number</label>
-                  <input type="tel" id="phone" name="phone" placeholder="Optional, e.g., 98XXXXXXXX" />
+                  <input type="tel" id="phone" name="phone" placeholder="Contact Number (Optional)" />
                 </div>
               </div>
               <div class="form-group">
-                <label for="requests">Special Requests (Optional)</label>
-                <textarea id="requests" name="requests" rows="3" placeholder="e.g., late check-in, allergies"></textarea>
+                <label for="requests">Notes or Requests (Optional)</label> <!-- Updated Label -->
+                <textarea id="requests" name="requests" rows="3" placeholder="Any specific requirements or questions for the host?"></textarea>
               </div>
             </section>
 
             <!-- Payment Section -->
             <section class="form-section payment-info">
               <h3>Payment Details</h3>
-              <p>All transactions are secure and encrypted.</p>
-              <!-- NOTE: Implement client-side validation (JS) and server-side processing for security -->
+               <!-- Updated context -->
+              <p>Secure payment for deposit or initial rent. Details may vary by property.</p>
               <div class="form-row">
                 <div class="form-group form-group-full">
                   <label for="card-number">Card Number</label>
@@ -182,7 +197,15 @@
               <div class="form-row">
                 <div class="form-group">
                   <label for="expiry-date">Expiry Date</label>
-                  <input type="text" id="expiry-date" name="expiry_date" placeholder="MM / YY" inputmode="numeric" pattern="\d{2} / \d{2}" autocomplete="cc-exp" required />
+                  <input
+                  type="text"
+                  id="expiry-date"
+                  name="expiry_date"
+                  placeholder="MM / YY"
+                  inputmode="numeric"
+                  maxlength="7" 
+                  autocomplete="cc-exp"
+                  required />
                 </div>
                 <div class="form-group">
                   <label for="cvv">CVV</label>
@@ -198,68 +221,74 @@
             <!-- Submission -->
             <div class="form-submit-area">
               <p class="terms">
-                <!-- Updated links -->
-                By clicking "Confirm Booking", you agree to the
-                <a href="terms.html" target="_blank">Terms of Service</a> and
+                 <!-- Updated text -->
+                By clicking "Request to Book", you agree to the property's rules,
+                PRATA's <a href="terms.html" target="_blank">Terms of Service</a> and
                 <a href="cancellation.html" target="_blank">Cancellation Policy</a>.
               </p>
               <button type="submit" class="confirm-button">
-                Confirm Booking
+                 <!-- Updated Button Text -->
+                Request to Book
               </button>
             </div>
           </form>
         </main>
 
         <aside class="booking-summary">
-          <h3>Booking Summary</h3>
-           <!-- NOTE: All content below needs to be updated by JS based on user input -->
+          <h3>Rental Summary</h3> <!-- Updated Heading -->
           <div class="summary-details">
             <div class="summary-item">
-              <span>Check-in:</span>
-              <strong id="summary-checkin">-- / -- / ----</strong>
+               <!-- Updated Label and ID -->
+              <span>Start Date:</span>
+              <strong id="summary-start-date">-- / -- / ----</strong>
             </div>
             <div class="summary-item">
-              <span>Check-out:</span>
-              <strong id="summary-checkout">-- / -- / ----</strong>
+               <!-- Updated Label and ID -->
+              <span>End Date:</span>
+              <strong id="summary-end-date">-- / -- / ----</strong>
             </div>
             <div class="summary-item">
-              <span>Total Nights:</span>
-              <strong id="summary-nights">0</strong>
+               <!-- Updated Label and ID -->
+              <span>Rental Duration:</span>
+               <!-- JS will calculate duration (e.g., "X nights", "Y months") -->
+              <strong id="summary-duration">N/A</strong>
             </div>
             <div class="summary-item">
-              <span>Guests:</span>
-              <strong id="summary-guests">1 Adult</strong> <!-- ID added for JS -->
+               <!-- Updated Label and ID -->
+              <span>Occupants:</span>
+              <strong id="summary-occupants">1 Adult</strong>
             </div>
           </div>
 
           <div class="price-breakdown">
-            <h4>Price Details</h4>
+            <h4>Rental Cost</h4> <!-- Updated Heading -->
             <dl>
               <div class="price-line">
-                <dt id="price-calc-text">NPR 15,000 x 0 nights</dt>
+                 <!-- Updated Label - JS populates calculation detail -->
+                <dt id="price-calc-text">Base Rate Calculation</dt>
                 <dd id="summary-base-price">NPR 0.00</dd>
               </div>
               <div class="price-line">
-                <!-- Tax calculation logic needed in JS -->
-                <dt>Taxes & Fees (approx)</dt>
+                 <!-- Updated Label -->
+                <dt>Service Fees / Taxes (approx)</dt>
                 <dd id="summary-taxes">NPR 0.00</dd>
               </div>
             </dl>
             <div class="price-total">
-              <span>Total Price:</span>
-              <strong id="summary-total-price">NPR 0.00</strong> <!-- ID added for JS -->
+               <!-- Updated Label -->
+              <span>Estimated Total:</span>
+              <strong id="summary-total-price">NPR 0.00</strong>
             </div>
           </div>
         </aside>
-      </div>
-      <!-- /.booking-content -->
-    </div>
-    <!-- /.booking-container -->
+      </div> <!-- /.booking-content -->
+    </div> <!-- /.booking-container -->
 
      <!-- Standard Footer -->
      <footer class="main-footer">
       <div class="container">
-          <div class="footer-content">
+           <!-- Footer content remains the same -->
+           <div class="footer-content">
                <a href="about.html">About Us</a>
                <a href="terms.html">Terms of Service</a>
                <a href="contact.html">Contact Us</a>
@@ -277,7 +306,9 @@
       </div>
    </footer>
 
-    <!-- NOTE: Link the JavaScript file that handles booking logic -->
-    <script src="js/script.js"></script> <!-- General script includes booking logic -->
+    <!-- Link the JavaScript file(s) -->
+    <script src="js/script.js"></script>
+    <!-- You might need a dedicated booking.js if logic becomes complex -->
+    <script src="js/booking.js"></script>
   </body>
 </html>

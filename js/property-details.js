@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const galleryGrid = document.getElementById('property-gallery-grid');
     const mapLink = document.getElementById('map-link');
     const mapImage = document.getElementById('map-image');
-    const mapInteractive = document.getElementById('map-interactive'); // For potential future use
+    const mapInteractive = document.getElementById('map-interactive');
     const bookNowLink = document.getElementById('book-now-link');
     const contactOwnerLink = document.getElementById('contact-owner-link');
     const inquiryPropertyIdInput = document.getElementById('inquiry-property-id');
@@ -34,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // --- 2. Fetch properties.json ---
-            const response = await fetch('properties.json'); // Assumes properties.json is in the root
+            const response = await fetch('properties.json'); // Ensure path is correct
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(`HTTP error! status: ${response.status} while fetching properties.json`);
             }
             const properties = await response.json();
 
@@ -48,64 +48,99 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
              // --- 4. Populate the HTML ---
-             document.title = `${property.title} - PRATA`; // Set page title
+             document.title = `${property.title} - PRATA`;
              propertyTitle.textContent = property.title;
              propertyLocation.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${property.location || 'Location not specified'}`;
              propertyDescription.textContent = property.description || 'No description available.';
-             propertyRent.textContent = formatCurrency(property.price) + (property.priceSuffix || '');
+             propertyRent.textContent = formatCurrency(property.price, property.currency) + (property.priceSuffix || '');
              propertyMainImage.src = property.image || 'images/placeholder.png';
              propertyMainImage.alt = property.title || 'Property Image';
 
-             // Populate Features
-             featuresGrid.innerHTML = ''; // Clear placeholder
+             // --- Populate Features ---
+             featuresGrid.innerHTML = ''; // Clear placeholder/static examples
+             let hasFeatures = false;
+
+             // Add features from the 'features' array
              if (property.features && property.features.length > 0) {
                  property.features.forEach(feature => {
                     const featureItem = document.createElement('div');
                     featureItem.classList.add('feature-item');
-                    // Using Font Awesome classes directly
                     featureItem.innerHTML = `<i class="fas ${feature.icon || 'fa-check'} feature-icon-fa"></i> <span>${feature.text || ''}</span>`;
                     featuresGrid.appendChild(featureItem);
+                    hasFeatures = true;
                  });
-             } else {
+             }
+
+             // Add Floor Information Based on Property Type
+             const floorFeatureItem = document.createElement('div');
+             floorFeatureItem.classList.add('feature-item');
+             let floorInfoAdded = false;
+
+             if ((property.type === 'House' || property.type === 'Villa') && property.numberOfFloors !== undefined && property.numberOfFloors !== null) {
+                 floorFeatureItem.innerHTML = `<i class="fas fa-layer-group feature-icon-fa"></i> <span>Floors: ${property.numberOfFloors}</span>`;
+                 floorInfoAdded = true;
+             } else if ((property.type === 'Apartment' || property.type === 'Flat') && property.floorNumber !== undefined && property.floorNumber !== null) {
+                 floorFeatureItem.innerHTML = `<i class="fas fa-building feature-icon-fa"></i> <span>Floor: ${property.floorNumber}</span>`;
+                 floorInfoAdded = true;
+             }
+
+             if (floorInfoAdded) {
+                 featuresGrid.appendChild(floorFeatureItem);
+                 hasFeatures = true;
+             }
+
+             // --- Add WiFi Information ---
+             if (property.hasWifi !== undefined && property.hasWifi !== null) {
+                 const wifiFeatureItem = document.createElement('div');
+                 wifiFeatureItem.classList.add('feature-item');
+                 const wifiText = property.hasWifi ? 'Yes' : 'No';
+                 wifiFeatureItem.innerHTML = `<i class="fas fa-wifi feature-icon-fa"></i> <span>WiFi Access: ${wifiText}</span>`;
+                 featuresGrid.appendChild(wifiFeatureItem);
+                 hasFeatures = true; // Mark that we added WiFi info
+             }
+             // --- End WiFi Information ---
+
+
+             // Show message only if NO features at all were added
+             if (!hasFeatures) {
                 featuresGrid.innerHTML = '<p>No specific features listed.</p>';
              }
 
+
              // Populate Gallery
-             galleryGrid.innerHTML = ''; // Clear placeholder
+             galleryGrid.innerHTML = '';
              if (property.gallery && property.gallery.length > 0) {
                  property.gallery.forEach((imgSrc, index) => {
                      const galleryDiv = document.createElement('div');
-                     galleryDiv.classList.add('gallery-image'); // Add class if needed for styling
+                     galleryDiv.classList.add('gallery-image');
                      const img = document.createElement('img');
                      img.src = imgSrc;
                      img.alt = `${property.title} - Gallery Image ${index + 1}`;
-                      // Optional: Add click handler for lightbox/modal
-                     // img.addEventListener('click', () => openImageModal(imgSrc));
+                     img.loading = 'lazy';
                      galleryDiv.appendChild(img);
                      galleryGrid.appendChild(galleryDiv);
                  });
              } else {
-                // Optionally show the main image again or a message
                  galleryGrid.innerHTML = '<p>No additional gallery images available.</p>';
              }
 
              // Populate Map Link
              if (property.mapLink) {
                  mapLink.href = property.mapLink;
-                 mapLink.style.display = 'block'; // Show the link/image container
-                 mapImage.src = 'images/basemap-image-2.png'; // Keep placeholder or update if specific map images exist
+                 mapLink.style.display = 'block';
+                 mapImage.src = 'images/basemap-image-2.png';
                  mapImage.alt = `Map location for ${property.title}`;
+                 const mapContainer = document.getElementById('map-container');
+                 if (mapContainer) mapContainer.style.display = 'block';
              } else {
-                 // Hide the map section or show a message if no link
                  const mapSection = document.querySelector('.property-map-section');
                  if (mapSection) mapSection.style.display = 'none';
-                 // mapLink.style.display = 'none'; // Hide just the link container
              }
-             // Add interactive map logic here if using coordinates and a library like Leaflet
+             // Add interactive map logic here using property.coordinates if desired
 
             // Update Button Links
-            bookNowLink.href = `booking.html?propertyId=${property.id}`; // Pass ID to booking page
-            contactOwnerLink.href = `contact.html?propertyId=${property.id}&subject=${encodeURIComponent('Inquiry about: ' + property.title)}`; // Pass ID and subject
+            bookNowLink.href = `booking.html?propertyId=${property.id}`;
+            contactOwnerLink.href = `contact.html?propertyId=${property.id}&subject=${encodeURIComponent('Inquiry about: ' + property.title)}`;
 
             // Update Inquiry Form hidden fields
              if (inquiryPropertyIdInput) inquiryPropertyIdInput.value = property.id;
@@ -113,25 +148,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
              // --- 5. Show Content, Hide Loading ---
-             propertyContent.style.display = 'block'; // Or appropriate display value
+             propertyContent.style.display = 'block';
              loadingMessage.style.display = 'none';
              errorMessage.style.display = 'none';
 
         } catch (error) {
             console.error("Error loading property details:", error);
             loadingMessage.style.display = 'none';
-            errorMessage.textContent = `Error loading property details: ${error.message}`;
+            errorMessage.textContent = `Error loading property details: ${error.message}. Please check the console and the property ID in the URL.`;
             errorMessage.style.display = 'block';
             propertyContent.style.display = 'none';
         }
     };
 
-    // Helper function (ensure this is available or redefine it here)
-    const formatCurrency = (amount) => {
-        if (isNaN(amount)) return 'NPR 0.00';
-        // Basic formatting, adjust as needed
-        return `NPR ${Number(amount).toLocaleString('en-NP', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    // Updated helper function to include currency
+    const formatCurrency = (amount, currency = 'NPR') => {
+        const numericAmount = Number(amount);
+        if (isNaN(numericAmount)) return `${currency} N/A`;
+
+        return `${currency} ${numericAmount.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
     };
 
-    fetchPropertyData(); // Call the function to load data
+    fetchPropertyData();
 });

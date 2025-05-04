@@ -2,75 +2,272 @@
 /* == All Properties Page Styles (allproperties.html) == */
 /* ===================================================== */
 
-/* Inherits .container, header, footer, .property-card from common.css */
+/* --- Imports & Variables (Assuming from common.css or define here) --- */
+/* @import url('common.css'); */ /* Or ensure common.css is loaded first */
 
-/* Specific Page Header */
-.page-header {
-    background: none; /* Override common if needed */
-    color: var(--primary-color);
-    text-align: center;
-    padding: 30px 20px 0 20px; /* Padding top */
-    margin-bottom: 20px;
+/* Re-declare variables if not importing, use fallbacks */
+:root {
+    --primary-color: #1A2C50;       /* Deep Blue */
+    --secondary-color: #E4D7C4;     /* Beige */
+    --accent-color: #ff6b6b;        /* Accent (example: Coral Red) */
+    --light-text-color: #6c757d;    /* Lighter grey text */
+    --medium-text-color: #495057;   /* Medium grey text */
+    --dark-text-color: #212529;     /* Dark text */
+    --border-color: #dee2e6;        /* Light border */
+    --background-color: #f8f9fa;   /* Light page background */
+    --card-background: #ffffff;    /* Card background */
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+    --border-radius: 6px;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --box-shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
+
+/* --- Page Wrapper --- */
+.all-properties-wrapper {
+    /* Optional: Add a subtle background or max-width specific to the main content area */
+    background-color: var(--background-color);
+    padding-top: 1px; /* Contain margins */
+    padding-bottom: 3rem;
+}
+
+/* --- Specific Page Header --- */
+.page-header {
+    background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0)), var(--card-background); /* Subtle gradient + white */
+    color: var(--dark-text-color);
+    text-align: center;
+    padding: 2.5rem 1rem; /* More vertical padding */
+    margin-bottom: 2.5rem; /* Space below header */
+    border-bottom: 1px solid var(--border-color);
+}
+
 .page-header h1 {
     font-family: var(--font-secondary);
     font-weight: 700;
-    font-size: 2rem;
-    margin-bottom: 5px;
+    font-size: 2.5rem; /* Larger title */
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
 }
+
 .page-header p {
-    color: var(--light-text-color);
-    font-size: 1rem;
+    color: var(--medium-text-color);
+    font-size: 1.1rem;
+    max-width: 600px; /* Constrain subtitle width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --- Back Button & Controls Area --- */
+.controls-container {
+    display: flex;
+    justify-content: space-between; /* Space for back button and potential filters */
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 1rem;
+    margin-bottom: 2.5rem; /* Space before grid */
+    padding: 0 1rem; /* Align with container padding if needed */
 }
 
 /* Back Button */
-.back-button-container {
-    margin-bottom: 30px;
-}
 .back-button {
     display: inline-flex;
     align-items: center;
-    padding: 8px 16px;
-    background-color: var(--secondary-color);
-    color: white;
-    border: none;
+    padding: 0.6rem 1.2rem; /* Slightly larger padding */
+    background-color: #f1f3f5; /* Lighter background */
+    color: var(--primary-color); /* Match primary text */
+    border: 1px solid var(--border-color); /* Subtle border */
     border-radius: var(--border-radius);
     text-decoration: none;
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600; /* Bolder */
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    white-space: nowrap; /* Prevent wrapping */
 }
-.back-button:hover {
-    background-color: var(--primary-color);
+
+.back-button:hover,
+.back-button:focus-visible {
+    background-color: #e9ecef; /* Slightly darker on hover */
+    border-color: #ced4da;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
 }
+
 .back-button i {
     margin-right: 8px;
+    font-size: 0.8em; /* Adjust icon size if needed */
 }
 
-/* Properties Grid Layout */
+/* --- Placeholder for Filter/Sort Controls --- */
+.filter-sort-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-grow: 1; /* Allow filters to take space */
+    justify-content: flex-end; /* Align to the right */
+}
+
+.filter-sort-controls select,
+.filter-sort-controls input {
+    /* Basic styling - match other form inputs */
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    background-color: var(--card-background);
+}
+/* Add more specific filter styles as needed */
+
+
+/* --- Properties Grid Layout --- */
 .properties-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 2rem; /* Slightly larger gap */
+    padding: 0 1rem; /* Align with container padding if needed */
 }
-/* Property card styles are in common.css */
+
+/* --- Card Enhancements Specific to This Page (Optional) --- */
+/* Assumes .property-card styles are in common.css */
+.properties-grid .property-card {
+    border: 1px solid #e9ecef; /* Add subtle border to cards */
+    box-shadow: var(--box-shadow);
+    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out; /* Smoother transition */
+}
+
+.properties-grid .property-card:hover {
+    transform: translateY(-5px); /* Lift effect */
+    box-shadow: var(--box-shadow-hover); /* Enhanced shadow */
+}
+
+/* --- Loading / Empty State --- */
+/* Use IDs defined in your JS for dynamic content */
+#properties-loading,
+#properties-empty {
+    display: none; /* Hidden by default */
+    grid-column: 1 / -1; /* Span full grid width */
+    text-align: center;
+    padding: 4rem 1rem;
+    font-size: 1.1rem;
+    color: var(--medium-text-color);
+    background-color: var(--card-background); /* Match card background or use page background */
+    border-radius: var(--border-radius);
+    border: 1px dashed var(--border-color);
+}
+/* Optional: Add icon */
+#properties-loading::before {
+    content: "\f110"; /* Font Awesome spinner */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900; /* Solid */
+    display: block;
+    font-size: 2em;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    animation: fa-spin 1.5s infinite linear; /* Spinning animation */
+}
+#properties-empty::before {
+    content: "\f071"; /* Font Awesome warning/exclamation */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900; /* Solid */
+    display: block;
+    font-size: 2em;
+    color: #ffc107; /* Warning color */
+    margin-bottom: 1rem;
+}
 
 
-/* --- Responsive for All Properties --- */
-@media (max-width: 768px) {
+/* --- Placeholder for Pagination --- */
+.pagination-controls {
+    text-align: center;
+    margin: 3rem auto 1rem auto; /* Add space above/below */
+    padding: 0 1rem;
+}
+
+.pagination-controls a,
+.pagination-controls span {
+    display: inline-block;
+    padding: 0.6rem 1.1rem; /* Slightly larger */
+    margin: 0 0.3rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--primary-color);
+    background-color: var(--card-background);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.pagination-controls a:hover,
+.pagination-controls a:focus-visible {
+    background-color: #f1f3f5;
+    border-color: #ced4da;
+    color: var(--primary-color);
+}
+
+.pagination-controls .active { /* Current page style */
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    cursor: default;
+}
+
+.pagination-controls .disabled { /* Prev/Next disabled */
+    color: #adb5bd;
+    background-color: #f8f9fa;
+    border-color: var(--border-color);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
     .properties-grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 25px;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.5rem;
     }
-    .page-header h1 { font-size: 1.8rem; }
+}
+
+@media (max-width: 768px) {
+    .page-header h1 { font-size: 2rem; }
+    .page-header p { font-size: 1rem; }
+    .controls-container {
+        flex-direction: column; /* Stack back button and filters */
+        align-items: flex-start; /* Align items left */
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    .filter-sort-controls {
+        width: 100%;
+        justify-content: flex-start; /* Align filters left */
+    }
+    .properties-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 1.5rem;
+    }
+    .pagination-controls a,
+    .pagination-controls span {
+        padding: 0.5rem 0.9rem;
+        margin: 0 0.2rem;
+    }
 }
 
 @media (max-width: 576px) {
      .properties-grid {
-        grid-template-columns: 1fr; /* Stack on smallest */
-        gap: 20px;
+        grid-template-columns: 1fr; /* Stack cards */
+        gap: 1.5rem; /* Consistent gap */
     }
-    .page-header { padding-top: 20px; }
-    .back-button-container { text-align: center; margin-bottom: 25px; }
+    .page-header { padding: 1.5rem 1rem; }
+    .page-header h1 { font-size: 1.8rem; }
+    .filter-sort-controls {
+        flex-direction: column;
+        align-items: stretch; /* Make filters full width */
+    }
+    .filter-sort-controls select,
+    .filter-sort-controls input {
+        width: 100%; /* Make filters take full width */
+    }
+     .pagination-controls { margin-top: 2rem; }
 }
