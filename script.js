@@ -81,7 +81,66 @@
                 // Otherwise, let the browser handle navigation for href="index.html"
             });
         }
+        
+    // ==========================================
+    // 1.5 AUTHENTICATION STATE LISTENER (NEW BLOCK)
+    // ==========================================
 
+    const profileLinkElement = document.querySelector('.header-nav .profile-link');
+    const profileLinkTextElement = profileLinkElement?.querySelector('.nav-text');
+    const profileLinkIconElement = profileLinkElement?.querySelector('i'); // Get icon element
+
+    if (profileLinkElement && profileLinkTextElement && profileLinkIconElement) {
+        try {
+            // Assuming 'auth' is available (you might need to import it or get it differently)
+            // If using Firebase v9+ SDK, ensure onAuthStateChanged is imported
+             const { onAuthStateChanged } = firebase.auth; // Or use import { getAuth, onAuthStateChanged } from "firebase/auth"; if using modules
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in.
+                    console.log("Auth state changed: User is LOGGED IN", user);
+
+                    // Attempt to get user's name: Prioritize displayName, then email.
+                    const displayName = user.displayName;
+                    const email = user.email;
+                    let userNameToShow = "User"; // Default fallback
+
+                    if (displayName) {
+                        userNameToShow = displayName;
+                    } else if (email) {
+                        // Use the part before the '@' as a fallback username
+                        userNameToShow = email.split('@')[0];
+                    }
+                    // Optional: Add logic here to fetch from Firestore if you stored a custom username
+
+                    profileLinkTextElement.textContent = userNameToShow; // Update link text
+                    // Optional: Hide the icon if you prefer only text when logged in
+                    // profileLinkIconElement.style.display = 'none';
+                    profileLinkElement.setAttribute('aria-label', `View profile for ${userNameToShow}`); // Update aria-label
+
+                } else {
+                    // User is signed out.
+                    console.log("Auth state changed: User is LOGGED OUT");
+                    profileLinkTextElement.textContent = 'Profile'; // Reset to default text
+                    // Optional: Ensure icon is visible
+                    // profileLinkIconElement.style.display = 'inline-block'; // Or remove this line if it's always inline-block via CSS
+                    profileLinkElement.setAttribute('aria-label', 'Profile Menu'); // Reset aria-label
+                }
+                // Update wishlist state based on login status as well (important!)
+                updateWishlistButtonsVisualState();
+                updateWishlistBadges();
+            });
+        } catch (error) {
+            console.error("Error setting up Firebase Auth listener:", error);
+            // Handle case where 'auth' or 'onAuthStateChanged' might not be available yet
+             if (profileLinkTextElement) profileLinkTextElement.textContent = 'Profile'; // Ensure default state on error
+        }
+
+    } else {
+        console.warn("Profile link elements (.profile-link, .nav-text, i) not found in header.");
+    }
+    // --- End Auth State Change ---
 
         // ==========================================
         // 2. WISHLIST MANAGEMENT (using localStorage)

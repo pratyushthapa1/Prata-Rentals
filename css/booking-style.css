@@ -425,3 +425,98 @@ body.booking-page { /* Optional: Add class to body in booking.html for scoping *
     .confirm-button { font-size: 1.05rem; padding: 14px 30px; }
     .price-total { font-size: 1.2rem; }
 }
+/* --- Payment Modal Styles --- */
+.modal-overlay {
+    position: fixed; /* Cover the whole screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65); /* Darker overlay */
+    display: flex; /* Use flex to center content */
+    align-items: center;
+    justify-content: center;
+    z-index: 1050; /* Ensure it's above other content */
+    opacity: 0; /* Start hidden */
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Fade effect */
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 2rem 2.5rem; /* More padding */
+    border-radius: 8px;
+    max-width: 500px; /* Or adjust as needed */
+    width: 90%; /* Responsive width */
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95); /* Start slightly smaller */
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1); /* Scale to full size when active */
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    text-align: center;
+    font-family: var(--font-secondary);
+    font-weight: 600;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem; /* Larger close icon */
+    font-weight: 300;
+    color: #6c757d;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2rem;
+    transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+    color: var(--dark-text-color);
+}
+
+/* Ensure payment section styles work well inside modal */
+.modal-content .payment-info {
+    margin-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+}
+.modal-content .payment-info p {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--medium-text-color);
+}
+
+/* Style the submit area within the modal */
+.modal-submit-area {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.modal-submit-area .confirm-button {
+    width: 100%; /* Make button full width */
+}
+
+#payment-processing-msg,
+#payment-error-msg {
+    text-align: center;
+    font-weight: 500;
+}
