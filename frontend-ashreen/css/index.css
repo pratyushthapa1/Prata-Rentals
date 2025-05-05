@@ -1,0 +1,560 @@
+/* ========================================================================== */
+/* ========================================================================== */
+/* ==                                                                      == */
+/* ==           HOMEPAGE SPECIFIC STYLES (index.html)                      == */
+/* ==                                                                      == */
+/* ========================================================================== */
+/* ========================================================================== */
+
+/* ============================================
+   01. Hero Section
+   ============================================ */
+
+   .improved-hero {
+    position: relative;
+    min-height: 600px; /* Adjusted min-height for presence */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px; /* Increased vertical padding */
+    overflow: hidden;
+    color: var(--white-color, #fff); /* Use variable, fallback to white */
+}
+
+.hero-background-overlay {
+    position: absolute;
+    inset: 0; /* Modern shorthand for top/right/bottom/left: 0 */
+    /* Subtle gradient overlay instead of flat color */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+    z-index: 1;
+    pointer-events: none; /* Allow clicks through to content if needed */
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    /* Subtle animation on load - optional */
+    /* animation: scaleIn 25s ease-out forwards; */
+}
+
+/* Optional Keyframe for background subtle zoom */
+/* @keyframes scaleIn {
+    from { transform: scale(1.1); }
+    to { transform: scale(1); }
+} */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px; /* Slightly wider max-width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 3.8rem); /* Larger, more impactful */
+    font-weight: 700;
+    margin-bottom: 20px; /* Increased spacing */
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6); /* Softer, deeper shadow */
+    color: var(--white-color, #fff);
+    font-family: var(--font-secondary, sans-serif); /* Add fallback */
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 3vw, 1.3rem); /* Slightly larger */
+    margin-bottom: 45px; /* Increased spacing */
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95); /* Almost opaque white */
+    max-width: 600px; /* Slightly wider */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* --- Hero Search Bar --- */
+.hero-search-container {
+    background-color: rgba(255, 255, 255, 0.97); /* Almost opaque background */
+    padding: 30px 35px; /* Generous padding */
+    border-radius: var(--border-radius-lg, 10px); /* Slightly larger radius */
+    /* Softer, more layered shadow */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-width: 950px;
+    margin: 0 auto;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+}
+
+.search-form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Slightly increased gap */
+    align-items: flex-end;
+}
+
+.search-form-inline .search-field {
+    flex: 1 1 200px; /* Adjusted basis */
+}
+.search-form-inline .location-field { flex-grow: 1.5; }
+.search-form-inline .price-field { flex-basis: 180px; flex-grow: 0.9; }
+
+.search-label {
+    display: block;
+    font-size: 0.85rem; /* Slightly larger label */
+    font-weight: 600;
+    color: var(--text-color-light, #555);
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.search-form-inline .input-icon {
+    position: absolute;
+    left: 18px; /* Increased spacing */
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color-placeholder, #aaa);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: color 0.2s ease-in-out;
+}
+/* Change icon color on focus */
+.search-form-inline input:focus + .input-icon,
+.search-form-inline select:focus + .input-icon {
+    color: var(--primary-color, #007bff);
+}
+
+.search-form-inline input[type="text"],
+.search-form-inline input[type="number"],
+.search-form-inline select {
+    width: 100%;
+    padding: 14px 20px 14px 50px; /* Adjusted padding */
+    border: 1px solid var(--border-color-light, #ccc);
+    border-radius: var(--border-radius-sm, 6px);
+    font-size: 1rem;
+    background-color: var(--white-color, #fff);
+    color: var(--text-color, #333);
+    height: 52px; /* Consistent height */
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.search-form-inline input[type="text"]:focus,
+.search-form-inline input[type="number"]:focus,
+.search-form-inline select:focus {
+    outline: none;
+    border-color: var(--primary-color, #007bff);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 0, 123, 255), 0.15); /* Focus ring */
+}
+/* Accessible focus state */
+.search-form-inline input[type="text"]:focus-visible,
+.search-form-inline input[type="number"]:focus-visible,
+.search-form-inline select:focus-visible {
+    outline: 2px solid var(--primary-color, #007bff);
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
+.search-form-inline select {
+    appearance: none;
+    /* Prettier SVG arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236c757d'%3E%3Cpath fill-rule='evenodd' d='M4.646 6.146a.5.5 0 0 1 .708 0L8 8.793l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 18px center;
+    background-size: 1.1em;
+    padding-right: 45px; /* Space for arrow */
+}
+
+.search-button-inline {
+    background-color: var(--primary-color, #007bff);
+    color: var(--white-color, #fff);
+    border: none;
+    padding: 0 30px; /* Generous padding */
+    border-radius: var(--border-radius-sm, 6px);
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-basis: auto;
+    height: 52px; /* Match input height */
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(var(--primary-rgb, 0, 123, 255), 0.2);
+}
+.search-button-inline:hover {
+    background-color: var(--accent-color, #0056b3); /* Darker shade */
+    transform: translateY(-2px); /* Subtle lift */
+    box-shadow: 0 4px 10px rgba(var(--primary-rgb, 0, 123, 255), 0.3);
+}
+.search-button-inline:active {
+    transform: translateY(0px); /* Press down */
+    box-shadow: 0 1px 3px rgba(var(--primary-rgb, 0, 123, 255), 0.2);
+}
+/* Accessible focus state */
+.search-button-inline:focus-visible {
+    outline: 2px solid var(--primary-color, #007bff);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 0, 123, 255), 0.25);
+}
+
+
+/* ============================================
+   02. Value Proposition Section
+   ============================================ */
+
+.value-prop-section {
+    padding: 80px 20px; /* Consistent padding */
+    background-color: var(--section-bg-light, #f8f9fa); /* Slightly off-white */
+}
+
+/* Optional: Add a styled section title */
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-color-dark, #333);
+    font-family: var(--font-secondary, sans-serif);
+    position: relative;
+    padding-bottom: 15px;
+}
+.section-title::after { /* Subtle underline accent */
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color, #007bff);
+    border-radius: 2px;
+}
+
+.value-prop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px; /* Increased gap */
+    text-align: center;
+    /* margin-top: 40px; Removed - handled by section title margin */
+}
+
+.value-prop-item {
+    background-color: var(--white-color, #fff);
+    padding: 35px 30px;
+    border-radius: var(--border-radius, 8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.value-prop-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.value-prop-item .prop-icon {
+    font-size: 3rem; /* Slightly larger icon */
+    color: var(--primary-color, #007bff);
+    margin-bottom: 25px;
+    display: inline-block; /* Allows transforms */
+    transition: transform 0.3s ease-in-out;
+}
+.value-prop-item:hover .prop-icon {
+    transform: scale(1.1); /* Icon scale effect */
+}
+
+.value-prop-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-color-dark, #333);
+    margin-bottom: 15px;
+    font-family: var(--font-secondary, sans-serif);
+}
+
+.value-prop-item p {
+    font-size: 0.98rem;
+    color: var(--text-color-light, #6c757d);
+    line-height: 1.7; /* Improved readability */
+}
+
+
+/* ============================================
+   03. Featured Rentals Section
+   ============================================ */
+
+.featured-rentals {
+    padding: 80px 20px;
+    background-color: var(--bg-color, #fff); /* Default white if not set */
+}
+/* Uses .section-title class defined above */
+
+.rental-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Slightly larger min */
+    gap: 35px; /* Consistent gap */
+}
+/* Property card styles assumed to be in common.css */
+/* Add subtle entrance animation to cards if desired */
+/* .property-card { animation: fadeInUp 0.5s ease-out forwards; opacity: 0; animation-delay: calc(0.1s * var(--card-index, 1)); } */
+/* @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } } */
+/* Requires adding style="--card-index: N;" to each card in HTML/JS */
+
+
+/* ============================================
+   04. Popular Locations Section
+   ============================================ */
+
+.popular-locations-section {
+    padding: 80px 20px;
+    background-color: var(--section-bg-light, #f8f9fa); /* Match value prop bg */
+}
+/* Uses .section-title class defined above */
+
+.locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjusted minmax */
+    gap: 30px;
+    /* margin-top: 30px; Removed - handled by section title margin */
+}
+
+.location-card {
+    position: relative;
+    height: 350px; /* Increased height */
+    border-radius: var(--border-radius, 8px);
+    overflow: hidden;
+    display: block; /* Keep as block for link */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.location-card:hover,
+.location-card:focus-visible {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    outline: none;
+}
+/* Accessible focus outline */
+.location-card:focus-visible {
+     box-shadow: 0 0 0 3px var(--primary-color-light, rgba(0, 123, 255, 0.3)), 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.location-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out; /* Slower, smoother zoom */
+}
+.location-card:hover img,
+.location-card:focus-visible img {
+    transform: scale(1.1); /* Enhanced zoom */
+}
+
+.location-overlay {
+     position: absolute;
+     bottom: 0;
+     left: 0;
+     width: 100%;
+     height: 70%; /* More overlay for text contrast */
+     background: linear-gradient(to top, rgba(0,0,0,0.85) 10%, rgba(0,0,0,0.6) 40%, transparent 100%);
+     z-index: 1;
+     transition: opacity 0.3s ease-in-out;
+     border-radius: 0 0 var(--border-radius, 8px) var(--border-radius, 8px); /* Match card radius */
+     opacity: 0.9; /* Slightly transparent overlay overall */
+}
+.location-card:hover .location-overlay,
+.location-card:focus-visible .location-overlay {
+    opacity: 1; /* Fully opaque on hover/focus */
+}
+
+.location-name {
+    position: absolute;
+    bottom: 25px; /* Increased spacing */
+    left: 25px;
+    color: var(--white-color, #fff);
+    font-size: 1.5rem; /* Larger text */
+    font-weight: 600;
+    z-index: 2;
+    font-family: var(--font-secondary, sans-serif);
+    text-shadow: 0 2px 5px rgba(0,0,0,0.7);
+    transition: transform 0.3s ease-in-out;
+}
+/* Subtle text move on hover */
+.location-card:hover .location-name,
+.location-card:focus-visible .location-name {
+    transform: translateY(-3px);
+}
+
+
+/* ============================================
+   05. CTA Section
+   ============================================ */
+
+.list-property-cta {
+    /* Smoother, slightly angled gradient */
+    background: linear-gradient(110deg, var(--primary-color, #007bff) 0%, var(--secondary-color, #6c757d) 100%);
+    color: var(--white-color, #fff);
+    padding: 80px 20px; /* Consistent padding */
+    text-align: center;
+    position: relative; /* For potential pseudo-elements */
+    overflow: hidden;
+}
+/* Optional: Add subtle pattern or texture */
+/* .list-property-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('path/to/subtle-pattern.svg');
+    opacity: 0.05;
+    z-index: 0;
+} */
+.list-property-cta > * { /* Ensure content is above pseudo-elements */
+    position: relative;
+    z-index: 1;
+}
+
+.cta-icon {
+    font-size: 3.5rem; /* Larger icon */
+    margin-bottom: 25px;
+    display: block;
+    color: rgba(255, 255, 255, 0.85);
+    transition: transform 0.3s ease-in-out;
+}
+.list-property-cta:hover .cta-icon {
+    transform: scale(1.1);
+}
+
+.list-property-cta h2 {
+    color: var(--white-color, #fff);
+    font-size: clamp(1.8rem, 5vw, 2.4rem); /* Responsive heading */
+    margin-bottom: 20px;
+    font-family: var(--font-secondary, sans-serif);
+    font-weight: 700;
+}
+
+.list-property-cta p {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 35px;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+
+/* Assuming .btn-cta is defined in common.css */
+/* Enhance the CTA button specifically if needed */
+.list-property-cta .btn-cta {
+    /* Example: Make it stand out more */
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    background-color: var(--white-color, #fff);
+    color: var(--primary-color, #007bff);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out; /* Transition all properties */
+}
+.list-property-cta .btn-cta:hover,
+.list-property-cta .btn-cta:focus-visible {
+    background-color: var(--accent-color, #eee); /* Slight change */
+    color: var(--primary-darker, #0056b3);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+.list-property-cta .btn-cta:focus-visible {
+     box-shadow: 0 0 0 3px var(--primary-color-light, rgba(0, 123, 255, 0.3)), 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ========================================================================== */
+/* ========================================================================== */
+/* ==                                                                      == */
+/* ==                   RESPONSIVE ADJUSTMENTS (Index)                     == */
+/* ==                                                                      == */
+/* ========================================================================== */
+/* ========================================================================== */
+
+/* -- Large Devices (Desktops, less than 1200px) -- */
+@media (max-width: 1199.98px) {
+    .improved-hero { min-height: 550px; padding: 80px 20px; }
+    .hero-search-container { max-width: 90%; }
+}
+
+/* -- Medium Devices (Tablets, less than 992px) -- */
+@media (max-width: 991.98px) {
+    .improved-hero { min-height: 500px; padding: 60px 20px; }
+    .hero-search-container { padding: 25px 20px; } /* Adjust padding */
+    .search-form-inline { gap: 15px; }
+    .search-button-inline .search-button-text { display: none; } /* Hide text on button */
+    .search-button-inline { padding: 0 20px; flex-basis: 52px; flex-grow: 0; } /* Fixed width for icon only */
+    .search-button-inline i { font-size: 1.2rem; } /* Ensure icon is visible */
+
+    .rental-cards-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .locations-grid { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+}
+
+/* -- Small Devices (Landscape Phones, less than 768px) -- */
+@media (max-width: 767.98px) {
+     .improved-hero { min-height: auto; padding: 60px 15px; } /* Less padding */
+     .hero-title { font-size: clamp(2rem, 8vw, 2.8rem); }
+     .hero-subtitle { font-size: 1.05rem; margin-bottom: 35px;}
+
+     .hero-search-container { max-width: 100%; padding: 20px 15px; }
+     /* Stack search fields */
+     .search-form-inline .search-field,
+     .search-form-inline .location-field,
+     .search-form-inline .price-field {
+         flex-basis: calc(50% - 10px); /* Two columns layout initially */
+         flex-grow: 1; /* Allow growing */
+     }
+     .search-button-inline {
+         width: 100%; /* Full width button */
+         flex-basis: 100%;
+         margin-top: 10px;
+         padding: 0 25px; /* Restore padding */
+     }
+     .search-button-inline .search-button-text { display: inline; } /* Show text again */
+
+     .section-title { font-size: clamp(1.6rem, 5vw, 2rem); margin-bottom: 40px; }
+     .value-prop-grid,
+     .locations-grid,
+     .rental-cards-grid {
+         grid-template-columns: 1fr; /* Stack everything */
+         gap: 25px;
+     }
+     .value-prop-item { padding: 30px 25px; }
+
+     .list-property-cta { padding: 60px 15px; }
+     .list-property-cta h2 { font-size: 1.8rem; }
+     .list-property-cta p { font-size: 1.05rem; }
+
+     .location-card { height: 300px; } /* Adjust height */
+}
+
+/* -- Extra Small Devices (Portrait Phones, less than 576px) -- */
+@media (max-width: 575.98px) {
+     .improved-hero { padding: 50px 15px; }
+     .hero-search-container { padding: 15px; }
+     .search-form-inline { gap: 12px; }
+     /* Stack all search fields */
+     .search-form-inline .search-field,
+     .search-form-inline .location-field,
+     .search-form-inline .price-field {
+         flex-basis: 100%; /* Full width */
+     }
+     .search-form-inline input, .search-form-inline select {
+         font-size: 0.95rem;
+         padding-left: 45px; /* Adjust padding */
+         height: 48px; /* Slightly smaller inputs */
+      }
+     .search-form-inline .input-icon { left: 15px; font-size: 0.95rem; }
+     .search-button-inline { height: 48px; font-size: 1rem; }
+
+     .location-card { height: 280px; }
+     .location-name { font-size: 1.3rem; bottom: 20px; left: 20px; }
+}

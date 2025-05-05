@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Page Title - PRATA</title> <!-- SET SPECIFIC TITLE -->
+        <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/static-page.css"> <!-- Specific: static-page.css -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+<body>
+    <!-- Reusing Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/PRATA logo.png" alt="PRATA Logo">
+            </a>
+             <nav class="header-nav">
+                 <a href="wishlist.html" class="wishlist-icon" aria-label="Wishlist"><img src="images/iconamoon-heart-bold.svg" alt="Wishlist"></a>
+                 <a href="profile.html" class="profile-icon" aria-label="Profile Menu"><div class="ellipse"></div></a>
+             </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="section-title alt-title">Help Center & FAQ</h1>
+        <div class="static-content">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How do I search for a property?</h3>
+                <div class="faq-answer">
+                    <p>Use the search bar on the homepage or the 'All Properties' page. You can filter by location, property type, price range, and number of bedrooms/bathrooms (where available). Enter your criteria and click 'Search'.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How do I contact a Host?</h3>
+                <div class="faq-answer">
+                    <p>On the property details page, you will find a 'Contact Owner' or 'Send Inquiry' button/form. Use this to send your questions directly to the Host or property manager. You may need to be logged in for certain contact options.</p>
+                </div>
+            </div>
+
+             <div class="faq-item">
+                <h3 class="faq-question">Is my booking confirmed immediately?</h3>
+                <div class="faq-answer">
+                    <p>Booking confirmation processes may vary. Some properties might offer instant booking, while others require the Host to accept your request. The specific process will be outlined during the booking steps. You will receive a confirmation email once your booking is finalized.</p>
+                     <p>Currently, the booking page simulates direct confirmation after filling out the form.</p>
+                </div>
+            </div>
+
+             <div class="faq-item">
+                <h3 class="faq-question">How does the cancellation policy work?</h3>
+                <div class="faq-answer">
+                    <p>Cancellation policies (e.g., Flexible, Moderate, Strict) are set by the Host and displayed on the property listing. Please review the specific policy before booking. You can find more general information on our <a href="cancellation.html" style="color: var(--primary-color);">Cancellation Policy</a> page.</p>
+                </div>
+            </div>
+
+             <div class="faq-item">
+                <h3 class="faq-question">How do I list my property?</h3>
+                <div class="faq-answer">
+                    <p>If you are a property owner or manager interested in listing with us, please visit our <a href="become-host.html" style="color: var(--primary-color);">Become a Host</a> page for more information and to get started.</p>
+                </div>
+            </div>
+
+            <h2>Need More Help?</h2>
+            <p>If your question isn't answered here, please feel free to <a href="contact.html" style="color: var(--primary-color);">contact our support team</a>. We're happy to assist you!</p>
+        </div>
+    </main>
+
+     <!-- Reusing Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                 <a href="about.html">About Us</a>
+                 <a href="terms.html">Terms of Service</a>
+                 <a href="contact.html">Contact Us</a>
+                 <a href="help.html">Help Center</a>
+                 <a href="become-host.html">For Landlords</a>
+            </div>
+             <div class="footer-social">
+                 <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                 <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                 <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+        </div>
+     </footer>
+    <script src="js/script.js"></script>
+    <script>
+        // Simple FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.closest('.faq-item');
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

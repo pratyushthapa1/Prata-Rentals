@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Us - PRATA</title>
+        <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/contact.css"> <!-- Specific: contact.css -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+<body class="contact-page"> <!-- Added class for specific background -->
+
+    <!-- Minimal Header for Contact Page -->
+    <header class="main-header" style="position: static; background-color: transparent; box-shadow: none;"> <!-- Transparent header -->
+         <div class="container">
+            <a href="index.html" class="header-logo">
+                <!-- Ensure image path is correct -->
+                <img src="images/PRATA logo.png" alt="PRATA Logo" style="filter: brightness(0.2);"> <!-- Darken logo on light bg -->
+            </a>
+            <nav class="header-nav">
+                 <a href="index.html" class="nav-link" style="color: var(--primary-color);">Back to Home</a> <!-- Added class for potential styling -->
+             </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Consider making the image optional or relevant to contact -->
+        <!-- Removed header image for cleaner look -->
+        <!-- <img class="contact-header-image" src="..." alt="Scenic contact background"> -->
+
+        <div class="contact-form-container">
+             <!-- Heading adjusted for general contact. If for specific landlord, needs update and property context -->
+            <h1>Get In Touch</h1>
+            <p id="contact-subject-line" style="text-align: center; margin-bottom: 20px; font-style: italic; color: #555;"></p> <!-- For subject -->
+            <!-- NOTE: JavaScript (script.js) required to handle form submission and redirect to message.html -->
+            <form class="contact-form" id="contact-form" action="#" method="POST"> <!-- action="#" requires JS handler -->
+                 <!-- Hidden input for context (like property ID or subject) -->
+                 <input type="hidden" name="contact_subject" id="contact-subject" value="General Inquiry">
+
+                <div class="form-group">
+                    <label for="contact-name">Name</label>
+                    <input type="text" id="contact-name" name="name" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email</label>
+                    <input type="email" id="contact-email" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group form-group-textarea">
+                     <!-- Label adjusted for general message -->
+                    <label for="contact-message">Your Message</label>
+                    <textarea id="contact-message" name="message" placeholder="Enter your message or inquiry" required></textarea>
+                </div>
+                <button type="submit" class="contact-submit-button">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+     <!-- Minimal Footer -->
+     <footer class="main-footer" style="background: transparent; border: none; margin-top: 20px;">
+        <div class="container">
+            <div class="footer-content">
+                 <!-- Link to actual terms page -->
+                 <a href="terms.html">Terms of Service</a>
+                 <a href="help.html">Help Center</a> <!-- Added Help -->
+            </div>
+             <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+        </div>
+     </footer>
+
+    <!-- NOTE: Link the JavaScript file that handles form submission -->
+    <script src="script.js"></script> <!-- General script includes contact logic -->
+    <script>
+        // Check for subject in URL query parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const subject = params.get('subject');
+            const propertyId = params.get('propertyId'); // Example for property inquiry
+            const subjectLine = document.getElementById('contact-subject-line');
+            const subjectInput = document.getElementById('contact-subject');
+
+            if (subject) {
+                if (subjectLine) subjectLine.textContent = `Regarding: ${subject}`;
+                if (subjectInput) subjectInput.value = subject;
+            }
+             if (propertyId) {
+                // Add property context to message placeholder or hidden field
+                const messageTextarea = document.getElementById('contact-message');
+                 if (subjectLine) subjectLine.textContent = `Inquiry about Property ID: ${propertyId}`; // Update subject line
+                 if (subjectInput) subjectInput.value = `Inquiry Property ID: ${propertyId}`; // Update hidden subject
+                if(messageTextarea) messageTextarea.placeholder = `Please enter your message regarding property ID ${propertyId}...`;
+            }
+        });
+    </script>
+</body>
+</html>

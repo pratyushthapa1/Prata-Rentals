@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Rooms - PRATA</title> <!-- Changed Title -->
+    <!-- Include necessary CSS files -->
+    <!-- <link rel="stylesheet" href="globals.css"> -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/index.css"> <!-- Can reuse index/search results styles -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Optional: Add specific styles for this page if needed */
+        .page-title {
+            text-align: center;
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 2em;
+            color: #333;
+        }
+        .results-info {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="main-header">
+        <!-- Copy the header structure from index.html -->
+        <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/PRATA logo.png" alt="PRATA Logo">
+            </a>
+            <nav class="header-nav">
+                <a href="wishlist.html" class="nav-link wishlist-link" aria-label="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="nav-text">Wishlist</span>
+                    <span class="wishlist-count-badge" style="display: none;">0</span>
+                </a>
+                 <a href="profile.html" class="nav-link profile-link" aria-label="Profile Menu">
+                    <i class="fa-regular fa-user-circle"></i>
+                    <span class="nav-text">Profile</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Available Rooms for Rent</h1>
+        <p class="results-info" id="results-info-rooms">Loading available rooms...</p>
+
+        <!-- Grid to display room cards -->
+        <div class="rental-cards-grid" id="rooms-grid">
+            <!-- Room cards will be dynamically inserted here by JavaScript -->
+            <!-- Example Card Structure (JS will generate these):
+            <a href="property.html?id=ROOM_ID" class="property-card-link" data-property-id="ROOM_ID">
+                <article class="property-card" data-property-id="ROOM_ID">
+                    <div class="card-image-container">
+                        <img src="ROOM_IMAGE" alt="Room View" class="card-image">
+                        <span class="card-tag card-tag-budget">Budget</span> // Optional tag
+                        <div class="card-price">NPR PRICE/mo</div>
+                        <button class="wishlist-button on-card-wishlist" data-property-id="ROOM_ID" aria-label="Add to wishlist">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-text-content">
+                        <h3 class="card-title">ROOM_TITLE</h3>
+                        <p class="card-location"><i class="fas fa-map-marker-alt"></i> ROOM_LOCATION</p>
+                        <div class="card-features">
+                             <span><i class="fas fa-bed"></i> 1 Bed</span> // Example feature
+                             <span><i class="fas fa-bath"></i> Shared Bath</span> // Example feature
+                        </div>
+                    </div>
+                </article>
+            </a>
+            -->
+        </div>
+
+        <!-- Optional: Add filters specific to rooms if needed -->
+
+    </main>
+
+    <footer class="main-footer">
+         <!-- Copy the footer structure from index.html -->
+         <div class="container">
+            <!-- ... Footer content ... -->
+             <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved. Designed with <i class="fa-regular fa-heart" style="color: #e48a8a;"></i> for Nepal.
+            </div>
+         </div>
+     </footer>
+
+    <!-- Link necessary JavaScript files -->
+    <script src="js/script.js"></script> <!-- General script if needed -->
+    <script src="js/rooms-display.js"></script> <!-- Create this NEW file for room filtering/display -->
+
+</body>
+</html>

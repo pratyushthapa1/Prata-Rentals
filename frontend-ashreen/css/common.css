@@ -1,0 +1,554 @@
+/* ============================================ */
+/* == Common/Global Styles                   == */
+/* ============================================ */
+
+/* --- Variables --- */
+:root {
+    --primary-color: #1A2C50; /* Dark Blue */
+    --secondary-color: #52658F; /* Lighter shade for accents */
+    --accent-color: #a48546; /* Gold/Brown accent */
+    --light-accent-color: #e4d7c5; /* Light accent */
+    --text-color: #333333;
+    --light-text-color: #555555;
+    --link-color: #007bff; /* Standard link blue */
+    --bg-color: #f8f9fa; /* Light grey page background */
+    --card-bg-color: #ffffff;
+    --border-color: #e0e0e0;
+    --border-light-color: #eee;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --warning-color: #ffc107;
+    --border-radius: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Montserrat', sans-serif;
+}
+
+/* --- Reset & Base --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased; /* Smoother fonts */
+}
+
+/* --- Container --- */
+.container {
+    max-width: 1200px; /* Standard max width */
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+@media (min-width: 1440px) {
+     .container { max-width: 1360px; } /* Slightly wider on large screens */
+}
+
+
+/* --- Header Styles --- */
+.main-header {
+    background-color: var(--primary-color);
+    color: var(--light-accent-color);
+    padding: 12px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo img {
+    height: 48px; /* Slightly smaller logo */
+    width: auto;
+    display: block; /* Prevents extra space below */
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-link { /* General style for header links */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--light-accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.2s ease;
+    font-family: var(--font-secondary);
+    font-size: 0.9rem;
+}
+
+.nav-link:hover {
+    color: #fff;
+}
+
+.nav-link i {
+    font-size: 1.3rem;
+    line-height: 1; /* Ensure icon aligns well */
+}
+
+.nav-text { /* Text label next to icon */
+    /* display: none; /* Hide by default, show on larger screens */
+}
+
+/* Specific icons if needed */
+.wishlist-icon img { /* If using img tag still */
+    width: 40px;
+    height: 40px;
+}
+.profile-icon .ellipse { /* If using ellipse */
+    width: 40px;
+    height: 40px;
+    background-color: #d9d9d9;
+    border-radius: 50%;
+    cursor: pointer;
+}
+/* Badge for wishlist count */
+.wishlist-count-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: #e83e8c;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* --- Footer Styles --- */
+.main-footer {
+    background-color: #fff; /* White footer */
+    color: var(--light-text-color);
+    padding: 60px 20px 30px 20px;
+    border-top: 1px solid var(--border-light-color);
+    margin-top: 60px; /* Ensure space above footer unless overridden */
+    font-size: 0.9rem;
+}
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+    text-align: left;
+}
+.footer-col h4 {
+    font-family: var(--font-secondary);
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+.footer-col ul li a {
+    color: var(--light-text-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.footer-col ul li a:hover {
+    color: var(--primary-color);
+}
+.footer-logo {
+    max-width: 100px;
+    margin-bottom: 15px;
+}
+.footer-about p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--light-text-color);
+}
+.social-icons a {
+    color: #777;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    transition: color 0.2s ease;
+}
+.social-icons a:hover {
+    color: var(--primary-color);
+}
+.footer-copyright {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-light-color);
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* --- Base Button Styles --- */
+.btn {
+    display: inline-block; /* Allow margin/padding */
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    font-size: 0.95rem;
+    font-weight: 600; /* Bolder buttons */
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    cursor: pointer;
+    font-family: var(--font-secondary);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+}
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: var(--primary-color);
+    border-color: #ccc; /* Neutral border */
+}
+.btn-secondary:hover {
+    background-color: #f8f9fa;
+    border-color: #adb5bd;
+    color: var(--primary-color);
+}
+/* Specific CTA button from homepage */
+.btn-cta {
+    background-color: #fff;
+    color: var(--primary-color);
+    padding: 14px 35px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-color 0.2s, color 0.2s, transform 0.2s;
+    border: none;
+}
+.btn-cta:hover {
+     background-color: #f0f0f0;
+     color: var(--primary-color);
+     transform: translateY(-2px);
+}
+
+
+/* --- Common Section Styles --- */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px; /* Consistent margin */
+}
+.section-title {
+    font-size: 2.0rem; /* Standardized */
+    font-weight: 700;
+    margin-bottom: 0; /* Handled by section-header */
+    text-align: left;
+    font-family: var(--font-secondary);
+    color: var(--primary-color);
+}
+.section-title.alt-title { /* For centered titles on light backgrounds */
+     text-align: center;
+     margin-bottom: 15px;
+     width: 100%;
+}
+.section-subtitle {
+    font-size: 1.05rem;
+    color: var(--light-text-color);
+    max-width: 600px;
+    margin: 5px auto 40px auto; /* Adjust spacing */
+    text-align: center;
+    font-weight: 400;
+}
+.view-more-link {
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-size: 0.9rem;
+    font-family: var(--font-secondary);
+}
+.view-more-link:hover {
+    color: var(--secondary-color);
+}
+.view-more-link i {
+    margin-left: 5px;
+}
+
+/* --- Base Property Card Styles (used on index, allproperties, wishlist, search) --- */
+.property-card-link { /* The wrapping <a> tag */
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: var(--border-radius);
+    transition: box-shadow 0.2s ease-in-out;
+    background-color: var(--card-bg-color); /* Apply bg here */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Softer base shadow */
+    border: 1px solid var(--border-light-color);
+}
+.property-card-link:hover {
+    box-shadow: var(--shadow); /* Use main shadow on hover */
+}
+
+.property-card {
+    /* Remove background, border, shadow from here */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure cards in grid have same height potential */
+}
+
+.card-image-container {
+    position: relative;
+    height: 220px; /* Consistent height */
+    background-color: #eee; /* Placeholder BG */
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 1;
+}
+/* Specific Tags */
+.card-tag-popular { background-color: #e83e8c; }
+.card-tag-featured { background-color: #007bff; }
+.card-tag-new { background-color: var(--success-color); }
+.card-tag-luxury { background-color: var(--warning-color); color: #333; }
+
+.card-price {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background-color: rgba(26, 44, 80, 0.9); /* Dark blue bg */
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    font-family: var(--font-secondary);
+    z-index: 1;
+}
+
+.card-text-content {
+    padding: 15px; /* Base padding */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.05rem; /* Base size */
+    line-height: 1.4;
+    margin-bottom: 8px;
+    /* Limit title lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.8em;
+}
+
+.card-location {
+    font-size: 0.85rem;
+    color: var(--light-text-color);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.card-location i {
+    color: var(--secondary-color);
+}
+
+.card-features {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping */
+    gap: 10px 15px; /* Row and column gap */
+    font-size: 0.8rem;
+    color: #666;
+    border-top: 1px solid var(--border-light-color);
+    padding-top: 12px;
+    margin-top: auto; /* Push to bottom */
+}
+.card-features span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.card-features i {
+    color: var(--accent-color);
+    width: 15px;
+    text-align: center;
+}
+
+/* Wishlist button on cards */
+.on-card-wishlist {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    color: #555;
+    z-index: 2;
+    padding: 0;
+}
+.on-card-wishlist:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+.on-card-wishlist i {
+    font-size: 1.1rem;
+}
+.on-card-wishlist.active i.far {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: #e83e8c;
+}
+
+/* --- Form Group Base Styles (used in booking, contact, auth, manage) --- */
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #343a40;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group input[type="number"],
+.form-group input[type="password"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px; /* Adjusted padding */
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: var(--font-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #fff; /* Ensure background */
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(82, 101, 143, 0.15);
+}
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+     color: #aaa;
+     font-style: italic;
+     font-size: 0.9em;
+}
+
+/* --- Utility Classes --- */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* --- Common Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .section-title { font-size: 1.8rem; }
+}
+
+@media (max-width: 768px) {
+    .main-header .container {
+        flex-direction: column; /* Stack logo and nav */
+        gap: 10px;
+        padding-bottom: 10px; /* Add padding when stacked */
+    }
+    .nav-text { /* Hide text labels in header */
+        display: none;
+    }
+    .header-nav {
+        gap: 15px;
+    }
+    .section-title { font-size: 1.6rem; }
+    .section-subtitle { font-size: 1rem; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; } /* Stack footer columns */
+    .footer-col h4 { margin-bottom: 10px; }
+    .social-icons { margin-top: 10px; }
+}
+@media (max-width: 576px) {
+    .container { padding: 0 15px; }
+    .btn { padding: 8px 16px; font-size: 0.9rem; }
+}
+/* Style for the filled heart when wishlisted */
+.wishlist-button.active i {
+    font-weight: 900; /* Use Font Awesome's solid style weight */
+    font-family: "Font Awesome 6 Free"; /* Ensure correct font family */
+    color: #ff4d4d; /* Or your preferred 'active' color */
+}
+
+/* Optional: Add a subtle transition */
+.wishlist-button i {
+    transition: color 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+}

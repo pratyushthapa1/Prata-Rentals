@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Properties - PRATA Rentals</title>
+    <!-- <link rel="stylesheet" href="globals.css"> If you have this -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/allproperties.css"> <!-- Specific: allproperties.css -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+  <body>
+     <!-- Added Standard Header -->
+     <header class="main-header">
+      <div class="container">
+          <a href="index.html" class="header-logo">
+              <img src="images/PRATA logo.png" alt="PRATA Logo">
+          </a>
+           <nav class="header-nav">
+               <a href="wishlist.html" class="wishlist-icon" aria-label="Wishlist"><img src="images/iconamoon-heart-bold.svg" alt="Wishlist"></a>
+               <a href="profile.html" class="profile-icon" aria-label="Profile Menu"><div class="ellipse"></div></a>
+           </nav>
+      </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header" style="background: none; color: var(--primary-color); padding: 20px 0;"> <!-- Inline style to override default header -->
+            <h1>Explore All Properties</h1>
+            <p>Find your perfect rental across Nepal</p>
+        </div>
+
+      <!-- Kept original back button placement -->
+       <div class="back-button-container">
+        <a href="index.html" class="back-button"> <!-- Link to home instead of history -->
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+      </div>
+
+      <!--
+        NOTE: This section ideally should be generated dynamically using JavaScript
+        by fetching data (e.g., from properties.json or an API).
+      -->
+      <div class="properties-grid">
+        <!-- Property Card 1 (ID is 5) - Ensure link wraps div -->
+        <a href="property.html?id=5" class="property-link">
+          <div class="property-card" id="property-5">
+            <div class="card-image">
+              <img
+                src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
+                alt="Modern Apartment in Lazimpat"
+              />
+              <span class="tag featured">Featured</span>
+              <span class="price">NPR 65,000/mo</span>
+            </div>
+            <div class="card-content">
+              <h3>Modern Apartment in Lazimpat</h3>
+              <p class="location">
+                <i class="fas fa-map-marker-alt"></i> Lazimpat, Kathmandu
+              </p>
+              <div class="features">
+                <span class="feature"><i class="fas fa-bed"></i> 2 Beds</span>
+                <span class="feature"><i class="fas fa-bath"></i> 2 Baths</span>
+                <span class="feature"
+                  ><i class="fas fa-couch"></i> Furnished</span
+                >
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Property Card 2 (ID is 6) - Ensure link wraps div -->
+        <a href="property.html?id=6" class="property-link">
+          <div class="property-card" id="property-6">
+            <div class="card-image">
+              <img
+                src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                alt="Cozy House near Lakeside"
+              />
+              <span class="tag popular">Popular</span>
+              <span class="price">NPR 40,000/mo</span>
+            </div>
+            <div class="card-content">
+              <h3>Cozy House near Lakeside</h3>
+              <p class="location">
+                <i class="fas fa-map-marker-alt"></i> Lakeside, Pokhara
+              </p>
+              <div class="features">
+                <span class="feature"><i class="fas fa-bed"></i> 3 Beds</span>
+                <span class="feature"><i class="fas fa-bath"></i> 1 Bath</span>
+                <span class="feature"
+                  ><i class="fas fa-parking"></i> Parking</span
+                >
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Property Card 3 (ID is 7) - Ensure link wraps div -->
+        <a href="property.html?id=7" class="property-link">
+          <div class="property-card" id="property-7">
+            <div class="card-image">
+              <img
+                src="https://images.unsplash.com/photo-1600121848594-d8644e57abab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
+                alt="Spacious Flat in Sanepa"
+              />
+              <span class="tag new">New</span>
+              <span class="price">NPR 50,000/mo</span>
+            </div>
+            <div class="card-content">
+              <h3>Spacious Flat in Sanepa</h3>
+              <p class="location">
+                <i class="fas fa-map-marker-alt"></i> Sanepa, Lalitpur
+              </p>
+              <div class="features">
+                <span class="feature"><i class="fas fa-bed"></i> 3 Beds</span>
+                <span class="feature"><i class="fas fa-bath"></i> 2 Baths</span>
+                <span class="feature"
+                  ><i class="fas fa-ruler-combined"></i> 1200 sq.ft.</span
+                >
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Property Card 4 (ID is 8) - Ensure link wraps div -->
+        <a href="property.html?id=8" class="property-link">
+          <div class="property-card" id="property-8">
+            <div class="card-image">
+              <img
+                src="https://images.pexels.com/photos/1029599/pexels-photo-1029599.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt="Traditional Home in Bhaktapur"
+              />
+              <span class="tag">For Rent</span>
+              <span class="price">NPR 35,000/mo</span>
+            </div>
+            <div class="card-content">
+              <h3>Traditional Home in Bhaktapur</h3>
+              <p class="location">
+                <i class="fas fa-map-marker-alt"></i> Bhaktapur Durbar Square Area
+              </p>
+              <div class="features">
+                <span class="feature"><i class="fas fa-bed"></i> 4 Beds</span>
+                <span class="feature"><i class="fas fa-bath"></i> 2 Baths</span>
+                <span class="feature"><i class="fas fa-tree"></i> Garden</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <!-- Properties 9-16 Removed as they are not in properties.json -->
+
+      </div>
+      <!-- /.properties-grid -->
+    </main>
+
+    <!-- Added Standard Footer -->
+    <footer class="main-footer">
+      <div class="container">
+          <div class="footer-content">
+               <a href="about.html">About Us</a>
+               <a href="terms.html">Terms of Service</a>
+               <a href="contact.html">Contact Us</a>
+               <a href="help.html">Help Center</a>
+               <a href="become-host.html">For Landlords</a>
+          </div>
+           <div class="footer-social">
+               <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+               <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+               <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="footer-copyright">
+              © 2024 PRATA Rentals. All rights reserved.
+          </div>
+      </div>
+   </footer>
+    <script src="script.js"></script> <!-- Link general script -->
+  </body>
+</html>

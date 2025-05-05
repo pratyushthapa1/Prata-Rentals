@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRATA - Forgot Password Options</title>
+    <!-- Links using your project structure -->
+    <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/forgot-password.css"> <!-- Link the new CSS -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page">
+
+    <!-- Simplified Header -->
+    <header class="main-header" style="position: static; box-shadow: none;">
+         <div class="container" style="justify-content: flex-start;">
+            <!-- Back link integrated into header -->
+            <a href="forgot-email.html" class="back-button-link" style="margin-right: 20px;">← Back</a>
+            <a href="index.html" class="header-logo" style="margin-left: auto; margin-right: auto;">
+                <img src="images/PRATA logo.png" alt="PRATA Logo">
+            </a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="auth-container forgot-password-container">
+            <h1>Account Recovery</h1> <!-- Changed Title -->
+            <p class="sub-description">How would you like to receive the verification code?</p>
+
+            <!-- Option 1: Email -->
+            <div class="contact-option">
+                <label>Via Email:</label>
+                <!-- Display masked email (JS/Backend needed) -->
+                <input type="text" id="masked-email" value="user***@example.com" readonly>
+                <form action="verification.html" method="get"> <!-- Use GET or POST -->
+                     <input type="hidden" name="method" value="email">
+                     <input type="hidden" name="contactInfo" id="email-for-verify" value=""> <!-- JS can populate this -->
+                     <button type="submit" class="btn btn-option">Send Code to Email</button> <!-- Used button class -->
+                </form>
+            </div>
+
+             <!-- Option 2: SMS -->
+            <div class="contact-option">
+                <label>Via SMS:</label>
+                 <!-- Display masked phone (JS/Backend needed) -->
+                <input type="text" id="masked-sms" value="+977 **** ***123" readonly>
+                 <form action="verification.html" method="get">
+                     <input type="hidden" name="method" value="sms">
+                     <input type="hidden" name="contactInfo" id="sms-for-verify" value=""> <!-- JS can populate this -->
+                     <button type="submit" class="btn btn-option">Send Code via SMS</button> <!-- Used button class -->
+                 </form>
+            </div>
+        </div>
+    </main>
+
+     <!-- Minimal Footer -->
+    <footer class="main-footer" style="margin-top: 30px; background: transparent; border-top: none; padding-top: 0;">
+         <div class="container">
+             <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+         </div>
+     </footer>
+
+     <script>
+        // Simple script to get email from previous page (if using GET)
+        // In a real app, backend would fetch user's contact options
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const email = params.get('email');
+            const maskedEmailEl = document.getElementById('masked-email');
+            const emailInputForVerify = document.getElementById('email-for-verify');
+
+            if (email && maskedEmailEl) {
+                // Basic masking simulation
+                const parts = email.split('@');
+                if (parts.length === 2) {
+                    const name = parts[0];
+                    const domain = parts[1];
+                    const maskedName = name.length > 3 ? name.substring(0, 3) + '***' : name[0] + '***';
+                    maskedEmailEl.value = maskedName + '@' + domain;
+                    if(emailInputForVerify) emailInputForVerify.value = email; // Store actual email for next step
+                } else {
+                    maskedEmailEl.value = 'Email not found';
+                }
+            }
+             // Add similar logic for SMS if phone number is available
+        });
+     </script>
+
+</body>
+</html>

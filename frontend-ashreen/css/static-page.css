@@ -1,0 +1,159 @@
+/* ===================================================== */
+/* == Static Content Page Styles (about, terms, help) == */
+/* ===================================================== */
+
+/* Inherits .container, header, footer, titles from common.css */
+
+.static-content-section { /* Wrapper for content area */
+    padding: 40px 0; /* Padding top/bottom */
+}
+
+.static-content {
+   background-color: #fff;
+   padding: 30px 40px; /* More padding */
+   border-radius: var(--border-radius);
+   box-shadow: var(--shadow);
+   max-width: 900px; /* Limit width for readability */
+   margin: 0 auto; /* Center content box */
+}
+
+.static-content h1, /* If h1 is inside */
+.static-content h2 {
+   font-family: var(--font-secondary);
+   font-weight: 600;
+   color: var(--primary-color);
+   margin-bottom: 20px;
+   padding-bottom: 10px;
+   border-bottom: 1px solid var(--border-light-color);
+}
+.static-content h1 { font-size: 1.8rem; }
+.static-content h2 { font-size: 1.5rem; }
+.static-content h3 {
+   font-family: var(--font-secondary);
+   font-weight: 600;
+   color: var(--secondary-color);
+   margin-top: 25px;
+   margin-bottom: 10px;
+   font-size: 1.2rem;
+}
+
+.static-content p,
+.static-content li {
+   margin-bottom: 15px;
+   line-height: 1.7;
+   color: var(--text-color);
+   font-size: 0.95rem;
+}
+
+.static-content ul,
+.static-content ol {
+   margin-left: 25px;
+   margin-bottom: 20px;
+}
+.static-content ul li { list-style: disc; }
+.static-content ol li { list-style: decimal; }
+
+.static-content a {
+   color: var(--primary-color);
+   text-decoration: none;
+   font-weight: 500;
+}
+.static-content a:hover {
+   text-decoration: underline;
+}
+.static-content strong {
+    font-weight: 600;
+    color: #000;
+}
+.static-content em {
+   font-style: italic;
+   color: var(--light-text-color);
+}
+
+/* Specific Styles from Help Page */
+.faq-item {
+   margin-bottom: 25px;
+   border-bottom: 1px solid var(--border-light-color);
+   padding-bottom: 15px;
+}
+.faq-item:last-child { border-bottom: none; margin-bottom: 0;}
+
+.faq-question {
+   font-weight: 600;
+   margin-bottom: 8px;
+   cursor: pointer;
+   position: relative;
+   padding-right: 25px; /* Space for icon */
+   font-size: 1.1rem;
+   color: var(--text-color);
+}
+.faq-question::after { /* Toggle icon */
+   content: '\f078'; /* fa-chevron-down */
+   font-family: "Font Awesome 6 Free";
+   font-weight: 900;
+   position: absolute;
+   right: 0;
+   top: 2px;
+   font-size: 0.9em;
+   color: var(--secondary-color);
+   transition: transform 0.2s ease;
+}
+.faq-item.active .faq-question::after {
+   transform: rotate(180deg); /* Point up */
+}
+
+.faq-answer {
+   display: none; /* Hidden by default */
+   padding-left: 15px;
+   /* border-left: 2px solid var(--secondary-color); */
+   margin-top: 10px;
+   color: var(--light-text-color);
+}
+.faq-item.active .faq-answer {
+   display: block;
+}
+
+/* Specific Styles from Cancellation Page */
+.policy-level {
+   border-left: 3px solid var(--secondary-color);
+   padding: 10px 0 10px 20px;
+   margin: 25px 0;
+   background-color: #fdfdfe; /* Slightly off-white */
+}
+.policy-level h3 {
+   font-size: 1.15rem;
+   font-weight: 600;
+   margin-bottom: 10px;
+   margin-top: 0; /* Remove top margin */
+   color: var(--secondary-color);
+}
+.policy-level ul { margin-left: 20px; margin-bottom: 5px;}
+
+/* Specific Styles from Become Host Page */
+.benefits-list li {
+   list-style: none; /* Remove default bullet */
+   position: relative;
+   padding-left: 25px; /* Space for icon */
+}
+.benefits-list li i {
+   color: var(--secondary-color);
+   position: absolute;
+   left: 0;
+   top: 4px; /* Adjust vertical alignment */
+   width: 15px;
+   text-align: center;
+}
+.host-cta-button {
+   display: inline-block;
+   background-color: var(--success-color);
+   color: white;
+   padding: 12px 25px;
+   border-radius: 6px;
+   text-decoration: none;
+   font-weight: bold;
+   transition: background-color 0.2s;
+   margin-top: 15px;
+   border: none;
+   cursor: pointer;
+}
+.host-cta-button:hover { background-color: #218838; }

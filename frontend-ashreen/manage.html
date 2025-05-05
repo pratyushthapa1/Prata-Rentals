@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Dashboard - PRATA</title>
+        <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/manage.css"> <!-- Specific: manage.css -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+<body>
+
+    <!-- Authentication Overlay (Very Basic - NOT SECURE) -->
+    <div id="auth-overlay">
+        <div class="auth-box">
+            <h2>Admin Access</h2>
+            <p>Enter Password:</p>
+            <input type="password" id="admin-password" style="padding: 8px; margin-bottom: 10px;">
+            <button id="auth-submit" class="btn-primary" style="padding: 8px 15px;">Login</button>
+            <p id="auth-error" style="color: red; margin-top: 10px; display: none;">Incorrect Password</p>
+        </div>
+    </div>
+
+    <!-- Main Admin Content (Hidden initially) -->
+    <div class="admin-content" style="display: none;">
+        <header class="main-header"> <!-- Reuse header style -->
+            <div class="container">
+                <a href="index.html" class="header-logo">
+                    <img src="images/PRATA logo.png" alt="PRATA Logo">
+                </a>
+                <nav class="header-nav">
+                    <button id="admin-logout" class="btn-delete" style="padding: 8px 12px;">Logout</button>
+                </nav>
+            </div>
+        </header>
+
+        <main class="admin-container">
+            <div class="admin-header">
+                <h1>Admin Dashboard</h1>
+                <p>Manage Properties</p>
+            </div>
+
+            <section class="add-property-section">
+                <button id="add-property-btn" class="btn-add"><i class="fas fa-plus"></i> Add New Property</button>
+            </section>
+
+            <section>
+                <h2>Property Listings</h2>
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Title</th>
+                            <th>Location</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="property-list-tbody">
+                        <!-- Property rows will be loaded here by JS -->
+                        <tr><td colspan="6" style="text-align:center;">Loading properties...</td></tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer" style="background: #fff; border-top: 1px solid #eee; margin-top: 30px;">
+            <div class="container">
+                <div class="footer-copyright">
+                    © 2024 PRATA Rentals Admin. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div> <!-- End admin-content -->
+
+    <!-- Add/Edit Property Modal -->
+    <dialog id="property-modal">
+        <h2 id="modal-title">Add Property</h2>
+        <form id="property-form">
+            <input type="hidden" id="property-id" name="id">
+
+            <div class="form-group full-width">
+                <label for="property-title">Title</label>
+                <input type="text" id="property-title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="property-location">Location</label>
+                <input type="text" id="property-location" name="location">
+            </div>
+             <div class="form-group">
+                <label for="property-price">Price</label>
+                <input type="number" id="property-price" name="price" required step="100">
+            </div>
+             <div class="form-group">
+                <label for="property-priceSuffix">Price Suffix (e.g., /mo)</label>
+                <input type="text" id="property-priceSuffix" name="priceSuffix" value="/mo">
+            </div>
+             <div class="form-group">
+                <label for="property-image">Main Image URL</label>
+                <input type="text" id="property-image" name="image" placeholder="e.g., images/new_image.jpg">
+            </div>
+             <div class="form-group">
+                <label for="property-tag">Tag (e.g., New, Popular)</label>
+                <input type="text" id="property-tag" name="tag">
+            </div>
+            <div class="form-group full-width">
+                <label for="property-description">Description</label>
+                <textarea id="property-description" name="description"></textarea>
+            </div>
+            <div class="form-group full-width">
+                <label for="property-features">Features (JSON Array or Simple List)</label>
+                 <textarea id="property-features" name="features" rows="3" placeholder='[{"icon": "fa-bed", "text": "3 Beds"}, {"icon": "fa-bath", "text": "2 Baths"}]'></textarea>
+                 <small>Enter as valid JSON array or simple comma-separated text.</small>
+            </div>
+             <div class="form-group full-width">
+                <label for="property-gallery">Gallery Image URLs (comma-separated)</label>
+                <input type="text" id="property-gallery" name="gallery" placeholder="e.g., images/gal1.jpg,images/gal2.jpg">
+            </div>
+             <div class="form-group">
+                <label for="property-mapLink">Google Maps Link (Optional)</label>
+                <input type="text" id="property-mapLink" name="mapLink">
+            </div>
+             <!-- Add coordinate inputs if needed -->
+
+            <div id="property-modal-actions">
+                <button type="button" id="cancel-modal-btn">Cancel</button>
+                <button type="submit">Save Property</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Link the specific JS for this page -->
+    <script src="js/manage.js"></script>
+</body>
+</html>

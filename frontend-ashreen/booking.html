@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm Your Rental Details - PRATA</title>
+
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/booking-style.css">
+    <!-- Fonts and Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  </head>
+  <body>
+    <!-- Standard Header -->
+    <header class="main-header" style="position: static;">
+      <!-- Header Content -->
+      <div class="container">
+          <a href="index.html" class="header-logo"><img src="images/PRATA logo.png" alt="PRATA Logo"></a>
+           <nav class="header-nav">
+               <a href="wishlist.html" class="nav-link wishlist-link" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="nav-text">Wishlist</span><span class="wishlist-count-badge" style="display: none;">0</span></a>
+               <a href="profile.html" class="nav-link profile-link" aria-label="Profile Menu"><i class="fa-regular fa-user-circle"></i><span class="nav-text">Profile</span></a>
+           </nav>
+      </div>
+    </header>
+
+    <div class="booking-container">
+      <header class="booking-header">
+        <h1>Confirm Your Rental Details</h1>
+        <p>Please review and confirm the details for your rental request.</p>
+      </header>
+
+      <div class="booking-content">
+        <main class="booking-form-area">
+          <!-- Form now includes details *except* payment initially -->
+          <!-- NOTE: Payment fields are still *logically* part of this form when modal is shown -->
+          <form id="booking-form" action="#" method="post">
+
+            <!-- Property Snippet -->
+            <section class="property-snippet">
+                <img src="images/placeholder.png" alt="Property Thumbnail" class="property-thumb" id="booking-property-image"/>
+                <div>
+                    <h2 id="booking-property-title">Selected Rental Property</h2>
+                    <p>Details will load based on selection.</p>
+                    <input type="hidden" name="property_id" id="booking-property-id" value="">
+                </div>
+            </section>
+
+            <!-- Dates Section -->
+            <section class="form-section">
+              <h3>Select Rental Period</h3>
+              <div class="date-selection">
+                <div class="form-group"><label for="start-date">Rental Start Date</label><input type="date" id="start-date" name="start_date" required/></div>
+                <div class="form-group"><label for="end-date">Rental End Date</label><input type="date" id="end-date" name="end_date" required/></div>
+              </div>
+              <p class="price-note">Base rental rate: <span id="base-rate-display">Loading...</span></p>
+              <input type="hidden" id="base-rate-value" value="0">
+            </section>
+
+            <!-- Occupants Section -->
+            <section class="form-section guest-info">
+              <h3>Occupant Information</h3>
+              <div class="guest-list">
+                  <!-- Guest Items (Adults, Children, Pets) -->
+                  <div class="guest-item"><div class="guest-type"><i class="fas fa-user guest-icon"></i><div><span class="guest-label">Adults</span><span class="guest-sublabel">Age 13+</span></div></div><div class="guest-counter"><button type="button" class="counter-btn" data-action="decrement" data-target="adults-count" aria-label="Decrease adults" disabled>-</button><span id="adults-count" class="guest-count">1</span><input type="hidden" name="adults" id="adults-input" value="1" /><button type="button" class="counter-btn" data-action="increment" data-target="adults-count" aria-label="Increase adults">+</button></div></div>
+                  <div class="guest-item"><div class="guest-type"><i class="fas fa-child guest-icon"></i><div><span class="guest-label">Children</span><span class="guest-sublabel">Ages 2–12</span></div></div><div class="guest-counter"><button type="button" class="counter-btn" data-action="decrement" data-target="children-count" aria-label="Decrease children" disabled>-</button><span id="children-count" class="guest-count">0</span><input type="hidden" name="children" id="children-input" value="0" /><button type="button" class="counter-btn" data-action="increment" data-target="children-count" aria-label="Increase children">+</button></div></div>
+                  <div class="guest-item"><div class="guest-type"><i class="fas fa-paw guest-icon"></i><div><span class="guest-label">Pets</span><span class="guest-sublabel">Check property rules</span></div></div><div class="guest-counter"><button type="button" class="counter-btn" data-action="decrement" data-target="pets-count" aria-label="Decrease pets" disabled>-</button><span id="pets-count" class="guest-count">0</span><input type="hidden" name="pets" id="pets-input" value="0" /><button type="button" class="counter-btn" data-action="increment" data-target="pets-count" aria-label="Increase pets">+</button></div></div>
+              </div>
+            </section>
+
+            <!-- Renter Information Section -->
+            <section class="form-section">
+              <h3>Your Information</h3>
+              <div class="form-row"><div class="form-group"><label for="full-name">Full Name</label><input type="text" id="full-name" name="full_name" placeholder="Your Full Name" required /></div><div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" placeholder="your.email@example.com" required /></div></div>
+              <div class="form-row"><div class="form-group"><label for="phone">Phone Number</label><input type="tel" id="phone" name="phone" placeholder="Contact Number (Optional)" /></div></div>
+              <div class="form-group"><label for="requests">Notes or Requests (Optional)</label><textarea id="requests" name="requests" rows="3" placeholder="Any specific requirements or questions for the host?"></textarea></div>
+            </section>
+
+            <!-- !!! PAYMENT SECTION REMOVED FROM HERE !!! -->
+
+            <!-- MODIFIED Submission Button - Now triggers modal -->
+            <div class="form-submit-area">
+              <button type="button" id="proceed-to-payment-btn" class="confirm-button"> <!-- Changed type and ID -->
+                Review & Proceed to Payment <!-- Changed Text -->
+              </button>
+               <p class="terms" style="margin-top: 15px;"> <!-- Added margin -->
+                Review rental details before proceeding. Payment required on next step.
+              </p>
+            </div>
+          </form> <!-- End of #booking-form -->
+        </main>
+
+        <aside class="booking-summary">
+            <!-- Booking Summary Content (remains the same) -->
+            <h3>Rental Summary</h3>
+            <div class="summary-details"><div class="summary-item"><span>Start Date:</span><strong id="summary-start-date">-- / -- / ----</strong></div><div class="summary-item"><span>End Date:</span><strong id="summary-end-date">-- / -- / ----</strong></div><div class="summary-item"><span>Rental Duration:</span><strong id="summary-duration">N/A</strong></div><div class="summary-item"><span>Occupants:</span><strong id="summary-occupants">1 Adult</strong></div></div>
+            <div class="price-breakdown"><h4>Rental Cost</h4><dl><div class="price-line"><dt id="price-calc-text">Base Rate Calculation</dt><dd id="summary-base-price">NPR 0.00</dd></div><div class="price-line"><dt>Service Fees / Taxes (approx)</dt><dd id="summary-taxes">NPR 0.00</dd></div></dl><div class="price-total"><span>Estimated Total:</span><strong id="summary-total-price">NPR 0.00</strong></div></div>
+        </aside>
+      </div> <!-- /.booking-content -->
+    </div> <!-- /.booking-container -->
+
+     <!-- Standard Footer -->
+     <footer class="main-footer">
+       <!-- Footer Content -->
+       <div class="container"><div class="footer-grid"><!-- ... --><div class="footer-col footer-social"><h4>Follow Us</h4><div class="social-icons"><a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div></div></div><div class="footer-copyright">© 2024 PRATA Rentals. All rights reserved.</div></div>
+   </footer>
+
+    <!-- ======================== -->
+    <!-- PAYMENT MODAL STRUCTURE  -->
+    <!-- ======================== -->
+    <div id="payment-modal" class="modal-overlay" style="display: none;"> <!-- Initially hidden -->
+        <div class="modal-content">
+            <button class="modal-close-btn" aria-label="Close payment details">×</button>
+            <h2>Payment Details</h2>
+
+            <!-- PAYMENT SECTION MOVED HERE -->
+             <section class="form-section payment-info">
+                <!-- NOTE: These inputs are still part of the main #booking-form -->
+                <p>Secure payment for deposit or initial rent. Details may vary by property.</p>
+                <div class="form-row">
+                    <div class="form-group form-group-full">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card_number" placeholder="Enter card number" inputmode="numeric" pattern="[\d ]{12,19}" autocomplete="cc-number" required />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                    <label for="expiry-date">Expiry Date</label>
+                    <input type="text" id="expiry-date" name="expiry_date" placeholder="MM / YY" inputmode="numeric" maxlength="7" autocomplete="cc-exp" required />
+                    </div>
+                    <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="CVV" inputmode="numeric" pattern="\d{3,4}" autocomplete="cc-csc" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="card-name">Name on Card</label>
+                    <input type="text" id="card-name" name="card_name" placeholder="Name as it appears on card" autocomplete="cc-name" required />
+                </div>
+            </section>
+
+            <!-- FINAL SUBMIT BUTTON INSIDE MODAL -->
+             <div class="form-submit-area modal-submit-area">
+                <p class="terms">
+                    By clicking "Confirm Payment & Book", you agree to the property's rules,
+                    PRATA's <a href="terms.html" target="_blank">Terms of Service</a> and
+                    <a href="cancellation.html" target="_blank">Cancellation Policy</a>.
+                </p>
+                 <!-- This button is now the primary submit trigger -->
+                <button type="button" id="confirm-payment-btn" class="confirm-button">
+                    Confirm Payment & Book
+                </button>
+                <p id="payment-processing-msg" style="display: none; margin-top: 10px; color: var(--primary-color);">Processing...</p>
+                <p id="payment-error-msg" style="display: none; margin-top: 10px; color: var(--accent-color);"></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Link JavaScript files -->
+    <script src="js/script.js"></script>
+    <script src="js/booking.js"></script> <!-- Ensure booking.js is loaded -->
+  </body>
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome Back - PRATA Rentals</title>
+    <!-- CSS Includes -->
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="container">
+        <!-- Ensure this links to the correct logged-in index -->
+        <a href="index_logged_in.html" class="header-logo">
+          <img src="images/PRATA logo.png" alt="PRATA Logo" />
+        </a>
+        <nav class="header-nav">
+          <a
+            href="wishlist.html"
+            class="nav-link wishlist-link"
+            aria-label="Wishlist"
+          >
+            <i class="fa-regular fa-heart"></i>
+            <span class="nav-text">Wishlist</span>
+            <span class="wishlist-count-badge" style="display: none">0</span>
+          </a>
+          <!-- ### LOGGED IN STATE ### -->
+          <a
+            href="profile.html"
+            class="nav-link profile-link"
+            aria-label="Profile Menu"
+          >
+            <i class="fa-regular fa-user-circle"></i>
+            <!-- MODIFIED SPAN BELOW -->
+            <span class="nav-text" id="header-username">User</span>
+          </a>
+          <!-- ###################### -->
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- ... (rest of your main content remains the same) ... -->
+      <!-- Hero Section -->
+      <section class="hero-section improved-hero">
+        <div class="hero-background-overlay"></div>
+        <img
+          class="hero-background"
+          src="images/photo-1518002054494-3a6f94352e9d.jpg"
+          alt="Comfortable living room backdrop"
+        />
+        <div class="hero-content container">
+          <h1 class="hero-title">Your Next Home Awaits in Nepal</h1>
+          <p class="hero-subtitle">
+            Discover apartments, houses, and rooms for rent with ease.
+          </p>
+          <div class="hero-search-container">
+            <form
+              id="search-form-hero"
+              class="search-form-inline"
+              action="search-results.html"
+              method="GET"
+            >
+              <div class="search-field location-field">
+                <label for="location-hero" class="search-label">Location</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-map-marker-alt input-icon"></i
+                  ><input
+                    type="text"
+                    id="location-hero"
+                    name="location"
+                    placeholder="e.g., Thamel, Pokhara"
+                  />
+                </div>
+              </div>
+              <div class="search-field category-field">
+                <label for="category-hero" class="search-label">Type</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-building input-icon"></i
+                  ><select id="category-hero" name="category">
+                    <option value="">Any Type</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="House">House</option>
+                    <option value="Room">Room</option>
+                    <option value="Villa">Villa</option>
+                  </select>
+                </div>
+              </div>
+              <div class="search-field price-field">
+                <label for="price-range-hero" class="search-label"
+                  >Max Price</label
+                >
+                <div class="input-wrapper">
+                  <i class="fas fa-tags input-icon"></i
+                  ><input
+                    type="number"
+                    id="price-range-hero"
+                    name="max_price"
+                    min="0"
+                    step="1000"
+                    placeholder="Max NPR/month"
+                  />
+                </div>
+              </div>
+              <button type="submit" class="search-button-inline">
+                <i class="fas fa-search"></i>
+                <span class="search-button-text">Search Rentals</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- Value Proposition Section -->
+      <section class="value-prop-section container">
+        <h2 class="section-title">Why Rent with PRATA?</h2>
+        <p class="section-subtitle">
+          We make finding your perfect rental simple and secure.
+        </p>
+        <div class="value-prop-grid">
+          <div class="value-prop-item">
+            <i class="fas fa-search-location prop-icon"></i>
+            <h3>Wide Selection</h3>
+            <p>Explore diverse listings across popular locations in Nepal.</p>
+          </div>
+          <div class="value-prop-item">
+            <i class="fas fa-shield-alt prop-icon"></i>
+            <h3>Trusted Listings</h3>
+            <p>Browse verified properties with clear details and photos.</p>
+          </div>
+          <div class="value-prop-item">
+            <i class="fas fa-headset prop-icon"></i>
+            <h3>Easy Connections</h3>
+            <p>
+              Connect directly with hosts to ask questions and arrange viewings.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Rentals Section -->
+      <section class="featured-rentals container">
+        <div class="section-header">
+          <h2 class="section-title">Featured Rentals</h2>
+          <a href="allproperties.html" class="view-more-link"
+            >View All <i class="fas fa-arrow-right"></i
+          ></a>
+        </div>
+        <div class="rental-cards-grid" id="featured-rentals-grid">
+          <p
+            id="featured-loading"
+            style="
+              text-align: center;
+              grid-column: 1 / -1;
+              padding: 2rem;
+              color: #888;
+            "
+          >
+            Loading featured rentals...
+          </p>
+          <!-- JS will populate this -->
+        </div>
+      </section>
+
+      <!-- Popular Locations Section -->
+      <section class="popular-locations-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Explore Popular Locations</h2>
+          </div>
+          <div class="locations-grid">
+            <a href="search-results.html?location=Pokhara" class="location-card"
+              ><img
+                src="images/location-pokhara.jpeg"
+                alt="Pokhara Lakeside"
+                loading="lazy"
+              />
+              <div class="location-overlay"></div>
+              <div class="location-name">Pokhara</div></a
+            >
+            <a href="search-results.html?location=Thamel" class="location-card"
+              ><img
+                src="images/location-thamel.jpg"
+                alt="Thamel Street View"
+                loading="lazy"
+              />
+              <div class="location-overlay"></div>
+              <div class="location-name">Thamel</div></a
+            >
+            <a
+              href="search-results.html?location=Lalitpur"
+              class="location-card"
+              ><img
+                src="images/location-lalitpur.jpeg"
+                alt="Lalitpur Patan Durbar Square"
+                loading="lazy"
+              />
+              <div class="location-overlay"></div>
+              <div class="location-name">Lalitpur</div></a
+            >
+            <a
+              href="search-results.html?location=Jhamsikhel"
+              class="location-card"
+              ><img
+                src="images/location-jhamsikhel.jpeg"
+                alt="Jhamsikhel Cafe Scene"
+                loading="lazy"
+              />
+              <div class="location-overlay"></div>
+              <div class="location-name">Jhamsikhel</div></a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="list-property-cta">
+        <div class="container cta-content">
+          <i class="fas fa-house-signal cta-icon"></i>
+          <h2>Ready to List Your Property?</h2>
+          <p>
+            Join PRATA and reach thousands of potential tenants across Nepal.
+            It's easy to get started!
+          </p>
+          <a href="become-host.html" class="btn btn-cta">Become a Host Today</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="main-footer">
+      <!-- ... (rest of your footer remains the same) ... -->
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col footer-about">
+            <img
+              src="images/PRATA logo.png"
+              alt="PRATA Footer Logo"
+              class="footer-logo"
+            />
+            <p>
+              Your trusted platform for finding rental properties in Nepal.
+              Simple, secure, and efficient.
+            </p>
+          </div>
+          <div class="footer-col footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="allproperties.html">All Properties</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="become-host.html">List Your Property</a></li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="help.html">Help Center</a></li>
+            </ul>
+          </div>
+          <div class="footer-col footer-legal">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="terms.html">Terms of Service</a></li>
+              <li><a href="privacy.html">Privacy Policy</a></li>
+              <li><a href="cancellation.html">Cancellation Policy</a></li>
+            </ul>
+          </div>
+          <div class="footer-col footer-social">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+              <a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                ><i class="fab fa-facebook-f"></i></a
+              ><a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                ><i class="fab fa-instagram"></i></a
+              ><a
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                ><i class="fab fa-twitter"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          © 2024 PRATA Rentals. All rights reserved. Designed with
+          <i class="fa-regular fa-heart" style="color: #e48a8a"></i> for Nepal.
+        </div>
+      </div>
+    </footer>
+
+    <!-- Include your existing script files -->
+    <script src="script.js"></script>
+    <script src="js/wishlist.js"></script>
+
+    <!-- Add the script to update the username -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Check if user is logged in - might be redundant if this page ONLY loads when logged in,
+        // but good practice to double-check or use for potential redirects if accessed wrongly.
+        const isLoggedIn = localStorage.getItem("prata_loggedIn") === "true";
+
+        if (isLoggedIn) {
+          // Get the username from localStorage (use the SAME key as set during login)
+          const userName = localStorage.getItem("prata_userName");
+          const usernameElement = document.getElementById("header-username");
+
+          if (usernameElement && userName) {
+            // Update the text content of the span if the element and username exist
+            usernameElement.textContent = userName;
+          } else if (usernameElement) {
+            // Optional: Fallback text if username is not found in localStorage
+            usernameElement.textContent = "Profile";
+          }
+        } else {
+          // Optional: Handle case where user somehow reaches this page while not logged in
+          // Could redirect to login page: window.location.href = 'login.html';
+          console.warn("User is not logged in but accessed logged-in page.");
+          // You might want to hide content or redirect here.
+          // For now, the header might just show the default "User" or "Profile".
+          const usernameElement = document.getElementById("header-username");
+          if (usernameElement) {
+            usernameElement.textContent = "Profile"; // Set fallback explicitly
+          }
+        }
+
+        // --- Your existing code from script.js or wishlist.js might also run here ---
+        // For example, loading featured rentals:
+        // loadFeaturedRentals(); // Assuming this function exists in script.js
+        // setupWishlistButtons(); // Assuming this exists in wishlist.js
+      });
+    </script>
+  </body>
+</html>
