@@ -35,13 +35,13 @@
             <!-- Option 1: Email -->
             <div class="contact-option">
                 <label>Via Email:</label>
-                <!-- Display masked email (JS/Backend needed) -->
                 <input type="text" id="masked-email" value="user***@example.com" readonly>
-                <form action="verification.html" method="get"> <!-- Use GET or POST -->
-                     <input type="hidden" name="method" value="email">
-                     <input type="hidden" name="contactInfo" id="email-for-verify" value=""> <!-- JS can populate this -->
-                     <button type="submit" class="btn btn-option">Send Code to Email</button> <!-- Used button class -->
+                <form id="send-email-code-form">
+                    <input type="hidden" name="method" value="email">
+                    <input type="hidden" name="contactInfo" id="email-for-verify" value="">
+                    <button type="submit" class="btn btn-option">Send Code to Email</button>
                 </form>
+                <div id="email-send-status" style="color: green; margin-top: 8px; display: none;"></div>
             </div>
 
              <!-- Option 2: SMS -->
@@ -95,3 +95,60 @@
 
 </body>
 </html>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get('email');
+    const maskedEmailEl = document.getElementById('masked-email');
+    const emailInputForVerify = document.getElementById('email-for-verify');
+    if (email && maskedEmailEl) {
+        const parts = email.split('@');
+        if (parts.length === 2) {
+            const name = parts[0];
+            const domain = parts[1];
+            const maskedName = name.length > 3 ? name.substring(0, 3) + '***' : name[0] + '***';
+            maskedEmailEl.value = maskedName + '@' + domain;
+            if(emailInputForVerify) emailInputForVerify.value = email;
+        } else {
+            maskedEmailEl.value = 'Email not found';
+        }
+    }
+    // Handle send code to email
+    const sendEmailForm = document.getElementById('send-email-code-form');
+    const emailSendStatus = document.getElementById('email-send-status');
+    if (sendEmailForm) {
+        sendEmailForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            emailSendStatus.style.display = 'none';
+            const email = emailInputForVerify.value;
+            if (!email) return;
+            try {
+                const response = await fetch('php/send_reset_code.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    emailSendStatus.textContent = 'Verification code sent! Check your email.';
+                    emailSendStatus.style.color = 'green';
+                    emailSendStatus.style.display = 'block';
+                    // Optionally redirect to verification page
+                    setTimeout(() => {
+                        window.location.href = 'verification.html?email=' + encodeURIComponent(email);
+                    }, 1200);
+                } else {
+                    emailSendStatus.textContent = data.message || 'Failed to send code.';
+                    emailSendStatus.style.color = 'red';
+                    emailSendStatus.style.display = 'block';
+                }
+            } catch (err) {
+                emailSendStatus.textContent = 'Server error. Please try again later.';
+                emailSendStatus.style.color = 'red';
+                emailSendStatus.style.display = 'block';
+            }
+        });
+    }
+});
+</script>

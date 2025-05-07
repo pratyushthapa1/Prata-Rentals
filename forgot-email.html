@@ -33,11 +33,12 @@
             <h1>Forgot Password</h1>
             <p class="sub-description">Enter your email address below, and we'll help you find your account.</p>
             <!-- Form uses existing auth styles -->
-            <form action="forgot-options.html" method="get" class="auth-form">
+            <form id="forgot-form" class="auth-form">
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="Enter your registered email" required>
                 </div>
+                <div id="forgot-error" style="color: red; margin-bottom: 10px; display: none;"></div>
                 <button type="submit" class="auth-submit-button">Next</button>
             </form>
         </div>
@@ -53,3 +54,34 @@
      </footer>
 </body>
 </html>
+<script>
+document.getElementById('forgot-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const errorDiv = document.getElementById('forgot-error');
+    errorDiv.style.display = 'none';
+    if (!email) {
+        errorDiv.textContent = 'Please enter your email.';
+        errorDiv.style.display = 'block';
+        return;
+    }
+    try {
+        const response = await fetch('php/forgot_password_check.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        });
+        const data = await response.json();
+        if (data.success) {
+            // Redirect to next step, passing email as query param
+            window.location.href = 'forgot-options.html?email=' + encodeURIComponent(email);
+        } else {
+            errorDiv.textContent = data.message || 'Email not found.';
+            errorDiv.style.display = 'block';
+        }
+    } catch (err) {
+        errorDiv.textContent = 'Server error. Please try again later.';
+        errorDiv.style.display = 'block';
+    }
+});
+</script>

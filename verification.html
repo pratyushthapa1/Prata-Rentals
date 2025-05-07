@@ -35,18 +35,19 @@
             <p class="sub-description" id="verification-message">Please enter the 5-digit verification code sent.</p>
 
             <!-- Form submits to backend for validation or directly to reset page -->
-            <form action="reset-password.html" method="post" class="auth-form" id="verify-form">
+            <form class="auth-form" id="verify-form">
                 <div class="code-input-group">
                     <input type="text" name="code1" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
                     <input type="text" name="code2" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
                     <input type="text" name="code3" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
                     <input type="text" name="code4" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
                     <input type="text" name="code5" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
+                    <input type="text" name="code6" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
                 </div>
-                 <div class="resend-link">
-                     Didn't receive code? <a href="#" id="resend-code-link">Resend</a>
-                 </div>
-
+                <div id="verify-error" style="color: red; margin-bottom: 10px; display: none;"></div>
+                <div class="resend-link">
+                    Didn't receive code? <a href="#" id="resend-code-link">Resend</a>
+                </div>
                 <button type="submit" class="auth-submit-button">Verify Code</button>
             </form>
         </div>

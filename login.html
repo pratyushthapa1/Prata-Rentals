@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - PRATA</title> <!-- Simplified Title for Login page -->
-    <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+    <!-- <link rel="stylesheet" href="globals.css"> If you have this -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/auth.css"> <!-- Specific: auth.css -->
     <!-- Fonts -->
@@ -31,38 +31,20 @@
         <div class="auth-container">
             <h1>Login to Your Account</h1>
             <form id="login-form" class="auth-form">
-
-                <!-- Email Field - Moved first for logical order -->
                 <div class="form-group">
                     <label for="login-email">Email Address</label>
-                    <input type="email" id="login-email" name="email" placeholder="Enter your email" required>
-                     <!-- Added placeholder -->
+                    <input type="email" id="login-email" name="email" autocomplete="username" required>
                 </div>
-
-                <!-- Password Field - Kept the one with the Forgot Password link -->
                 <div class="form-group">
-                    <!-- Container for Label and Forgot Link -->
                     <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
                         <label for="login-password" style="margin-bottom: 0;">Password</label>
                         <a href="forgot-email.html" class="form-link forgot-password-link">Forgot password?</a>
                     </div>
-                    <input type="password" id="login-password" name="password" placeholder="Enter your password" required>
-                    <!-- Removed the redundant password field that was here -->
+                    <input type="password" id="login-password" name="password" autocomplete="current-password" required>
                 </div>
-
+                <div id="login-error" style="color: red; margin-bottom: 10px; display: none;"></div>
                 <button type="submit" class="auth-submit-button">Login</button>
             </form>
-
-            <!-- Social Login Section Placeholder (Optional) -->
-            <!-- If you implement social login from your CSS, add it here -->
-            <!-- Example:
-            <div class="social-login">
-                 <p>Or continue with</p>
-                 <button class="social-btn google"><i class="fab fa-google"></i> Google</button>
-                 <button class="social-btn facebook"><i class="fab fa-facebook-f"></i> Facebook</button>
-            </div>
-             -->
-
             <p class="auth-link">
                 Don't have an account? <a href="signup.html">Sign Up</a>
             </p>
@@ -77,35 +59,9 @@
         </div>
     </footer>
 
-    <script>
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const emailInput = document.getElementById('login-email');
-            const passwordInput = document.getElementById('login-password'); // Now correctly targets the single password field
-            const email = emailInput.value;
-            const password = passwordInput.value;
-
-            // Basic validation
-            if (!email || !password) {
-                alert('Please enter both email and password.');
-                // Optional: Add error classes/messages near inputs
-                return;
-            }
-
-            // --- Login Simulation ---
-            console.log(`Attempting login for: ${email}`); // Useful for debugging
-            // In a real app, send credentials to the backend for verification.
-            // Here, we just set a flag in localStorage.
-            localStorage.setItem('prata_loggedIn', 'true');
-            localStorage.setItem('prata_userEmail', email); // Store email for profile page
-            // Optionally store a dummy name based on email if signup isn't implemented fully
-            localStorage.setItem('prata_userName', email.split('@')[0]);
-
-            alert('Login successful! Redirecting...');
-            // Redirect to profile page or homepage
-            window.location.href = 'profile.html';
-            // --- End Simulation ---
-        });
+    <script type="module">
+        import { initLoginForm } from './js/auth.js';
+        document.addEventListener('DOMContentLoaded', initLoginForm);
     </script>
 </body>
 </html>

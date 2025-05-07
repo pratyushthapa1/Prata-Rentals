@@ -2,246 +2,291 @@
 /* == All Properties Page Styles (allproperties.html) == */
 /* ===================================================== */
 
-/* --- Imports & Variables (Assuming from common.css or define here) --- */
-/* @import url('common.css'); */ /* Or ensure common.css is loaded first */
+/* --- Imports & Variables --- */
+@import url('common.css');
 
-/* Re-declare variables if not importing, use fallbacks */
 :root {
-    --primary-color: #1A2C50;       /* Deep Blue */
-    --secondary-color: #E4D7C4;     /* Beige */
-    --accent-color: #ff6b6b;        /* Accent (example: Coral Red) */
-    --light-text-color: #6c757d;    /* Lighter grey text */
-    --medium-text-color: #495057;   /* Medium grey text */
-    --dark-text-color: #212529;     /* Dark text */
-    --border-color: #dee2e6;        /* Light border */
-    --background-color: #f8f9fa;   /* Light page background */
-    --card-background: #ffffff;    /* Card background */
-    --font-primary: 'Poppins', sans-serif;
-    --font-secondary: 'Montserrat', sans-serif;
-    --border-radius: 6px;
-    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --box-shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.12);
+    --allprop-card-radius: var(--border-radius);
+    --allprop-card-shadow: var(--shadow);
+    --allprop-card-shadow-hover: 0 8px 32px rgba(26,44,80,0.13);
+    --allprop-tag-radius: 999px;
 }
 
-/* --- Page Wrapper --- */
 .all-properties-wrapper {
-    /* Optional: Add a subtle background or max-width specific to the main content area */
-    background-color: var(--background-color);
-    padding-top: 1px; /* Contain margins */
+    background-color: var(--bg-color);
+    padding-top: 1px;
     padding-bottom: 3rem;
 }
 
-/* --- Specific Page Header --- */
 .page-header {
-    background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0)), var(--card-background); /* Subtle gradient + white */
-    color: var(--dark-text-color);
+    background: linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0)), var(--card-bg-color);
+    color: var(--text-color);
     text-align: center;
-    padding: 2.5rem 1rem; /* More vertical padding */
-    margin-bottom: 2.5rem; /* Space below header */
-    border-bottom: 1px solid var(--border-color);
+    padding: 2.5rem 1rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border-light-color);
 }
-
 .page-header h1 {
     font-family: var(--font-secondary);
     font-weight: 700;
-    font-size: 2.5rem; /* Larger title */
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
     color: var(--primary-color);
 }
-
 .page-header p {
-    color: var(--medium-text-color);
+    color: var(--light-text-color);
     font-size: 1.1rem;
-    max-width: 600px; /* Constrain subtitle width */
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* --- Back Button & Controls Area --- */
 .controls-container {
     display: flex;
-    justify-content: space-between; /* Space for back button and potential filters */
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* Allow wrapping on small screens */
+    flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 2.5rem; /* Space before grid */
-    padding: 0 1rem; /* Align with container padding if needed */
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
 }
-
-/* Back Button */
 .back-button {
     display: inline-flex;
     align-items: center;
-    padding: 0.6rem 1.2rem; /* Slightly larger padding */
-    background-color: #f1f3f5; /* Lighter background */
-    color: var(--primary-color); /* Match primary text */
-    border: 1px solid var(--border-color); /* Subtle border */
+    padding: 0.6rem 1.2rem;
+    background-color: #f1f3f5;
+    color: var(--primary-color);
+    border: 1px solid var(--border-light-color);
     border-radius: var(--border-radius);
     text-decoration: none;
     font-size: 0.9rem;
-    font-weight: 600; /* Bolder */
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap; /* Prevent wrapping */
+    transition: all 0.2s;
+    white-space: nowrap;
 }
-
 .back-button:hover,
 .back-button:focus-visible {
-    background-color: #e9ecef; /* Slightly darker on hover */
+    background-color: #e9ecef;
     border-color: #ced4da;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transform: translateY(-1px);
 }
-
 .back-button i {
     margin-right: 8px;
-    font-size: 0.8em; /* Adjust icon size if needed */
+    font-size: 0.8em;
 }
 
-/* --- Placeholder for Filter/Sort Controls --- */
 .filter-sort-controls {
     display: flex;
     gap: 1rem;
     align-items: center;
-    flex-grow: 1; /* Allow filters to take space */
-    justify-content: flex-end; /* Align to the right */
+    flex-grow: 1;
+    justify-content: flex-end;
 }
-
 .filter-sort-controls select,
 .filter-sort-controls input {
-    /* Basic styling - match other form inputs */
     padding: 0.5rem 0.8rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-light-color);
     border-radius: var(--border-radius);
     font-size: 0.9rem;
-    background-color: var(--card-background);
+    background-color: var(--card-bg-color);
 }
-/* Add more specific filter styles as needed */
 
-
-/* --- Properties Grid Layout --- */
 .properties-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
-    gap: 2rem; /* Slightly larger gap */
-    padding: 0 1rem; /* Align with container padding if needed */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+.property-card {
+    background: var(--card-bg-color);
+    border-radius: var(--allprop-card-radius);
+    box-shadow: var(--allprop-card-shadow);
+    overflow: hidden;
+    transition: box-shadow 0.2s, transform 0.2s, border 0.2s;
+    border: 1.5px solid transparent;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+.property-card:hover, .property-card:focus-visible {
+    border: 1.5px solid var(--accent-color);
+    box-shadow: var(--allprop-card-shadow-hover);
+    z-index: 2;
+}
+.property-card:active {
+    transform: scale(0.98);
+}
+.property-card:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+}
+.card-image img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: var(--allprop-card-radius);
+    border-top-right-radius: var(--allprop-card-radius);
+    background: #eee;
+}
+.card-content {
+    padding: 1.5rem;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.property-card .tag {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: var(--accent-color);
+    color: #fff;
+    font-size: 0.85em;
+    font-weight: 700;
+    padding: 0.35em 0.9em;
+    border-radius: var(--allprop-tag-radius);
+    box-shadow: 0 2px 8px rgba(255,107,107,0.12);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    pointer-events: none;
+}
+.property-card .tag-luxury { background: var(--warning-color); color: #333; }
+.property-card .tag-featured { background: var(--link-color); color: #fff; }
+.property-card .tag-budget { background: var(--success-color); }
+.property-card .tag-new { background: var(--success-color); }
+.property-card .tag-heritage { background: #a0522d; }
+.property-card .tag-popular { background: #e83e8c; }
+.property-card .tag-default { background: #888; }
+.property-card .location {
+    color: var(--light-text-color);
+    margin-bottom: 0.5em;
+    font-size: 0.97em;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+}
+.property-card .price {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.15em;
+    margin-bottom: 0.7em;
+}
+.property-card .features {
+    margin-top: 0.7em;
+    gap: 0.5em;
+    display: flex;
+    flex-wrap: wrap;
+}
+.property-card .feature {
+    background: #f1f3f5;
+    color: #333;
+    border-radius: 5px;
+    padding: 0.3em 0.8em;
+    font-size: 0.93em;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+}
+.property-card .feature i {
+    color: var(--accent-color);
+    font-size: 1em;
 }
 
-/* --- Card Enhancements Specific to This Page (Optional) --- */
-/* Assumes .property-card styles are in common.css */
-.properties-grid .property-card {
-    border: 1px solid #e9ecef; /* Add subtle border to cards */
-    box-shadow: var(--box-shadow);
-    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out; /* Smoother transition */
-}
-
-.properties-grid .property-card:hover {
-    transform: translateY(-5px); /* Lift effect */
-    box-shadow: var(--box-shadow-hover); /* Enhanced shadow */
-}
-
-/* --- Loading / Empty State --- */
-/* Use IDs defined in your JS for dynamic content */
 #properties-loading,
 #properties-empty {
-    display: none; /* Hidden by default */
-    grid-column: 1 / -1; /* Span full grid width */
+    display: none;
+    grid-column: 1 / -1;
     text-align: center;
     padding: 4rem 1rem;
     font-size: 1.1rem;
-    color: var(--medium-text-color);
-    background-color: var(--card-background); /* Match card background or use page background */
+    color: var(--light-text-color);
+    background-color: var(--card-bg-color);
     border-radius: var(--border-radius);
-    border: 1px dashed var(--border-color);
+    border: 1px dashed var(--border-light-color);
 }
-/* Optional: Add icon */
 #properties-loading::before {
-    content: "\f110"; /* Font Awesome spinner */
+    content: "\f110";
     font-family: "Font Awesome 6 Free";
-    font-weight: 900; /* Solid */
+    font-weight: 900;
     display: block;
     font-size: 2em;
     color: var(--primary-color);
     margin-bottom: 1rem;
-    animation: fa-spin 1.5s infinite linear; /* Spinning animation */
+    animation: fa-spin 1.5s infinite linear;
 }
 #properties-empty::before {
-    content: "\f071"; /* Font Awesome warning/exclamation */
+    content: "\f071";
     font-family: "Font Awesome 6 Free";
-    font-weight: 900; /* Solid */
+    font-weight: 900;
     display: block;
     font-size: 2em;
-    color: #ffc107; /* Warning color */
+    color: var(--warning-color);
     margin-bottom: 1rem;
 }
 
-
-/* --- Placeholder for Pagination --- */
 .pagination-controls {
     text-align: center;
-    margin: 3rem auto 1rem auto; /* Add space above/below */
+    margin: 3rem auto 1rem auto;
     padding: 0 1rem;
 }
-
 .pagination-controls a,
 .pagination-controls span {
     display: inline-block;
-    padding: 0.6rem 1.1rem; /* Slightly larger */
+    padding: 0.6rem 1.1rem;
     margin: 0 0.3rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-light-color);
     border-radius: var(--border-radius);
     color: var(--primary-color);
-    background-color: var(--card-background);
+    background-color: var(--card-bg-color);
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
-
 .pagination-controls a:hover,
 .pagination-controls a:focus-visible {
     background-color: #f1f3f5;
     border-color: #ced4da;
     color: var(--primary-color);
 }
-
-.pagination-controls .active { /* Current page style */
+.pagination-controls .active {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
     color: white;
     font-weight: 600;
     cursor: default;
 }
-
-.pagination-controls .disabled { /* Prev/Next disabled */
+.pagination-controls .disabled {
     color: #adb5bd;
     background-color: #f8f9fa;
-    border-color: var(--border-color);
+    border-color: var(--border-light-color);
     cursor: not-allowed;
     opacity: 0.7;
 }
 
-
-/* --- Responsive Adjustments --- */
 @media (max-width: 992px) {
     .properties-grid {
         grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
         gap: 1.5rem;
     }
 }
-
 @media (max-width: 768px) {
     .page-header h1 { font-size: 2rem; }
     .page-header p { font-size: 1rem; }
     .controls-container {
-        flex-direction: column; /* Stack back button and filters */
-        align-items: flex-start; /* Align items left */
+        flex-direction: column;
+        align-items: flex-start;
         gap: 1.5rem;
         margin-bottom: 2rem;
     }
     .filter-sort-controls {
         width: 100%;
-        justify-content: flex-start; /* Align filters left */
+        justify-content: flex-start;
     }
     .properties-grid {
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -253,21 +298,20 @@
         margin: 0 0.2rem;
     }
 }
-
 @media (max-width: 576px) {
-     .properties-grid {
-        grid-template-columns: 1fr; /* Stack cards */
-        gap: 1.5rem; /* Consistent gap */
+    .properties-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     .page-header { padding: 1.5rem 1rem; }
     .page-header h1 { font-size: 1.8rem; }
     .filter-sort-controls {
         flex-direction: column;
-        align-items: stretch; /* Make filters full width */
+        align-items: stretch;
     }
     .filter-sort-controls select,
     .filter-sort-controls input {
-        width: 100%; /* Make filters take full width */
+        width: 100%;
     }
-     .pagination-controls { margin-top: 2rem; }
+    .pagination-controls { margin-top: 2rem; }
 }

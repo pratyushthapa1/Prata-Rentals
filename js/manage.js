@@ -1,214 +1,168 @@
+// js/manage.js
+console.log("Manage JS Initialized - XAMPP/MySQL Mode");
+
+// Assume API_BASE_URL is defined globally from script.js or define it here if script.js is not loaded
+// const API_BASE_URL = 'api';
+
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Basic Authentication (NOT SECURE) ---
     const authOverlay = document.getElementById('auth-overlay');
     const adminContent = document.querySelector('.admin-content');
     const passwordInput = document.getElementById('admin-password');
     const authSubmit = document.getElementById('auth-submit');
     const authError = document.getElementById('auth-error');
-    const adminLogout = document.getElementById('admin-logout');
+    const adminLogoutBtn = document.getElementById('admin-logout');
 
-    const CORRECT_PASSWORD = 'admin'; // CHANGE THIS! Keep it simple for demo.
+    const propertyListTbody = document.getElementById('property-list-tbody');
+    const addPropertyBtn = document.getElementById('add-property-btn');
+    const propertyModal = document.getElementById('property-modal'); // Ensure this is a <dialog> element
+    const propertyForm = document.getElementById('property-form');
+    const cancelModalBtn = document.getElementById('cancel-modal-btn');
+    const modalTitle = document.getElementById('modal-title');
+    const propertyIdInput = document.getElementById('property-id'); // Hidden input for ID
 
-    authSubmit.addEventListener('click', () => {
-        if (passwordInput.value === CORRECT_PASSWORD) {
+    let propertiesDataCache = [];
+
+    // Use global makeApiCall if available from script.js
+    const callAdminApi = typeof makeApiCall === 'function' ? makeApiCall : async (endpoint, options = {}) => {
+        // Basic local fallback for makeApiCall if script.js isn't loaded first on this page
+        if (!options.credentials) options.credentials = 'include';
+        const resp = await fetch(`${API_BASE_URL}/${endpoint}`, options);
+        if (!resp.ok) { let errD={message:`HTTP Error ${resp.status}`}; try{errD=await resp.json();}catch(e){} throw new Error(errD.message||errD.error||`HTTP Error ${resp.status}`);}
+        try { return await resp.json(); } catch (e) { if(resp.status===204||resp.headers.get("content-length")==="0")return{success:true}; throw new Error("Invalid JSON");}
+    };
+    const localFormatCurrency = (typeof formatCurrency === 'function') ? formatCurrency :
+        (amount, currency = 'NPR') => { /* ... fallback definition ... */
+            const n = Number(amount); if (isNaN(n)) return `${currency} N/A`;
+            return `${currency} ${n.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+        };
+
+
+    async function checkAdminSession() {
+        // In a real app, this calls a backend PHP script to check $_SESSION['is_admin']
+        // For this demo, we'll use sessionStorage, but it's not secure.
+        if (sessionStorage.getItem('prata_admin_auth_status') === 'authenticated') {
             authOverlay.style.display = 'none';
             adminContent.style.display = 'block';
-            loadProperties(); // Load data only after successful auth
+            loadPropertiesFromServer();
         } else {
+            authOverlay.style.display = 'flex';
+            adminContent.style.display = 'none';
+        }
+    }
+
+    authSubmit.addEventListener('click', async () => {
+        const enteredPassword = passwordInput.value;
+        authError.style.display = 'none';
+        // Replace with actual API call to admin_login.php
+        // For this example, insecure direct password check
+        if (enteredPassword === 'admin123') { // VERY INSECURE - REPLACE WITH API CALL
+            sessionStorage.setItem('prata_admin_auth_status', 'authenticated');
+            await checkAdminSession(); // Will hide overlay and load properties
+        } else {
+            authError.textContent = "Incorrect admin password.";
             authError.style.display = 'block';
         }
     });
 
-    adminLogout.addEventListener('click', () => {
-        // Simulate logout by showing the overlay again
-        passwordInput.value = '';
-        authError.style.display = 'none';
-        authOverlay.style.display = 'flex'; // Use flex to center
-        adminContent.style.display = 'none';
-        // In a real app, you'd clear tokens/session data
+    adminLogoutBtn.addEventListener('click', async () => {
+        sessionStorage.removeItem('prata_admin_auth_status');
+        // await callAdminApi('admin_logout.php', { method: 'POST' }); // Call backend logout
+        await checkAdminSession(); // Will show overlay
+        if(propertyListTbody) propertyListTbody.innerHTML = '<tr><td colspan="6">Please log in to manage properties.</td></tr>';
     });
 
-    // --- Property Management ---
-    const propertyListTbody = document.getElementById('property-list-tbody');
-    const addPropertyBtn = document.getElementById('add-property-btn');
-    const propertyModal = document.getElementById('property-modal');
-    const propertyForm = document.getElementById('property-form');
-    const cancelModalBtn = document.getElementById('cancel-modal-btn');
-    const modalTitle = document.getElementById('modal-title');
-    const propertyIdInput = document.getElementById('property-id');
-
-    let propertiesData = []; // Holds the loaded properties
-
-    // Function to format currency (reuse or adapt)
-    const formatCurrency = (amount) => {
-        if (isNaN(amount)) return 'N/A';
-        return `NPR ${Number(amount).toLocaleString('en-NP', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
-    };
-
-    // Function to display properties in the table
-    const displayProperties = (properties) => {
-        propertyListTbody.innerHTML = ''; // Clear existing rows
-        if (!properties || properties.length === 0) {
-            propertyListTbody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No properties found.</td></tr>';
-            return;
-        }
-
+    const displayProperties = (properties) => { /* ... keep implementation, adjust image path prefix ... */
+        propertyListTbody.innerHTML = '';
+        if (!properties || properties.length === 0) { propertyListTbody.innerHTML = '<tr><td colspan="6">No properties.</td></tr>'; return; }
         properties.forEach(prop => {
             const row = document.createElement('tr');
+            // Image path needs to be relative to the root of your website, not the api folder
+            const imageSrc = prop.imageURL || prop.image_url_1 || 'images/placeholder.png';
             row.innerHTML = `
                 <td>${prop.id}</td>
-                <td><img src="${prop.image || 'images/placeholder.png'}" alt="${prop.title}" class="thumbnail"></td>
-                <td>${prop.title || 'N/A'}</td>
-                <td>${prop.location || 'N/A'}</td>
-                <td>${formatCurrency(prop.price)}${prop.priceSuffix || ''}</td>
-                <td class="actions">
-                    <button class="btn-edit" data-id="${prop.id}"><i class="fas fa-edit"></i> Edit</button>
-                    <button class="btn-delete" data-id="${prop.id}"><i class="fas fa-trash"></i> Delete</button>
-                </td>
-            `;
+                <td><img src="${imageSrc.startsWith('http') ? imageSrc : '../'+imageSrc}" alt="${prop.title}" class="thumbnail"></td>
+                <td>${prop.title || 'N/A'}</td><td>${prop.location || 'N/A'}</td>
+                <td>${localFormatCurrency(prop.price, prop.currency)}${prop.price_suffix || prop.priceSuffix || ''}</td>
+                <td class="actions"><button class="btn-edit" data-id="${prop.id}"><i class="fas fa-edit"></i> Edit</button><button class="btn-delete" data-id="${prop.id}"><i class="fas fa-trash"></i> Delete</button></td>`;
             propertyListTbody.appendChild(row);
         });
     };
 
-    // Function to load properties from JSON
-    const loadProperties = async () => {
+    const loadPropertiesFromServer = async () => { /* ... uses callAdminApi ... */
+        propertyListTbody.innerHTML = '<tr><td colspan="6">Loading...</td></tr>';
         try {
-            const response = await fetch('properties.json'); // Ensure this path is correct
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            propertiesData = await response.json();
-            displayProperties(propertiesData);
-        } catch (error) {
-            console.error("Error loading properties:", error);
-            propertyListTbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color: red;">Error loading properties: ${error.message}</td></tr>`;
-        }
+            propertiesDataCache = await callAdminApi('admin_get_all_properties.php'); // Create this PHP endpoint
+            displayProperties(propertiesDataCache);
+        } catch (error) { console.error("Error loading properties:", error); propertyListTbody.innerHTML = `<tr><td colspan="6" style="color:red;">Error: ${error.message}</td></tr>`;}
     };
 
-    // Function to open the Add/Edit modal
-    const openPropertyModal = (property = null) => {
-        propertyForm.reset(); // Clear the form
+    const openPropertyModal = (property = null) => { /* ... keep implementation, ensure form field IDs match HTML ... */
+        propertyForm.reset();
         if (property) {
-            // Editing existing property
-            modalTitle.textContent = 'Edit Property';
-            propertyIdInput.value = property.id;
-            // Populate form fields
+            modalTitle.textContent = 'Edit Property'; propertyIdInput.value = property.id;
             document.getElementById('property-title').value = property.title || '';
-            document.getElementById('property-location').value = property.location || '';
-            document.getElementById('property-price').value = property.price || '';
-            document.getElementById('property-priceSuffix').value = property.priceSuffix || '/mo';
-            document.getElementById('property-image').value = property.image || '';
-            document.getElementById('property-tag').value = property.tag || '';
             document.getElementById('property-description').value = property.description || '';
-            // Handle features (assuming JSON string or simple text)
-            try {
-                 document.getElementById('property-features').value = Array.isArray(property.features) ? JSON.stringify(property.features, null, 2) : property.features || '';
-            } catch {
-                document.getElementById('property-features').value = property.features || ''; // Fallback if stringify fails
-            }
-             // Handle gallery (assuming array or comma-separated)
-             document.getElementById('property-gallery').value = Array.isArray(property.gallery) ? property.gallery.join(',') : property.gallery || '';
-             document.getElementById('property-mapLink').value = property.mapLink || '';
-
-        } else {
-            // Adding new property
-            modalTitle.textContent = 'Add New Property';
-            propertyIdInput.value = ''; // Ensure ID is empty for 'add'
-        }
-        propertyModal.showModal(); // Show the dialog
+            document.getElementById('property-location').value = property.location || '';
+            document.getElementById('property-category').value = property.category || ''; // Assuming select element
+            document.getElementById('property-price').value = property.price || '';
+            document.getElementById('property-currency').value = property.currency || 'NPR';
+            document.getElementById('property-priceSuffix').value = property.price_suffix || property.priceSuffix || '/mo';
+            document.getElementById('property-bedrooms').value = property.bedrooms || '';
+            document.getElementById('property-bathrooms').value = property.bathrooms || '';
+            document.getElementById('property-area').value = property.area || '';
+            document.getElementById('property-main-image-url').value = property.imageURL || property.image_url_1 || ''; // For displaying current, file input is separate
+            document.getElementById('property-gallery-urls').value = Array.isArray(property.image_urls_array) ? property.image_urls_array.join('\n') : ''; // Textarea for multiple URLs
+            document.getElementById('property-features-json').value = Array.isArray(property.features_array) ? JSON.stringify(property.features_array, null, 2) : '[]'; // Textarea for JSON
+            document.getElementById('property-map-image-url').value = property.map_image_url || '';
+            document.getElementById('property-tag').value = property.tag || '';
+        } else { modalTitle.textContent = 'Add New Property'; propertyIdInput.value = ''; }
+        if (propertyModal.showModal) propertyModal.showModal(); else propertyModal.style.display = 'block';
     };
 
-    // --- Event Listeners ---
+    addPropertyBtn.addEventListener('click', () => openPropertyModal());
+    cancelModalBtn.addEventListener('click', () => { if (propertyModal.close) propertyModal.close(); else propertyModal.style.display = 'none'; });
 
-    // Open modal to Add Property
-    addPropertyBtn.addEventListener('click', () => {
-        openPropertyModal();
+    propertyListTbody.addEventListener('click', (e) => { /* ... keep edit/delete click logic ... */
+        const editBtn = e.target.closest('.btn-edit'); const delBtn = e.target.closest('.btn-delete');
+        if(editBtn){ const id = parseInt(editBtn.dataset.id); const prop = propertiesDataCache.find(p=>p.id===id); if(prop) openPropertyModal(prop); }
+        else if(delBtn){ const id = parseInt(delBtn.dataset.id); if(confirm(`Delete property ID ${id}?`)) deletePropertyFromServer(id); }
     });
 
-    // Cancel button in modal
-    cancelModalBtn.addEventListener('click', () => {
-        propertyModal.close();
-    });
-
-    // Handle clicks within the property list (for Edit/Delete) - Event Delegation
-    propertyListTbody.addEventListener('click', (e) => {
-        const target = e.target;
-        const editButton = target.closest('.btn-edit');
-        const deleteButton = target.closest('.btn-delete');
-
-        if (editButton) {
-            const propertyId = parseInt(editButton.dataset.id, 10);
-            const propertyToEdit = propertiesData.find(p => p.id === propertyId);
-            if (propertyToEdit) {
-                openPropertyModal(propertyToEdit);
-            }
-        } else if (deleteButton) {
-            const propertyId = parseInt(deleteButton.dataset.id, 10);
-            if (confirm(`Are you sure you want to delete property ID ${propertyId}? This action cannot be undone (simulation).`)) {
-                // Simulate deletion by filtering the array
-                propertiesData = propertiesData.filter(p => p.id !== propertyId);
-                displayProperties(propertiesData); // Re-render the table
-                alert(`Property ID ${propertyId} deleted (simulated).`);
-                 // In a real app, send DELETE request to backend here.
-            }
-        }
-    });
-
-    // Handle form submission (Add/Edit)
-    propertyForm.addEventListener('submit', (e) => {
+    propertyForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formData = new FormData(propertyForm);
-        const property = Object.fromEntries(formData.entries());
-        const id = parseInt(property.id, 10); // Get ID from hidden input
+        const formData = new FormData(propertyForm); // This will collect all fields, including file input if added
+        const propertyId = formData.get('id'); // From hidden input
+        const submitButton = propertyForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true; submitButton.textContent = propertyId ? 'Updating...' : 'Adding...';
 
-        // Basic conversion/cleanup
-        property.price = parseFloat(property.price) || 0;
-        // Attempt to parse features JSON, fallback to string
-         try {
-            const featuresInput = property.features.trim();
-            if(featuresInput.startsWith('[')) { // Basic check for JSON array
-                 property.features = JSON.parse(featuresInput);
-            } else if (featuresInput){ // Treat as comma-separated if not JSON array
-                property.features = featuresInput.split(',').map(f => ({ text: f.trim() })); // Simple conversion
-            } else {
-                property.features = [];
-            }
-         } catch (error) {
-             console.warn("Could not parse features JSON, treating as text:", error);
-             // Keep as string or split simple text
-             property.features = property.features ? property.features.split(',').map(f => ({ text: f.trim() })) : [];
-         }
-        // Convert gallery string to array
-        property.gallery = property.gallery ? property.gallery.split(',').map(url => url.trim()) : [];
+        // Prepare features_array and image_urls_array from textareas if needed by PHP
+        const featuresJsonString = document.getElementById('property-features-json').value;
+        const galleryUrlsString = document.getElementById('property-gallery-urls').value;
+        formData.set('features_array_json', featuresJsonString); // Send as string, PHP will decode/re-encode
+        formData.set('image_urls_array_string', galleryUrlsString); // Send as string, PHP will parse
 
-
-        if (!isNaN(id) && id > 0) {
-            // --- Simulate Update ---
-            const index = propertiesData.findIndex(p => p.id === id);
-            if (index !== -1) {
-                propertiesData[index] = { ...propertiesData[index], ...property }; // Merge changes
-                alert(`Property ID ${id} updated (simulated).`);
-                 // In a real app, send PUT/PATCH request to backend here.
-            }
-        } else {
-            // --- Simulate Add ---
-            property.id = Date.now(); // Generate a temporary unique ID
-            propertiesData.push(property);
-            alert(`New property added with temporary ID ${property.id} (simulated).`);
-             // In a real app, send POST request to backend here.
-        }
-
-        displayProperties(propertiesData); // Re-render the table
-        propertyModal.close(); // Close the modal
+        try {
+            const endpoint = propertyId ? `admin_update_property.php` : `admin_add_property.php`;
+            const result = await callAdminApi(endpoint, { method: 'POST', body: formData });
+            if (result.success) {
+                alert(result.message);
+                loadPropertiesFromServer();
+                if (propertyModal.close) propertyModal.close(); else propertyModal.style.display = 'none';
+            } else { throw new Error(result.message || "Operation failed."); }
+        } catch (error) { console.error("Error submitting property:", error.message); alert(`Error: ${error.message}`); }
+        finally { submitButton.disabled = false; submitButton.textContent = originalButtonText; }
     });
 
-    // Initial check: If password was already entered (e.g., page refresh), skip auth overlay
-    // This uses sessionStorage, cleared when browser tab closes. Use localStorage for persistence.
-    // if (sessionStorage.getItem('prata_admin_auth') === 'true') {
-    //     authOverlay.style.display = 'none';
-    //     adminContent.style.display = 'block';
-    //     loadProperties();
-    // }
+    async function deletePropertyFromServer(propertyId) { /* ... uses callAdminApi ... */
+        try {
+            const result = await callAdminApi('admin_delete_property.php', {
+                method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({id:propertyId})
+            });
+            if (result.success) { alert(result.message); loadPropertiesFromServer(); }
+            else { throw new Error(result.message || "Delete failed."); }
+        } catch (error) { console.error("Error deleting:", error.message); alert(`Error: ${error.message}`);}
+    }
 
-
-}); // End DOMContentLoaded
+    checkAdminSession(); // Initial check
+});
