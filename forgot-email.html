@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRATA - Forgot Password</title>
+    <!-- Links using your project structure -->
+    <!-- <link rel="stylesheet" href="globals.css"> If you have this -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/forgot-password.css"> <!-- Link the new CSS -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="auth-page"> <!-- Use auth-page class -->
+
+    <!-- Simplified Header -->
+    <header class="main-header" style="position: static; box-shadow: none;">
+         <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/PRATA logo.png" alt="PRATA Logo">
+            </a>
+        </div>
+    </header>
+
+    <!-- Back to Sign In link below the navbar -->
+    <!-- REMOVE THIS SECTION
+    <div class="container" style="margin-top: 10px; margin-bottom: 0;">
+        <a href="login.html" class="back-button-link">← Back to Sign In</a>
+    </div>
+    -->
+
+    <main class="main-content">
+        <!-- Use existing auth container -->
+        <div class="auth-container forgot-password-container">
+            <h1>Forgot Password</h1>
+            <p class="sub-description">Enter your email address below, and we'll help you find your account.</p>
+            <!-- Form uses existing auth styles -->
+            <form id="forgot-form" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your registered email" required>
+                </div>
+                <div id="forgot-error" style="color: red; margin-bottom: 10px; display: none;"></div>
+                <button type="submit" class="auth-submit-button">Next</button>
+                <!-- ADD BACK TO SIGN IN LINK HERE -->
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="login.html" class="back-button-link" style="text-decoration: none; color: #007bff;">← Back to Sign In</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="main-footer" style="margin-top: 30px; background: transparent; border-top: none; padding-top: 0;">
+         <div class="container">
+             <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+         </div>
+     </footer>
+     <script>
+     document.getElementById('forgot-form').addEventListener('submit', async function(e) {
+         e.preventDefault();
+         // Get the email value
+         const email = document.getElementById('email').value;
+         
+         // You might want to add validation or API call here
+         // For now, just redirect to the forgot-option.html page
+         window.location.href = 'forgot-options.html';
+     });
+     </script>
+    </body>
+    </html>
