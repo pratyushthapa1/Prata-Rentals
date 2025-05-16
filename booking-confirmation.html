@@ -1,20 +1,21 @@
+--- START OF FILE booking-confirmation.html ---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Message Sent / Booking Confirmed - PRATA</title> <!-- Adjust Title per page -->
-        <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
-        <link rel="stylesheet" href="css/common.css">
-        <link rel="stylesheet" href="css/messages.css"> <!-- Specific: message.css -->
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    </head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message Sent / Booking Confirmed - PRATA</title>
+    <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/messages.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
 <body>
     <!-- Reusing Header -->
     <header class="main-header">
@@ -39,7 +40,6 @@
 
             <div class="booking-summary-confirm">
                 <h3>Your Booking Summary</h3>
-                 <!-- Details will be populated by JS -->
                  <div class="summary-item">
                      <span>Property:</span>
                      <strong id="confirm-property-title">Loading...</strong>
@@ -68,7 +68,7 @@
 
             <div class="confirmation-actions">
                 <a href="index.html" class="btn btn-primary">Back to Home</a>
-                <a href="profile.html" class="btn btn-secondary">View My Bookings</a> <!-- Link to profile where bookings would show -->
+                <a href="profile.html" class="btn btn-secondary">View My Bookings</a>
             </div>
         </div>
     </main>
@@ -96,11 +96,9 @@
      <script type="module" src="js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Retrieve booking details from sessionStorage (set by booking.js)
             const bookingData = JSON.parse(sessionStorage.getItem('prata_bookingDetails'));
 
             if (bookingData) {
-                // Populate the summary details
                 document.getElementById('confirm-property-title').textContent = bookingData.title || 'Selected Property';
                 document.getElementById('confirm-checkin').textContent = bookingData.checkin || '-- / -- / ----';
                 document.getElementById('confirm-checkout').textContent = bookingData.checkout || '-- / -- / ----';
@@ -108,13 +106,11 @@
                 document.getElementById('confirm-guests').textContent = bookingData.guests || '1 Adult';
                 document.getElementById('confirm-total-price').textContent = bookingData.totalPrice || 'NPR 0.00';
 
-                // Clear the data from storage after displaying it
                 sessionStorage.removeItem('prata_bookingDetails');
             } else {
-                // Handle case where data is missing (e.g., user navigated directly)
                 const summaryConfirm = document.querySelector('.booking-summary-confirm');
                 if (summaryConfirm) {
-                     summaryConfirm.innerHTML = '<p style="text-align: center; color: red;">Could not retrieve booking details.</p>';
+                     summaryConfirm.innerHTML = '<p style="text-align: center; color: red;">Could not retrieve booking details. Please check "My Bookings" or contact support.</p>';
                 }
                 console.error('Booking details not found in sessionStorage.');
             }

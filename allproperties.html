@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All Properties - PRATA Rentals</title>
-    <!-- <link rel="stylesheet" href="globals.css"> If you have this -->
     <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/allproperties.css"> <!-- Specific: allproperties.css -->
+    <link rel="stylesheet" href="css/allproperties.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,16 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
   <body>
-    <select id="filter-type"></select>
-<select id="filter-location"></select>
-<select id="sort-select">
-  <option value="">Sort By</option>
-  <option value="price-asc">Price: Low to High</option>
-  <option value="price-desc">Price: High to Low</option>
-  <option value="title-az">Title: A-Z</option>
-  <option value="title-za">Title: Z-A</option>
-</select>
-     <!-- Added Standard Header -->
+     <!-- Standard Header -->
      <header class="main-header">
       <div class="container">
           <a href="index.html" class="header-logo">
@@ -38,29 +28,49 @@
     </header>
 
     <main class="container">
-        <div class="page-header" style="background: none; color: var(--primary-color); padding: 20px 0;"> <!-- Inline style to override default header -->
+        <div class="page-header" style="background: none; color: var(--primary-color); padding: 20px 0;">
             <h1>Explore All Properties</h1>
             <p>Find your perfect rental across Nepal</p>
         </div>
 
-      <!-- Kept original back button placement -->
        <div class="back-button-container">
-        <a href="index.html" class="back-button"> <!-- Link to home instead of history -->
+        <a href="index.html" class="back-button">
           <i class="fas fa-arrow-left"></i> Back to Home
         </a>
       </div>
 
-      <!--
-        NOTE: This section ideally should be generated dynamically using JavaScript
-        by fetching data (e.g., from properties.json or an API).
-      -->
-      <div id="properties-loading" style="display:none;">Loading properties...</div>
-      <div id="properties-empty" style="display:none;">No properties found.</div>
-      <div class="properties-grid"></div>
-      <div class="pagination-controls"></div>
+      <!-- MOVED Filters and Sort HERE -->
+      <div class="controls-container">
+          <div class="filter-sort-controls">
+              <select id="filter-type">
+                  <option value="">All Types</option>
+                  <!-- Options will be populated by JavaScript -->
+              </select>
+              <select id="filter-location">
+                  <option value="">All Locations</option>
+                  <!-- Options will be populated by JavaScript -->
+              </select>
+              <select id="sort-select">
+                  <option value="">Sort By</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="title-az">Title: A-Z</option>
+                  <option value="title-za">Title: Z-A</option>
+              </select>
+          </div>
+      </div>
+
+      <div id="properties-loading" style="display:none; text-align: center; padding: 20px;">Loading properties...</div>
+      <div id="properties-empty" style="display:none; text-align: center; padding: 20px;">No properties found matching your criteria.</div>
+      <div class="properties-grid">
+        <!-- Property cards will be dynamically inserted here by JavaScript -->
+      </div>
+      <div class="pagination-controls">
+        <!-- Pagination links/buttons will be dynamically inserted here by JavaScript -->
+      </div>
     </main>
 
-    <!-- Added Standard Footer -->
+    <!-- Standard Footer -->
     <footer class="main-footer">
       <div class="container">
           <div class="footer-content">
@@ -81,5 +91,6 @@
       </div>
    </footer>
    <script type="module" src="js/main.js"></script>
+   <script type="module" src="js/allproperties.js"></script>
   </body>
 </html>

@@ -72,7 +72,7 @@ export async function checkUserSession() {
     }
 }
 
-export function initLoginForm() {
+    export function initLoginForm() {
     const form = document.getElementById('login-form');
     if (!form) return; // Prevents error if form is not found
     const errorDiv = document.getElementById('login-error');

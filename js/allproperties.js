@@ -60,13 +60,49 @@ function render() {
 }
 
 function propertyCardHTML(prop) {
+  // Prepare features (bedrooms, bathrooms, area, furnished, etc.)
+  let features = [];
+  // Furnished status
+  let furnishedText = "Unfurnished";
+  if (prop.is_furnished !== undefined) {
+    furnishedText = prop.is_furnished ? "Furnished" : "Unfurnished";
+  } else if (Array.isArray(prop.features_array)) {
+    if (prop.features_array.some(f => typeof f.text === 'string' && f.text.toLowerCase() === 'fully furnished')) {
+      furnishedText = "Fully Furnished";
+    } else if (prop.features_array.some(f => typeof f.text === 'string' && f.text.toLowerCase() === 'furnished')) {
+      furnishedText = "Furnished";
+    }
+  }
+  features.push({ icon: 'fa-couch', text: furnishedText });
+
+  if (prop.bedrooms) features.push({ icon: 'fa-bed', text: `${prop.bedrooms} Bed${Number(prop.bedrooms) !== 1 ? 's' : ''}` });
+  if (prop.bathrooms) features.push({ icon: 'fa-bath', text: `${prop.bathrooms} Bath${Number(prop.bathrooms) !== 1 ? 's' : ''}` });
+  if (prop.area) features.push({ icon: 'fa-ruler-combined', text: `${prop.area} sq ft` });
+
+  // Add up to 3 features from features_array (excluding furnished)
+  if (Array.isArray(prop.features_array)) {
+    prop.features_array.forEach(f => {
+      if (
+        typeof f.text === 'string' &&
+        !['furnished', 'fully furnished', 'unfurnished'].includes(f.text.toLowerCase())
+      ) {
+        features.push({ icon: f.icon || 'fa-check-circle', text: f.text });
+      }
+    });
+  }
+
+  // Limit to 4 features for card display
+  const featuresHTML = features.slice(0, 4).map(f =>
+    `<span class='feature'><i class='fas ${f.icon}'></i> ${f.text}</span>`
+  ).join('');
+
   return `<div class="property-card" tabindex="0" onclick="location.href='property.html?id=${prop.id}'">
     <div class="card-image"><img src="${prop.image_url_1}" alt="${prop.title}" loading="lazy"></div>
     <div class="card-content">
       <h3>${prop.title}</h3>
       <div class="location"><i class="fas fa-map-marker-alt"></i> ${prop.location}</div>
       <div class="price">${formatCurrency(prop.price, prop.currency)}${prop.price_suffix || ''}</div>
-      <div class="features">${(prop.features_array||[]).slice(0,3).map(f=>`<span class='feature'><i class='fas ${f.icon}'></i> ${f.text}</span>`).join('')}</div>
+      <div class="features">${featuresHTML}</div>
       <span class="tag tag-${(prop.tag||'').toLowerCase()}">${prop.tag||''}</span>
     </div>
   </div>`;

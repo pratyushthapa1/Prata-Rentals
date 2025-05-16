@@ -1,3 +1,4 @@
+
 // js/main.js
 console.log("PRATA Master Script Initialized (Modular) - XAMPP/MySQL Mode");
 
@@ -10,32 +11,42 @@ import * as ui from './ui.js';
 import { initHomepage } from './page-index.js';
 import { initContactPage } from './page-contact.js';
 import { initSearchResultsPage } from './page-search-results.js';
-// Import other page-specific init functions as you create them
+import { initializeBookingPage } from './booking.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("DOM Fully Loaded - Initializing modules and page logic");
 
-    // Initialize global UI elements/handlers
     ui.initPasswordToggle();
     ui.initSmoothScroll();
-    wishlist.initWishlistGlobalClickHandler(); // For wishlist buttons on cards
+    wishlist.initWishlistGlobalClickHandler();
 
-    // Initialize authentication (this will also fetch initial wishlist if logged in)
     auth.initLoginForm();
     auth.initSignupForm();
     auth.initLogoutButton();
-    await auth.checkUserSession(); // Important: check session early
 
-    // Initialize logic for the current page
-    // You can detect the current page by body ID, specific element, or URL path
-    // For simplicity, we'll just call all page initializers.
-    // They should be written to do nothing if their specific page elements aren't found.
-    initHomepage();
-    initContactPage();
-    initSearchResultsPage();
-    // Call other page init functions here:
-    // initPropertyDetailsPage(); (if you create a module for it)
-    // initWishlistDisplayPage(); (if you create a module for the wishlist.html page content)
+    console.log("main.js: About to check user session...");
+    const currentUsername = await auth.checkUserSession(); // <<< --- Get username from function's return
+    console.log("main.js: User session check complete. Username from auth.checkUserSession:", currentUsername);
+    // You can still log localStorage as a sanity check, but we'll rely on currentUsername
+    console.log("main.js: localStorage username AFTER session check for reference:", localStorage.getItem('loggedInUsername'));
+
+    const currentPath = window.location.pathname;
+    console.log("main.js: Current path:", currentPath);
+
+    if (currentPath.endsWith('/booking.html') || currentPath.endsWith('/booking')) {
+        console.log("main.js: Detected booking page. Passing username to initializeBookingPage:", currentUsername);
+        try {
+           await initializeBookingPage(currentUsername); // <<< --- PASS THE USERNAME
+           console.log("main.js: initializeBookingPage() finished.");
+        } catch (error) {
+            console.error("main.js: Error during initializeBookingPage execution:", error);
+        }
+    } else {
+        console.log("main.js: Not on booking page, checking other initializers...");
+        initHomepage();
+        initContactPage();
+        initSearchResultsPage();
+    }
 
     console.log("All initializations complete.");
 });
