@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - PRATA</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/search-results.css">
+    <!-- Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header enhanced-header">
+        <!-- Copy your standard header HTML here -->
+        <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/image-2.png" alt="PRATA Logo">
+            </a>
+            <nav class="header-nav">
+                 <a href="#" class="wishlist-icon" aria-label="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="wishlist-count-badge" style="display:none;">0</span>
+                </a>
+                <div class="profile-icon" aria-label="Profile Menu / Login">
+                     <i class="fa-regular fa-circle-user"></i>
+                </div>
+                <a href="#" class="btn btn-primary btn-small btn-header-cta" style="display:none;">List Property</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="search-results-section">
+            <h1 class="section-title alt-title">Search Results</h1>
+            <p id="search-query-display" style="text-align: center; margin-bottom: 20px; color: #555;">Searching for properties...</p>
+            <div id="search-results-grid" class="rental-cards-grid">
+                <!-- Properties will be loaded here by JavaScript -->
+                <p class="loading-message" style="text-align: center; grid-column: 1 / -1;">Loading results...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer enhanced-footer">
+        <!-- Copy your standard footer HTML here -->
+        <div class="container">
+             <div class="footer-grid">
+                 <div class="footer-col about-col">
+                     <img src="images/image-2.png" alt="PRATA Logo Footer" class="footer-logo">
+                     <p class="footer-tagline">Your trusted partner in finding the perfect rental property.</p>
+                      <div class="footer-social">
+                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                     </div>
+                 </div>
+                  <div class="footer-col links-col">
+                     <h4 class="footer-col-title">Quick Links</h4>
+                     <ul class="footer-links">
+                         <li><a href="index.html#featured">Featured Rentals</a></li>
+                         <li><a href="index.html#locations">Popular Locations</a></li>
+                         <li><a href="#">List Your Property</a></li>
+                         <li><a href="#">Help Center</a></li>
+                     </ul>
+                 </div>
+                  <div class="footer-col links-col">
+                      <h4 class="footer-col-title">Company</h4>
+                     <ul class="footer-links">
+                         <li><a href="#">About Us</a></li>
+                         <li><a href="#">Careers</a></li>
+                         <li><a href="#">Terms of Service</a></li>
+                         <li><a href="#">Privacy Policy</a></li>
+                     </ul>
+                 </div>
+                 <div class="footer-col contact-col">
+                      <h4 class="footer-col-title">Contact Us</h4>
+                     <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i> Kathmandu, Nepal</li>
+                        <li><i class="fas fa-phone-alt"></i> +977 1 4XXXXXX</li>
+                        <li><i class="fas fa-envelope"></i> support@prata.com</li>
+                     </ul>
+                 </div>
+             </div>
+             <div class="footer-bottom">
+                <p class="footer-copyright">© 2024 PRATA Rentals. All rights reserved.</p>
+             </div>
+        </div>
+    </footer>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

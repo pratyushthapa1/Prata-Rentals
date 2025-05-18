@@ -3,16 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRATA - Forgot Password Options</title>
+    <title>PRATA - Account Recovery Options</title>
     <!-- Links using your project structure -->
-    <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
+    <!-- <link rel="stylesheet" href="globals.css"> If you have this -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/auth.css">
-    <link rel="stylesheet" href="css/forgot-password.css"> <!-- Link the new CSS -->
+    <link rel="stylesheet" href="css/forgot-password.css"> <!-- Assuming styles for forgot password pages -->
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Add some basic styling for messages if not already in auth.css or forgot-password.css */
+        .message-box {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            text-align: left;
+        }
+        .error-message-box {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+        .success-message-box {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .form-group small {
+            font-size: 0.8em;
+            color: #6c757d;
+            display: block;
+            margin-top: 4px;
+        }
+    </style>
 </head>
 <body class="auth-page">
 
@@ -25,28 +51,31 @@
         </div>
     </header>
 
-    <!-- Remove the back button from here -->
-
     <main class="main-content">
         <div class="auth-container forgot-password-container">
             <h1>Account Recovery</h1>
-            <p class="sub-description">How would you like to receive the verification code?</p>
+            <p class="sub-description">Enter the phone number associated with your account to receive a verification code.</p>
+            
+            <!-- Message Placeholders -->
+            <div id="phone-otp-success" class="message-box success-message-box" style="display: none;"></div>
+            <div id="phone-otp-error" class="message-box error-message-box" style="display: none;"></div>
 
-            <!-- Only Option 2: SMS -->
-            <div class="contact-option">
-                <label>Enter Phone Number:</label>
-                <!-- Make input typable -->
-                <input type="text" id="masked-sms" name="phone" class="large-input" placeholder="Enter your phone number" required>
-                <form action="verification.html" method="get">
-                    <input type="hidden" name="method" value="sms">
-                    <input type="hidden" name="contactInfo" id="sms-for-verify" value="">
-                    <button type="submit" class="btn btn-option" id="sms-submit-btn" disabled>Send Code via SMS</button>
-                    <!-- Add back to sign in link here -->
-                    <div style="text-align: center; margin-top: 15px;">
-                        <a href="login.html" class="back-button-link" style="text-decoration: none; color: #007bff;">← Back to Sign In</a>
-                    </div>
-                </form>
-            </div>
+            <form id="send-phone-otp-form" class="auth-form">
+                <!-- Optional: Hidden input to carry over email from previous step (forgot-email.html) -->
+                <!-- The backend (send_phone_otp.php) can use this email to verify the phone number belongs to that account. -->
+                <input type="hidden" id="recovery-email" name="email" value="">
+
+                <div class="form-group">
+                    <label for="phone-number-input">Phone Number</label>
+                    <input type="tel" id="phone-number-input" name="phone_number" class="large-input" placeholder="Enter your registered phone number" required pattern="[0-9+-\s()]{7,20}">
+                    <small>Include country code if necessary (e.g., +1, +977).</small>
+                </div>
+                <button type="submit" class="auth-submit-button" id="send-otp-sms-btn">Send Code via SMS</button> <!-- Changed class for consistency -->
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="login.html" class="form-link">← Back to Sign In</a> <!-- Changed class for consistency -->
+                </div>
+            </form>
         </div>
     </main>
 
@@ -60,85 +89,106 @@
      </footer>
 
      <script>
-        // Simple script to get phone from previous page (if using GET)
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
-            const phone = params.get('phone');
-            const maskedSmsEl = document.getElementById('masked-sms');
-            const smsInputForVerify = document.getElementById('sms-for-verify');
-            const smsSubmitBtn = document.getElementById('sms-submit-btn');
-            if (phone && maskedSmsEl) {
-                // Basic masking simulation
-                const masked = phone.replace(/^(\+\d{3})\d{4}(\d{3})$/, '$1 **** ***$2');
-                maskedSmsEl.value = masked;
-                if(smsInputForVerify) smsInputForVerify.value = phone;
-                if(smsSubmitBtn) smsSubmitBtn.disabled = false;
+            // Attempt to get email from URL, if passed from a previous step (e.g., forgot-email.html)
+            const emailFromPreviousStep = params.get('email'); 
+            const recoveryEmailInput = document.getElementById('recovery-email');
+
+            if (recoveryEmailInput && emailFromPreviousStep) {
+                recoveryEmailInput.value = emailFromPreviousStep;
+                console.log("Email carried over to recovery options:", emailFromPreviousStep);
             }
-            // Enable button only if input is not empty
-            if(maskedSmsEl && smsSubmitBtn) {
-                maskedSmsEl.addEventListener('input', function() {
-                    smsSubmitBtn.disabled = !maskedSmsEl.value.trim();
-                    if(smsInputForVerify) smsInputForVerify.value = maskedSmsEl.value.trim();
-                });
+
+            const sendPhoneOtpForm = document.getElementById('send-phone-otp-form');
+            const phoneNumberInput = document.getElementById('phone-number-input');
+            const errorDiv = document.getElementById('phone-otp-error');
+            const successDiv = document.getElementById('phone-otp-success');
+            const submitBtn = document.getElementById('send-otp-sms-btn');
+
+            if (!sendPhoneOtpForm) {
+                console.error("Form with ID 'send-phone-otp-form' not found!");
+                return;
             }
+
+            sendPhoneOtpForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                if (errorDiv) errorDiv.style.display = 'none';
+                if (successDiv) successDiv.style.display = 'none';
+
+                const phoneNumber = phoneNumberInput.value.trim();
+                const emailForVerification = recoveryEmailInput.value.trim(); // Get email if it was set
+
+                // Frontend validation
+                if (!phoneNumber) {
+                    if (errorDiv) {
+                        errorDiv.textContent = 'Phone number is required.';
+                        errorDiv.style.display = 'block';
+                    }
+                    phoneNumberInput.focus();
+                    return;
+                }
+                // Basic phone number format validation (adjust regex as needed for your target region)
+                if (!/^[0-9+()\-\s]{7,20}$/.test(phoneNumber)) {
+                     if (errorDiv) {
+                        errorDiv.textContent = 'Please enter a valid phone number format.';
+                        errorDiv.style.display = 'block';
+                    }
+                    phoneNumberInput.focus();
+                    return;
+                }
+
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                try {
+                    const payload = { phone_number: phoneNumber };
+                    if (emailForVerification) {
+                        payload.email = emailForVerification; // Only include email if it's present
+                    }
+
+                    const response = await fetch('php/send_phone_otp.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await response.json();
+
+                    if (response.ok && data.success) {
+                        if (successDiv) {
+                            successDiv.textContent = data.message || 'OTP sent successfully! Please check your phone.';
+                            successDiv.style.display = 'block';
+                        }
+                        // Redirect to OTP verification page
+                        // Pass method, phone number, and email (if available) for the next step
+                        let redirectUrl = `verification.html?method=sms&contactInfo=${encodeURIComponent(phoneNumber)}`;
+                        if (emailForVerification) {
+                            redirectUrl += `&email=${encodeURIComponent(emailForVerification)}`;
+                        }
+
+                        setTimeout(() => {
+                            window.location.href = redirectUrl;
+                        }, 3000); // Wait 3 seconds before redirecting
+
+                    } else {
+                        if (errorDiv) {
+                            errorDiv.textContent = data.message || 'Failed to send OTP. Please try again.';
+                            errorDiv.style.display = 'block';
+                        }
+                    }
+                } catch (err) {
+                    console.error('Send Phone OTP Request Error:', err);
+                    if (errorDiv) {
+                        errorDiv.textContent = 'An error occurred. Please check your connection and try again.';
+                        errorDiv.style.display = 'block';
+                    }
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                }
+            });
         });
      </script>
 </body>
 </html>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const params = new URLSearchParams(window.location.search);
-    const email = params.get('email');
-    const maskedEmailEl = document.getElementById('masked-email');
-    const emailInputForVerify = document.getElementById('email-for-verify');
-    if (email && maskedEmailEl) {
-        const parts = email.split('@');
-        if (parts.length === 2) {
-            const name = parts[0];
-            const domain = parts[1];
-            const maskedName = name.length > 3 ? name.substring(0, 3) + '***' : name[0] + '***';
-            maskedEmailEl.value = maskedName + '@' + domain;
-            if(emailInputForVerify) emailInputForVerify.value = email;
-        } else {
-            maskedEmailEl.value = 'Email not found';
-        }
-    }
-    // Handle send code to email
-    const sendEmailForm = document.getElementById('send-email-code-form');
-    const emailSendStatus = document.getElementById('email-send-status');
-    if (sendEmailForm) {
-        sendEmailForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            emailSendStatus.style.display = 'none';
-            const email = emailInputForVerify.value;
-            if (!email) return;
-            try {
-                const response = await fetch('php/send_reset_code.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email })
-                });
-                const data = await response.json();
-                if (data.success) {
-                    emailSendStatus.textContent = 'Verification code sent! Check your email.';
-                    emailSendStatus.style.color = 'green';
-                    emailSendStatus.style.display = 'block';
-                    // Optionally redirect to verification page
-                    setTimeout(() => {
-                        window.location.href = 'verification.html?email=' + encodeURIComponent(email);
-                    }, 1200);
-                } else {
-                    emailSendStatus.textContent = data.message || 'Failed to send code.';
-                    emailSendStatus.style.color = 'red';
-                    emailSendStatus.style.display = 'block';
-                }
-            } catch (err) {
-                emailSendStatus.textContent = 'Server error. Please try again later.';
-                emailSendStatus.style.color = 'red';
-                emailSendStatus.style.display = 'block';
-            }
-        });
-    }
-});
-</script>

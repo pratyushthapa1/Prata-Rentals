@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sign Up - PRATA</title>
+        <link rel="stylesheet" href="css/common.css">
+        <link rel="stylesheet" href="css/auth.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+<body>
+    <header class="main-header" style="position: static;">
+         <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/PRATA logo.png" alt="PRATA Logo">
+            </a>
+        </div>
+    </header>
+    <main>
+        <div class="auth-container">
+            <h1>Create Your Account</h1>
+
+            <!-- Message Placeholders -->
+            <div id="signup-success-message" style="display: none; color: green; background-color: #e6ffed; border: 1px solid #b3f0c8; padding: 10px; margin-bottom: 15px; border-radius: 5px;"></div>
+            <div id="signup-error-message" style="display: none; color: red; background-color: #ffebee; border: 1px solid #ffcdd2; padding: 10px; margin-bottom: 15px; border-radius: 5px;"></div>
+
+            <form id="signup-form" class="auth-form" autocomplete="off">
+                 <div class="form-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" name="username" required minlength="3" maxlength="32" pattern="[a-zA-Z0-9_]+">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email Address</label>
+                    <input type="email" id="signup-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-phone">Phone Number</label>
+                    <input type="tel" id="signup-phone" name="phone" required pattern="^\+?\d{10,15}$" placeholder="e.g. +1234567890">
+                    <p id="phone-error" class="error-message" style="display: none; color: red; font-size: 0.9em; margin-top: 5px;">Please enter a valid phone number.</p>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="password" required minlength="8" maxlength="64">
+                </div>
+                 <div class="form-group">
+                    <label for="signup-confirm-password">Confirm Password</label>
+                    <input type="password" id="signup-confirm-password" name="confirm_password" required>
+                    <p id="password-match-error" class="error-message" style="display: none; color: red; font-size: 0.9em; margin-top: 5px;">Passwords do not match.</p>
+                </div>
+                <button type="submit" class="auth-submit-button">Sign Up</button>
+            </form>
+            <p class="auth-link">
+                Already have an account? <a href="login.html">Log In</a>
+            </p>
+        </div>
+    </main>
+    <footer class="main-footer" style="margin-top: 30px;">
+         <div class="container">
+             <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+         </div>
+     </footer>
+     <!-- JavaScript will go here -->
+     <script>
+       document.addEventListener('DOMContentLoaded', () => {
+    const signupForm = document.getElementById('signup-form');
+    const usernameInput = document.getElementById('signup-username');
+    const emailInput = document.getElementById('signup-email');
+    const phoneInput = document.getElementById('signup-phone');
+    const passwordInput = document.getElementById('signup-password');
+    const confirmPasswordInput = document.getElementById('signup-confirm-password');
+    const passwordMatchError = document.getElementById('password-match-error');
+    const phoneError = document.getElementById('phone-error');
+    const successMessageDiv = document.getElementById('signup-success-message');
+    const errorMessageDiv = document.getElementById('signup-error-message');
+    const submitButton = signupForm.querySelector('button[type="submit"]');
+
+    if (!signupForm) {
+        console.error("Signup form not found!");
+        return;
+    }
+
+    signupForm.addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Clear previous messages
+        if (successMessageDiv) successMessageDiv.style.display = 'none';
+        if (errorMessageDiv) errorMessageDiv.style.display = 'none';
+        if (passwordMatchError) passwordMatchError.style.display = 'none';
+        if (phoneError) phoneError.style.display = 'none';
+
+        const username = usernameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        // --- Frontend Validations ---
+        let frontEndValid = true;
+
+        if (password !== confirmPassword) {
+            if (passwordMatchError) {
+                passwordMatchError.textContent = 'Passwords do not match.';
+                passwordMatchError.style.display = 'block';
+            }
+            confirmPasswordInput.focus();
+            frontEndValid = false;
+        }
+
+        if (password.length < 8 || password.length > 64) {
+            // This could also be displayed near the password field
+            if (errorMessageDiv) {
+                errorMessageDiv.textContent = 'Password must be between 8 and 64 characters.';
+                errorMessageDiv.style.display = 'block';
+            } else {
+                alert('Password must be between 8 and 64 characters.');
+            }
+            passwordInput.focus();
+            frontEndValid = false;
+        }
+
+        if (!/^[a-zA-Z0-9_]{3,32}$/.test(username)) {
+            if (errorMessageDiv) {
+                errorMessageDiv.textContent = 'Username must be 3-32 characters (letters, numbers, underscore).';
+                errorMessageDiv.style.display = 'block';
+            } else {
+                alert('Username must be 3-32 characters (letters, numbers, underscore).');
+            }
+            usernameInput.focus();
+            frontEndValid = false;
+        }
+        
+        // Basic email format check (browser also does this via type="email")
+        if (!email.includes('@') || !email.includes('.')) {
+             if (errorMessageDiv) {
+                errorMessageDiv.textContent = 'Please enter a valid email address.';
+                errorMessageDiv.style.display = 'block';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+            emailInput.focus();
+            frontEndValid = false;
+        }
+
+
+        // Phone validation (simple international format, 10-15 digits, optional +)
+        if (!/^\+?\d{10,15}$/.test(phone)) {
+            if (phoneError) {
+                phoneError.textContent = 'Please enter a valid phone number.';
+                phoneError.style.display = 'block';
+            }
+            phoneInput.focus();
+            frontEndValid = false;
+        }
+
+        if (!frontEndValid) {
+            return; // Stop if frontend validation fails
+        }
+        // --- End Frontend Validations ---
+
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Signing Up...';
+
+        try {
+            const response = await fetch('php/signup.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    email: email,
+                    phone: phone,
+                    password: password
+                }),
+            });
+
+            const responseData = await response.json();
+
+            if (response.ok && responseData.success) {
+                if (successMessageDiv) {
+                    successMessageDiv.textContent = responseData.message || 'Registration successful! Please check your email to verify your account.';
+                    successMessageDiv.style.display = 'block';
+                } else {
+                    alert(responseData.message || 'Registration successful! Please check your email to verify your account.');
+                }
+                signupForm.reset(); // Clear the form fields
+                setTimeout(() => {
+                    window.location.href = 'login.html'; // Redirect to login page
+                }, 5000); // 5-second delay
+            } else {
+                // Handle errors from the backend (e.g., email exists, server error)
+                if (errorMessageDiv) {
+                    errorMessageDiv.textContent = responseData.message || 'Signup failed. Please try again.';
+                    errorMessageDiv.style.display = 'block';
+                } else {
+                    alert(responseData.message || 'Signup failed. Please try again.');
+                }
+            }
+        } catch (error) {
+            console.error('Signup Fetch Error:', error);
+            if (errorMessageDiv) {
+                errorMessageDiv.textContent = 'An error occurred. Please check your connection and try again.';
+                errorMessageDiv.style.display = 'block';
+            } else {
+                alert('An error occurred. Please check your connection and try again.');
+            }
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        }
+    });
+
+    // Optional: Real-time password match validation
+    confirmPasswordInput.addEventListener('input', () => {
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            if (passwordMatchError) {
+                passwordMatchError.textContent = 'Passwords do not match.';
+                passwordMatchError.style.display = 'block';
+            }
+        } else {
+            if (passwordMatchError) {
+                passwordMatchError.style.display = 'none';
+            }
+        }
+    });
+    passwordInput.addEventListener('input', () => { // Also check if primary password changes
+        if (confirmPasswordInput.value && passwordInput.value !== confirmPasswordInput.value) {
+            if (passwordMatchError) {
+                passwordMatchError.textContent = 'Passwords do not match.';
+                passwordMatchError.style.display = 'block';
+            }
+        } else if (confirmPasswordInput.value) { // if confirm has value and they now match
+             if (passwordMatchError) {
+                passwordMatchError.style.display = 'none';
+            }
+        }
+    });
+
+});
+     </script>
+</body>
+</html>

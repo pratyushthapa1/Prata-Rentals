@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Profile - PRATA</title>
+        <!-- <link rel="stylesheet" href="globals.css"> If you have this -->
+        <link rel="stylesheet" href="css/profile.css">
+        <!-- Optionally add a profile.css if needed, or use common styles/inline -->
+        <!-- <link rel="stylesheet" href="css/profile.css"> -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style> /* Example: Keep simple profile styles inline or move to profile.css */
+            .profile-section { background-color: #fff; padding: 30px; margin-bottom: 20px; border-radius: 8px; box-shadow: var(--shadow); }
+            .profile-section h2 { font-size: 1.5em; margin-bottom: 20px; color: var(--primary-color); border-bottom: 1px solid var(--border-light-color); padding-bottom: 10px; font-family: var(--font-secondary); font-weight: 600; }
+            .profile-section p { margin-bottom: 10px; font-size: 0.95rem;}
+            .profile-section strong { color: var(--text-dark); }
+            .logout-button { background-color: var(--error-color); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; transition: background-color 0.2s; font-weight: 500; }
+            .logout-button:hover { background-color: #c9302c; }
+        </style>
+    </head>
+<body>
+
+    <!-- Reusing Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/PRATA logo.png" alt="PRATA Logo">
+            </a>
+            <nav class="header-nav">
+                <a href="wishlist.html" class="wishlist-icon" aria-label="Wishlist">
+                    <img src="images/iconamoon-heart-bold.svg" alt="Wishlist">
+                </a>
+                <a href="profile.html" class="profile-icon" aria-label="Profile Menu">
+                     <!-- Highlight profile icon? -->
+                    <div class="ellipse"></div>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="section-title alt-title">Your Profile</h1>
+
+         <!-- Login Check Simulation -->
+        <div id="login-prompt-profile" style="display: none; text-align: center; padding: 30px; background-color: #fff; border-radius: 8px; margin-bottom: 30px;">
+            <p>Please <a href="login.html" style="color: var(--primary-color); font-weight: bold;">log in</a> to view your profile.</p>
+        </div>
+
+        <div id="profile-content" style="display: none;"> <!-- Hide content if not logged in -->
+            <section class="profile-section">
+                <h2>Account Details</h2>
+                <p><strong>Name:</strong> <span id="profile-name">Demo User</span></p>
+                <p><strong>Email:</strong> <span id="profile-email">demo@example.com</span></p>
+                <p><a href="#" class="btn btn-secondary" style="font-size: 0.9em; padding: 5px 10px;">Edit Details</a></p>
+                 <!-- Add more details like phone, address if needed -->
+            </section>
+
+            <section class="profile-section">
+                <h2>Your Bookings</h2>
+                <p>You have no past or upcoming bookings.</p>
+                <!-- Placeholder for booking list -->
+                <!-- <div class="booking-item"> ... </div> -->
+                 <p><a href="index.html" class="btn btn-primary" style="font-size: 0.9em; padding: 5px 10px;">Find a Rental</a></p>
+            </section>
+
+            <section class="profile-section">
+                <h2>Settings</h2>
+                <p>Manage your notification preferences and password.</p>
+                <div class="profile-section">
+                    <h2>Account Settings</h2>
+                    <button class="btn-cta" onclick="window.location.href='change-password.html';" style="margin-top: 10px;">Change Password</button>
+                </div>
+            </section>
+
+             <section class="profile-section" style="text-align: right;">
+                <button id="logout-btn" class="logout-button">Log Out</button>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Reusing Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                 <a href="about.html">About Us</a>
+                 <a href="terms.html">Terms of Service</a>
+                 <a href="contact.html">Contact Us</a>
+                 <a href="help.html">Help Center</a>
+                 <a href="become-host.html">For Landlords</a>
+            </div>
+             <div class="footer-social">
+                 <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                 <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                 <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+        </div>
+     </footer>
+
+    <script type="module" src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+             // --- Login Simulation ---
+            const isLoggedIn = localStorage.getItem('prata_loggedIn') === 'true';
+            const loginPrompt = document.getElementById('login-prompt-profile');
+            const profileContent = document.getElementById('profile-content');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            if (!isLoggedIn) {
+                if (loginPrompt) loginPrompt.style.display = 'block';
+                if (profileContent) profileContent.style.display = 'none';
+            } else {
+                if (loginPrompt) loginPrompt.style.display = 'none';
+                if (profileContent) profileContent.style.display = 'block';
+
+                 // Load user info (using demo data from localStorage if set during login)
+                 const userEmail = localStorage.getItem('prata_userEmail') || 'demo@example.com';
+                 const userName = localStorage.getItem('prata_userName') || 'Demo User'; // Assume name is stored too
+                 document.getElementById('profile-email').textContent = userEmail;
+                 document.getElementById('profile-name').textContent = userName;
+
+                // Logout functionality
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', () => {
+                        localStorage.removeItem('prata_loggedIn');
+                        localStorage.removeItem('prata_userEmail');
+                        localStorage.removeItem('prata_userName');
+                        alert('You have been logged out.');
+                        window.location.href = 'index.html'; // Redirect to home
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html>

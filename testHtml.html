@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Connection Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+        pre { background: #f4f4f4; padding: 10px; border-radius: 5px; overflow: auto; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>API Connection Test</h1>
+    
+    <div>
+        <button id="test1">Test: localhost API</button>
+        <button id="test2">Test: 127.0.0.1 API</button>
+        <button id="test3">Test: Relative Path API</button>
+    </div>
+    
+    <h2>Result:</h2>
+    <pre id="result">Click a button to test API connection...</pre>
+    
+    <script>
+        document.getElementById('test1').addEventListener('click', async () => {
+            testApi('http://localhost/api/check_session.php');
+        });
+        
+        document.getElementById('test2').addEventListener('click', async () => {
+            testApi('http://127.0.0.1/api/check_session.php');
+        });
+        
+        document.getElementById('test3').addEventListener('click', async () => {
+            testApi('/api/check_session.php');
+        });
+        
+        async function testApi(url) {
+            const result = document.getElementById('result');
+            result.innerHTML = `Testing connection to: ${url}...`;
+            
+            try {
+                const startTime = new Date();
+                const response = await fetch(url, {
+                    credentials: 'include'
+                });
+                const endTime = new Date();
+                const timeElapsed = endTime - startTime;
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    result.innerHTML = `<span class="success">✅ Success! (${timeElapsed}ms)</span>\n${JSON.stringify(data, null, 2)}`;
+                } else {
+                    result.innerHTML = `<span class="error">❌ Error: ${response.status} ${response.statusText} (${timeElapsed}ms)</span>`;
+                }
+            } catch (error) {
+                result.innerHTML = `<span class="error">❌ Exception: ${error.message}</span>`;
+            }
+        }
+    </script>
+</body>
+</html>

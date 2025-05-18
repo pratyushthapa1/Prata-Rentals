@@ -4,21 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRATA - Enter Verification Code</title>
-    <!-- Links using your project structure -->
     <link rel="stylesheet" href="globals.css"> <!-- If you have this -->
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/auth.css">
-    <link rel="stylesheet" href="css/forgot-password.css"> <!-- Link the new CSS -->
-    <!-- Fonts -->
+    <link rel="stylesheet" href="css/forgot-password.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome (Needed for icons like back arrow potentially) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Style for single OTP input if needed */
+        .otp-input-field {
+            width: 100%;
+            padding: 10px;
+            font-size: 1.2em;
+            text-align: center;
+            letter-spacing: 0.5em; /* Spacing between digits */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+         .message-box {
+            padding: 10px 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            text-align: left;
+        }
+        .error-message-box {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+    </style>
 </head>
 <body class="auth-page">
 
-    <!-- Simplified Header -->
     <header class="main-header" style="position: static; box-shadow: none;">
          <div class="container" style="justify-content: flex-start;">
             <a href="index.html" class="header-logo">
@@ -27,40 +48,36 @@
         </div>
     </header>
 
-    <!-- Back button below the navbar - REMOVE THIS SECTION -->
-    <!--
-    <div class="container" style="margin-top: 10px; margin-bottom: 0;">
-        <a href="forgot-options.html" class="back-button-link">← Back</a>
-    </div>
-    -->
-
     <main class="main-content">
         <div class="auth-container verification-container">
             <h1>Enter Code</h1>
-            <p class="sub-description" id="verification-message">Please enter the 5-digit verification code sent.</p>
-            <!-- Form submits to backend for validation or directly to reset page -->
-            <form class="auth-form" id="verify-form">
-                <div class="code-input-group">
-                    <input type="text" name="code1" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
-                    <input type="text" name="code2" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
-                    <input type="text" name="code3" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
-                    <input type="text" name="code4" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
-                    <input type="text" name="code5" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
-                    <input type="text" name="code6" class="code-input" maxlength="1" required pattern="[0-9]" inputmode="numeric">
+            <p class="sub-description" id="verification-message">Please enter the verification code sent.</p>
+            
+            <div id="verify-otp-error" class="message-box error-message-box" style="display: none;"></div>
+
+            <form class="auth-form" id="verify-otp-form">
+                <!-- Hidden fields to store phone and email -->
+                <input type="hidden" id="verify-phone-number" name="phone_number" value="">
+                <input type="hidden" id="verify-email" name="email" value="">
+
+                <div class="form-group">
+                    <label for="otp-code-input" style="display: block; margin-bottom: 8px; text-align:left;">Verification Code</label>
+                    <input type="text" id="otp-code-input" name="otp_code" class="otp-input-field" maxlength="6" required pattern="[0-9]{4,10}" inputmode="numeric" placeholder="______">
+                     <small style="font-size: 0.8em; color: #6c757d; display: block; margin-top: 4px; text-align:left;">Enter the code sent to your phone.</small>
                 </div>
-                <div id="verify-error" style="color: red; margin-bottom: 10px; display: none;"></div>
-                <div class="resend-link">
+                
+                <div class="resend-link" style="margin-top: 10px; margin-bottom: 15px;">
                     Didn't receive code? <a href="#" id="resend-code-link">Resend</a>
                 </div>
-                <button type="submit" class="auth-submit-button">Verify Code</button>
-                <!-- ADD BACK TO SIGN IN LINK HERE -->
-                <div style="text-align: center; margin-top: 15px;">
-                    <a href="login.html" class="back-button-link" style="text-decoration: none; color: #007bff;">← Back to Sign In</a>
+                <button type="submit" id="verify-otp-btn" class="auth-submit-button">Verify Code</button>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="login.html" class="form-link">← Back to Sign In</a>
                 </div>
             </form>
         </div>
     </main>
-    <!-- Minimal Footer -->
+    
     <footer class="main-footer" style="margin-top: 30px; background: transparent; border-top: none; padding-top: 0;">
          <div class="container">
              <div class="footer-copyright">
@@ -68,54 +85,141 @@
             </div>
          </div>
      </footer>
+
      <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Update message based on how user got here
             const params = new URLSearchParams(window.location.search);
-            const method = params.get('method');
-            const contactInfo = params.get('contactInfo'); // Email or Phone (masked or real)
-            const messageEl = document.getElementById('verification-message');
+            const method = params.get('method'); // e.g., 'sms' or 'email'
+            const contactInfoFromUrl = params.get('contactInfo'); // The phone number or email address
+            const emailFromUrl = params.get('email'); // The email associated with the account (if different from contactInfo)
 
-            if (method && messageEl) {
-                messageEl.textContent = `Please enter the 5-digit verification code sent via ${method}${contactInfo ? ' to ' + contactInfo : ''}.`;
+            const messageEl = document.getElementById('verification-message');
+            const verifyPhoneNumberInput = document.getElementById('verify-phone-number');
+            const verifyEmailInput = document.getElementById('verify-email');
+            const otpCodeInput = document.getElementById('otp-code-input');
+            const verifyOtpForm = document.getElementById('verify-otp-form');
+            const errorDiv = document.getElementById('verify-otp-error');
+            const submitBtn = document.getElementById('verify-otp-btn');
+
+            if (messageEl && contactInfoFromUrl) {
+                messageEl.textContent = `Please enter the verification code sent via ${method || 'your chosen method'} to ${contactInfoFromUrl}.`;
             }
 
-            // Auto-focus next input
-            const codeInputs = document.querySelectorAll('.code-input');
-            codeInputs.forEach((input, index) => {
-                input.addEventListener('input', (e) => {
-                    // If input has value and it's not the last input, focus next
-                    if (input.value && index < codeInputs.length - 1) {
-                        codeInputs[index + 1].focus();
+            // Populate hidden fields. If method is SMS, contactInfo is the phone.
+            // If method was email (for a different flow), contactInfo would be the email.
+            if (verifyPhoneNumberInput && method === 'sms' && contactInfoFromUrl) {
+                verifyPhoneNumberInput.value = contactInfoFromUrl;
+            }
+            if (verifyEmailInput && emailFromUrl) { // Store the primary email for user identification
+                verifyEmailInput.value = emailFromUrl;
+            } else if (verifyEmailInput && method === 'email' && contactInfoFromUrl) {
+                 verifyEmailInput.value = contactInfoFromUrl; // If OTP was sent to email, that's the identifier
+            }
+
+
+            const resendLink = document.getElementById('resend-code-link');
+            if(resendLink){
+                resendLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Redirect back to forgot-options, pre-filling if possible
+                    // This assumes 'contactInfoFromUrl' is the phone number if method is 'sms'
+                    let resendRedirectUrl = `forgot-options.html`;
+                    const queryParams = new URLSearchParams();
+                    if (method === 'sms' && contactInfoFromUrl) {
+                        queryParams.set('phone', contactInfoFromUrl);
                     }
-                });
-                // Optional: Handle backspace to focus previous
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Backspace' && !input.value && index > 0) {
-                         codeInputs[index - 1].focus();
+                    if (emailFromUrl) { // The original email used to find the account
+                        queryParams.set('email', emailFromUrl);
                     }
+                    if (queryParams.toString()) {
+                        resendRedirectUrl += `?${queryParams.toString()}`;
+                    }
+                    window.location.href = resendRedirectUrl;
                 });
+            }
+
+            if (!verifyOtpForm) {
+                console.error("Form with ID 'verify-otp-form' not found!");
+                return;
+            }
+
+            verifyOtpForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                if(errorDiv) errorDiv.style.display = 'none';
+
+                const otpCode = otpCodeInput.value.trim();
+                const phoneNumberForVerification = verifyPhoneNumberInput.value; // From hidden input
+                const emailForIdentification = verifyEmailInput.value; // From hidden input
+
+                if (!otpCode || !/^\d{4,10}$/.test(otpCode)) { // Twilio codes are usually 6-10 digits
+                    if(errorDiv) {
+                        errorDiv.textContent = 'Please enter a valid OTP (usually 6 digits).';
+                        errorDiv.style.display = 'block';
+                    }
+                    otpCodeInput.focus();
+                    return;
+                }
+                if (method === 'sms' && !phoneNumberForVerification) {
+                     if(errorDiv) {
+                        errorDiv.textContent = 'Verification phone number missing. Please restart the process.';
+                        errorDiv.style.display = 'block';
+                    }
+                    return;
+                }
+
+
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Verifying...';
+
+                try {
+                    const payload = {
+                        otp_code: otpCode,
+                        // Send the correct identifier based on the method
+                        phone_number: (method === 'sms' ? phoneNumberForVerification : null),
+                        email: emailForIdentification // This email identifies the user account
+                    };
+                    // Clean up payload if phone_number is null
+                    if (!payload.phone_number) delete payload.phone_number;
+
+
+                    const response = await fetch('php/verify_phone_otp.php', { // Or a generic verify_otp.php if it handles both email/phone
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await response.json();
+
+                    if (response.ok && data.success) {
+                        // OTP Verified! Redirect to reset password page
+                        // Pass the email as the primary identifier for the user whose password needs reset
+                        let resetPasswordUrl = `reset-password.html?identifier=${encodeURIComponent(emailForIdentification || phoneNumberForVerification)}`;
+                        
+                        // If your backend's verify_phone_otp.php specifically sets a reset_token in session and returns
+                        // a flag like data.reset_token_generated, you might not need to pass identifier in URL,
+                        // as reset_password.php could then get it from session.
+                        // For now, passing identifier is simpler for the next step.
+
+                        window.location.href = resetPasswordUrl;
+                    } else {
+                        if(errorDiv) {
+                            errorDiv.textContent = data.message || 'OTP verification failed. Please try again.';
+                            errorDiv.style.display = 'block';
+                        }
+                        otpCodeInput.focus();
+                        otpCodeInput.select();
+                    }
+                } catch (err) {
+                    console.error("Verify OTP Request Error:", err);
+                    if(errorDiv) {
+                        errorDiv.textContent = 'An error occurred during verification. Please check your connection.';
+                        errorDiv.style.display = 'block';
+                    }
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalBtnText;
+                }
             });
-
-            // Simulate Resend
-             const resendLink = document.getElementById('resend-code-link');
-             if(resendLink){
-                 resendLink.addEventListener('click', (e) => {
-                     e.preventDefault();
-                     alert('Verification code resend request simulated.');
-                     // Add logic here to potentially disable the link for a while
-                 });
-             }
-
-             // Redirect to reset-password.html after verification
-             const verifyForm = document.getElementById('verify-form');
-             verifyForm?.addEventListener('submit', (e) => {
-                 e.preventDefault();
-                 // In real app, collect code, send to backend for validation
-                 // const code = Array.from(codeInputs).map(input => input.value).join('');
-                 // fetch('/api/verify-code', { method: 'POST', body: JSON.stringify({ code }) }) ...
-                 window.location.href = 'reset-password.html';
-             });
         });
      </script>
 </body>

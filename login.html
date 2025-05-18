@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Removed the extra <head> tag that was here -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PRATA</title> <!-- Simplified Title for Login page -->
+    <!-- <link rel="stylesheet" href="globals.css"> If you have this -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/auth.css"> <!-- Specific: auth.css -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome (Optional for auth pages) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- The closing </head> tag was missing here in the original erroneous structure -->
+</head>
+<body class="auth-page"> <!-- Added class for CSS targeting if needed -->
+    <!-- Simple Header for Auth Pages -->
+    <header class="main-header" style="position: static;"> <!-- Non-sticky header -->
+        <div class="container">
+            <a href="index.html" class="header-logo">
+                <img src="images/PRATA logo.png" alt="PRATA Logo">
+            </a>
+            <!-- No nav icons needed here -->
+        </div>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <h1>Login to Your Account</h1>
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email Address</label>
+                    <input type="email" id="login-email" name="email" autocomplete="username" required>
+                </div>
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+                        <label for="login-password" style="margin-bottom: 0;">Password</label>
+                        <a href="forgot-email.html" class="form-link forgot-password-link">Forgot password?</a>
+                    </div>
+                    <input type="password" id="login-password" name="password" autocomplete="current-password" required>
+                </div>
+                <div id="login-error" style="color: red; margin-bottom: 10px; display: none;"></div>
+                <button type="submit" class="auth-submit-button">Login</button>
+            </form>
+            <p class="auth-link">
+                Don't have an account? <a href="signup.html">Sign Up</a>
+            </p>
+        </div>
+    </main>
+
+    <footer class="main-footer" style="margin-top: 30px;">
+        <div class="container">
+            <div class="footer-copyright">
+                © 2024 PRATA Rentals. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initLoginForm } from './js/auth.js';
+        document.addEventListener('DOMContentLoaded', initLoginForm);
+    </script>
+</body>
+</html>
