@@ -1,0 +1,138 @@
+/* css/wishlist.css */
+
+/* --- General Wishlist Page Layout --- */
+main.container {
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+    max-width: 1200px; /* Adjust max width if needed */
+}
+
+/* --- Title Styling --- */
+h1.alt-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color, #1A2C50); /* Use variable or fallback */
+    font-weight: 600;
+    font-size: 2.2em; /* Larger title */
+}
+
+/* --- Message Styling (Login Prompt & Empty Wishlist) --- */
+#login-prompt,
+#empty-wishlist-message {
+    display: none; /* Hidden by default, shown by JS */
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background-color: #f8f9fa; /* Light background */
+    border: 1px dashed #dee2e6; /* Dashed border */
+    border-radius: 8px;
+    margin: 2rem auto; /* Centered */
+    max-width: 600px;
+    color: #495057; /* Darker grey text */
+    font-size: 1.1em;
+}
+
+#login-prompt a {
+    color: var(--secondary-color, #E4D7C4); /* Use theme color for link */
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+#empty-wishlist-message::before {
+    content: "\f004"; /* Font Awesome empty heart */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 400; /* Regular weight */
+    display: block;
+    font-size: 2.5em;
+    color: #ced4da; /* Light grey icon */
+    margin-bottom: 1rem;
+}
+
+/* --- Wishlist Grid Styling (#wishlist-grid) --- */
+#wishlist-grid {
+    display: grid;
+    /* Responsive columns: min 280px wide, fill available space */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem; /* Increased gap */
+    margin-top: 2rem;
+}
+
+/* --- Enhancements for Property Cards on Wishlist Page --- */
+/* Assuming .property-card styles are defined in common.css or index.css */
+#wishlist-grid .property-card {
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    border: 1px solid #e9ecef; /* Subtle border */
+    overflow: hidden; /* Ensure content stays within rounded corners */
+}
+
+#wishlist-grid .property-card:hover {
+    transform: translateY(-6px); /* Slightly more lift */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Softer, larger shadow */
+}
+
+#wishlist-grid .card-image-container {
+    position: relative; /* Needed for absolute positioning of remove button */
+}
+
+/* --- Remove Button Styling --- */
+.remove-wishlist-btn {
+    /* Reset default button styles */
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    outline: none; /* Remove default focus outline if custom is added */
+
+    /* Positioning and Appearance */
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    border-radius: 50%;
+    color: white;
+    font-size: 16px; /* Icon size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    z-index: 10; /* Ensure it's above image tags etc. */
+}
+
+.remove-wishlist-btn:hover,
+.remove-wishlist-btn:focus-visible { /* Add focus style */
+    background-color: rgba(220, 53, 69, 0.8); /* Reddish on hover/focus */
+    transform: scale(1.1);
+}
+
+/* Style for the icon *inside* the button */
+.remove-wishlist-btn i {
+    line-height: 1; /* Ensure icon is centered vertically */
+    display: block;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+    #wishlist-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    h1.alt-title {
+        font-size: 1.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    #wishlist-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+        gap: 1rem;
+    }
+
+     main.container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}

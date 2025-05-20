@@ -1,0 +1,344 @@
+/* ================================================== */
+/* == Property Details Page Styles (property.html) == */
+/* ================================================== */
+
+.property-details-section {
+    padding: 40px 0;
+    background-color: #fff; /* White background for main details */
+    margin-bottom: 40px; /* Space before next section */
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.property-main-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+.property-info-column {
+    flex: 1 1 350px;
+    min-width: 300px;
+}
+.property-image-column img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.feature-item {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.05em;
+}
+.property-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.review-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.inquiry-form input, .inquiry-form textarea {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    font-size: 1em;
+}
+.inquiry-form button {
+    background: var(--accent-color, #e4b95b);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.inquiry-form button:hover {
+    background: #cfa32a;
+}
+@media (max-width: 900px) {
+    .property-main-layout {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    .property-image-column img {
+        max-width: 100%;
+    }
+}
+p#property-location { /* More specific selector */
+    font-size: 0.95rem;
+    color: var(--light-text-color);
+    margin-bottom: 20px;
+    font-style: italic;
+}
+p#property-location i {
+    margin-right: 6px;
+    color: var(--secondary-color);
+}
+
+p#property-description { /* More specific selector */
+    color: var(--text-color);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    white-space: pre-line; /* Respect line breaks from JSON */
+}
+
+div#property-rent { /* More specific selector */
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+}
+
+.property-actions {
+    display: flex;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+    gap: 15px;
+}
+/* Button styles inherited from common.css */
+
+.property-image-column img#property-main-image { /* More specific selector */
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    height: auto; /* Adjust height based on aspect ratio */
+    max-height: 450px; /* Limit max height */
+    object-fit: cover;
+    display: block; /* Remove extra space */
+}
+
+/* --- Sections Below Main --- */
+.property-features-section,
+.property-gallery-section,
+.property-map-section,
+.property-reviews-section,
+.property-inquiry-section {
+    padding: 50px 20px; /* Padding within container */
+    margin-bottom: 40px;
+    background-color: #fff; /* White background */
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+/* Remove top border inherited from older style */
+.property-features-section, .property-gallery-section, .property-map-section, .property-reviews-section, .property-inquiry-section {
+     border-top: none;
+}
+
+/* Features */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust minmax */
+    gap: 20px;
+}
+.feature-item {
+    background-color: #f8f9fa; /* Light bg for items */
+    border: 1px solid var(--border-light-color);
+    border-radius: 6px;
+    padding: 15px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.feature-icon-fa { /* Style for Font Awesome icons */
+    font-size: 1.4rem;
+    color: var(--secondary-color);
+    width: 30px; /* Fixed width */
+    text-align: center;
+}
+.feature-item span {
+     font-size: 0.95rem;
+     color: var(--text-color);
+     font-weight: 500;
+}
+
+/* Gallery */
+.property-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Smaller thumbnails */
+    gap: 15px;
+}
+.gallery-image img { /* Selector matches generated HTML */
+    width: 100%;
+    height: 140px; /* Smaller height */
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border: 1px solid var(--border-light-color);
+}
+.gallery-image img:hover {
+    opacity: 0.85;
+    transform: scale(1.03);
+}
+
+/* Map */
+.property-map-section .map-container {
+    height: 400px; /* Adjust map height */
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+    background-color: #e9ecef; /* Lighter placeholder background */
+    border: 1px solid var(--border-light-color);
+}
+.property-map-section .map-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Reviews */
+.property-reviews-layout {
+    display: grid;
+    grid-template-columns: 1fr; /* Stack by default */
+    gap: 40px;
+}
+@media (min-width: 768px) { /* Two columns on larger screens */
+    .property-reviews-layout {
+        grid-template-columns: minmax(250px, 1fr) 2fr;
+         align-items: center;
+    }
+}
+
+.review-image-container img {
+    width: 100%;
+    max-width: 300px; /* Limit size */
+    height: auto;
+    border-radius: var(--border-radius);
+    margin: 0 auto; /* Center image */
+    display: block;
+}
+
+.reviews-content h2, .property-inquiry-section h2 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 1.6rem; /* Adjust size */
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+.reviews-content .section-subtitle, .property-inquiry-section .section-subtitle {
+    font-size: 1rem;
+    color: var(--light-text-color);
+    margin-bottom: 30px;
+    font-weight: 400;
+    text-align: left; /* Align left */
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none;
+}
+
+.review-cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.review-card {
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    padding: 20px;
+    border: 1px solid var(--border-light-color);
+}
+.review-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.review-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #e9ecef; /* Placeholder color */
+    border-radius: 50%;
+     /* Add background-image if available */
+}
+.review-user-info h4 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+.review-rating img { /* Assuming rating is an image */
+    height: 14px;
+    width: auto;
+    margin-left: auto; /* Push rating to the right */
+}
+.review-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--light-text-color);
+    font-style: italic;
+}
+
+/* Inquiry */
+.property-inquiry-layout {
+    display: grid;
+    grid-template-columns: 1fr; /* Stack by default */
+    gap: 30px 50px; /* Row and Col gap */
+}
+@media (min-width: 768px) { /* Side by side on larger screens */
+     .property-inquiry-layout {
+         grid-template-columns: minmax(250px, 1fr) 1.5fr;
+         align-items: start;
+     }
+}
+
+.inquiry-info p {
+    font-size: 0.9rem;
+    color: var(--light-text-color);
+    line-height: 1.7;
+}
+.inquiry-info strong {
+    color: var(--text-color);
+}
+
+/* Inquiry form inherits base .form-group styles from common.css */
+.inquiry-form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: flex-end; /* Align buttons right */
+}
+.inquiry-form-actions .btn-reset {
+    background-color: #6c757d; /* Grey */
+    color: #fff;
+    border-color: #6c757d;
+}
+.inquiry-form-actions .btn-reset:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+/* Primary button style from common.css */
+
+
+/* --- Responsive for Property Page --- */
+@media (max-width: 768px) {
+    .property-main-layout { grid-template-columns: 1fr; }
+    .property-image-column { order: -1; } /* Image first */
+    .property-info-column h1#property-title { font-size: 1.6rem; }
+    div#property-rent { font-size: 1.4rem; }
+    .review-image-container { display: none; } /* Hide image on smaller screens */
+}

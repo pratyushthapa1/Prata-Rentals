@@ -1,0 +1,111 @@
+/* ============================================ */
+/* == Contact Page Styles (contact.html)     == */
+/* ============================================ */
+
+/* Inherits .container, header, footer from common.css */
+/* Inherits .form-group base styles from common.css */
+
+body.contact-page {
+    background-color: #e4d7c4; /* Specific page background */
+    /* Override common body background if needed */
+}
+
+/* Specific header styling for this page */
+.contact-page .main-header {
+    position: static;
+    background-color: transparent !important; /* Ensure transparent */
+    box-shadow: none !important;
+}
+.contact-page .header-logo img {
+     filter: brightness(0.2); /* Darken logo for light background */
+}
+.contact-page .header-nav .nav-link {
+     color: var(--primary-color) !important; /* Dark link text */
+}
+.contact-page .header-nav .nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+.contact-header-image { /* If you decide to keep it */
+    height: 331px;
+    width: 100%;
+    object-fit: cover;
+    margin-bottom: 40px;
+    border-radius: 8px;
+}
+
+.contact-form-container {
+    max-width: 700px;
+    margin: 40px auto; /* Adjust margin as header is static */
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.contact-form-container h1 {
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    color: var(--primary-color);
+    font-size: 1.8rem; /* Adjust size */
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+#contact-subject-line { /* Style for the optional subject line */
+    text-align: center;
+    margin-bottom: 25px;
+    font-style: italic;
+    color: var(--light-text-color);
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+    /* Remove grid layout if not desired, use default stacking */
+}
+.contact-form label {
+    font-size: 0.9rem; /* Standard label size */
+}
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    font-size: 0.95rem; /* Standard input font size */
+}
+.contact-form textarea {
+    min-height: 120px; /* More space for message */
+}
+
+.contact-submit-button {
+    display: block;
+    width: fit-content;
+    margin: 30px auto 0 auto;
+    background-color: var(--primary-color);
+    color: var(--light-accent-color); /* Match header text */
+    border: none;
+    border-radius: 30px; /* Rounded button */
+    padding: 12px 35px; /* Adjust padding */
+    font-family: var(--font-secondary);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    cursor: pointer;
+}
+
+.contact-submit-button:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+/* Minimal footer on contact page */
+.contact-page .main-footer {
+    background: transparent;
+    border: none;
+    margin-top: 20px;
+    padding-top: 0;
+}
+.contact-page .footer-content a {
+    color: #555;
+}
+.contact-page .footer-copyright {
+    color: #777;
+}

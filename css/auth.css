@@ -1,0 +1,189 @@
+/* ============================================ */
+/* == Auth Page Styles - ENHANCED            == */
+/* ============================================ */
+
+/* Inherits .container, header, footer, buttons from common.css */
+/* Inherits .form-group base styles from common.css */
+
+body.auth-page {
+   background-color: var(--bg-color); /* Use common light background */
+}
+
+.auth-container {
+ max-width: 420px; /* Slightly narrower */
+ margin: 50px auto; /* Reduced top/bottom margin */
+ padding: 30px 35px; /* Adjusted padding */
+ background-color: #fff;
+ border-radius: var(--border-radius);
+ box-shadow: var(--shadow);
+ text-align: center;
+}
+.auth-container h1 {
+ font-family: var(--font-secondary);
+ color: var(--primary-color);
+ font-size: 1.5rem; /* Reduced size */
+ font-weight: 600;
+ margin-bottom: 25px; /* Reduced margin */
+}
+
+.auth-form .form-group {
+ margin-bottom: 18px; /* Slightly reduced margin */
+ text-align: left;
+}
+.auth-form label {
+ font-size: 0.85rem; /* Smaller label */
+ margin-bottom: 5px;
+ color: var(--text-color);
+ font-weight: 500;
+}
+.auth-form input {
+ padding: 11px 14px; /* Adjust padding */
+ border-radius: 4px; /* Less rounded */
+ border-color: var(--border-color);
+}
+
+/* Style for the forgot password link */
+.form-link.forgot-password-link {
+  font-size: 0.8rem; /* Smaller link */
+  color: var(--link-color); /* Use link color */
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: auto; /* Pushes it right in the flex container */
+}
+.form-link.forgot-password-link:hover {
+  text-decoration: underline;
+}
+/* Flex container for label and forgot link */
+.auth-form .form-group div:has(> .forgot-password-link) {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+.auth-form .form-group div:has(> .forgot-password-link) label {
+  margin-bottom: 0; /* Remove margin from label inside flex */
+}
+
+
+.auth-submit-button {
+ background-color: var(--primary-color);
+ color: white;
+ border: none;
+ padding: 11px 30px; /* Adjusted padding */
+ border-radius: 6px;
+ font-size: 0.95rem; /* Adjust font size */
+ font-weight: 600;
+ cursor: pointer;
+ transition: background-color 0.2s;
+ width: 100%;
+ margin-top: 15px; /* More space above button */
+ font-family: var(--font-secondary);
+ letter-spacing: 0.5px;
+}
+.auth-submit-button:hover {
+ background-color: var(--secondary-color);
+}
+
+/* Social Login Section */
+.social-login {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light-color); /* Separator */
+  text-align: center;
+}
+.social-login p {
+  font-size: 0.85rem;
+  color: var(--light-text-color);
+  margin-bottom: 15px;
+  position: relative;
+  display: inline-block; /* Center line correctly */
+  padding: 0 10px;
+  background-color: #fff; /* Cover the border */
+  z-index: 1; /* Above the pseudo element */
+}
+.social-login p::before { /* Line through effect */
+  content: "";
+  position: absolute;
+  left: -40px; /* Adjust as needed */
+  right: -40px; /* Adjust as needed */
+  top: 50%;
+  height: 1px;
+  background-color: var(--border-light-color);
+  z-index: -1;
+}
+
+/* Individual Social Buttons */
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background-color: #fff;
+  color: var(--text-color);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.social-btn i {
+  margin-right: 10px;
+  font-size: 1.2em; /* Make icon slightly larger */
+  width: 20px; /* Align icons */
+  text-align: center;
+}
+
+/* Specific Social Button Colors */
+.social-btn.google { border-color: #ccc; }
+.social-btn.google:hover { background-color: #f8f8f8; }
+.social-btn.google i { color: #DB4437; } /* Google Red */
+
+.social-btn.facebook { border-color: #3b5998; background-color: #3b5998; color: #fff; }
+.social-btn.facebook:hover { background-color: #324c81; border-color: #324c81; }
+.social-btn.facebook i { color: #fff; }
+
+.social-btn.apple { border-color: #333; background-color: #333; color: #fff; }
+.social-btn.apple:hover { background-color: #111; border-color: #111; }
+.social-btn.apple i { color: #fff; }
+
+/* Signup/Login Link at Bottom */
+.auth-link {
+ margin-top: 25px;
+ font-size: 0.9em;
+ color: var(--light-text-color);
+}
+.auth-link a {
+ color: var(--link-color); /* Standard link color */
+ text-decoration: none;
+ font-weight: 500;
+}
+.auth-link a:hover {
+ text-decoration: underline;
+}
+
+.error-message { /* Keep error style */
+ color: var(--error-color);
+ font-size: 0.85em;
+ margin-top: 5px;
+ text-align: left;
+}
+
+/* Header override for auth pages */
+.auth-page .main-header {
+ position: static;
+ box-shadow: none;
+}
+
+/* Footer override for auth pages */
+.auth-page .main-footer {
+  background: transparent;
+  border-top: none;
+  margin-top: 20px; /* Less margin */
+  padding-top: 0;
+}
+.auth-page .footer-copyright {
+  color: #999; /* Lighter copyright */
+}

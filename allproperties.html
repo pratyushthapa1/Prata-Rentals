@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Properties - PRATA Rentals</title>
+    <!-- <link rel="stylesheet" href="globals.css"> If you have this -->
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/allproperties.css"> <!-- Specific: allproperties.css -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+  <body>
+    <select id="filter-type"></select>
+<select id="filter-location"></select>
+<select id="sort-select">
+  <option value="">Sort By</option>
+  <option value="price-asc">Price: Low to High</option>
+  <option value="price-desc">Price: High to Low</option>
+  <option value="title-az">Title: A-Z</option>
+  <option value="title-za">Title: Z-A</option>
+</select>
+     <!-- Added Standard Header -->
+     <header class="main-header">
+      <div class="container">
+          <a href="index.html" class="header-logo">
+              <img src="images/PRATA logo.png" alt="PRATA Logo">
+          </a>
+           <nav class="header-nav">
+               <a href="wishlist.html" class="wishlist-icon" aria-label="Wishlist"><img src="images/iconamoon-heart-bold.svg" alt="Wishlist"></a>
+               <a href="profile.html" class="profile-icon" aria-label="Profile Menu"><div class="ellipse"></div></a>
+           </nav>
+      </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header" style="background: none; color: var(--primary-color); padding: 20px 0;"> <!-- Inline style to override default header -->
+            <h1>Explore All Properties</h1>
+            <p>Find your perfect rental across Nepal</p>
+        </div>
+
+      <!-- Kept original back button placement -->
+       <div class="back-button-container">
+        <a href="index.html" class="back-button"> <!-- Link to home instead of history -->
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+      </div>
+
+      <!--
+        NOTE: This section ideally should be generated dynamically using JavaScript
+        by fetching data (e.g., from properties.json or an API).
+      -->
+      <div id="properties-loading" style="display:none;">Loading properties...</div>
+      <div id="properties-empty" style="display:none;">No properties found.</div>
+      <div class="properties-grid"></div>
+      <div class="pagination-controls"></div>
+    </main>
+
+    <!-- Added Standard Footer -->
+    <footer class="main-footer">
+      <div class="container">
+          <div class="footer-content">
+               <a href="about.html">About Us</a>
+               <a href="terms.html">Terms of Service</a>
+               <a href="contact.html">Contact Us</a>
+               <a href="help.html">Help Center</a>
+               <a href="become-host.html">For Landlords</a>
+          </div>
+           <div class="footer-social">
+               <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+               <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+               <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+          <div class="footer-copyright">
+              © 2024 PRATA Rentals. All rights reserved.
+          </div>
+      </div>
+   </footer>
+   <script type="module" src="js/main.js"></script>
+  </body>
+</html>
